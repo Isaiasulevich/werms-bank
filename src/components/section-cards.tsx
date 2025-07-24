@@ -1,14 +1,51 @@
 import { IconTrendingDown, IconTrendingUp, IconCoins, IconUsers, IconClock, IconStack } from "@tabler/icons-react"
+import { Area, AreaChart, ResponsiveContainer } from "recharts"
 
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardAction,
+  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  ChartContainer,
+} from "@/components/ui/chart"
+
+// Mock data for mini charts
+const bankReserveData = [
+  { value: 2650 }, { value: 2720 }, { value: 2680 }, { value: 2750 }, 
+  { value: 2790 }, { value: 2820 }, { value: 2847 }
+]
+
+const employeeData = [
+  { value: 72 }, { value: 74 }, { value: 75 }, { value: 76 }, 
+  { value: 77 }, { value: 77 }, { value: 78 }
+]
+
+const circulationData = [
+  { value: 14200 }, { value: 14450 }, { value: 14680 }, { value: 14890 }, 
+  { value: 15100 }, { value: 15220 }, { value: 15342 }
+]
+
+const halvingData = [
+  { value: 53 }, { value: 52 }, { value: 51 }, { value: 50 }, 
+  { value: 49 }, { value: 48 }, { value: 47 }
+]
+
+const chartConfig = {
+  value: {
+    color: "var(--primary)",
+  },
+}
+
+const chartConfigDestructive = {
+  value: {
+    color: "var(--destructive)",
+  },
+}
 
 export function SectionCards() {
   return (
@@ -27,15 +64,24 @@ export function SectionCards() {
             </Badge>
           </CardAction>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Daily minting active <IconCoins className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Ready for distribution to employees
-          </div>
-        </CardFooter>
+        <CardContent className="pt-0">
+          <ChartContainer config={chartConfig} className="h-[60px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={bankReserveData}>
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="var(--color-value)"
+                  fill="var(--color-value)"
+                  fillOpacity={0.2}
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </CardContent>
       </Card>
+      
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Active Employees</CardDescription>
@@ -50,15 +96,24 @@ export function SectionCards() {
             </Badge>
           </CardAction>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Growing team <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Daily mint rate: 156 Werms (78 × 2)
-          </div>
-        </CardFooter>
+        <CardContent className="pt-0">
+          <ChartContainer config={chartConfig} className="h-[60px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={employeeData}>
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="var(--color-value)"
+                  fill="var(--color-value)"
+                  fillOpacity={0.2}
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </CardContent>
       </Card>
+      
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Total in Circulation</CardDescription>
@@ -73,15 +128,24 @@ export function SectionCards() {
             </Badge>
           </CardAction>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Healthy circulation growth <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            $153,420 equivalent value
-          </div>
-        </CardFooter>
+        <CardContent className="pt-0">
+          <ChartContainer config={chartConfig} className="h-[60px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={circulationData}>
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="var(--color-value)"
+                  fill="var(--color-value)"
+                  fillOpacity={0.2}
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </CardContent>
       </Card>
+      
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Days Until Halving</CardDescription>
@@ -96,14 +160,22 @@ export function SectionCards() {
             </Badge>
           </CardAction>
         </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Scheduled monetary policy <IconClock className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Mint rate will reduce by 50%
-          </div>
-        </CardFooter>
+        <CardContent className="pt-0">
+          <ChartContainer config={chartConfigDestructive} className="h-[60px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={halvingData}>
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="var(--color-value)"
+                  fill="var(--color-value)"
+                  fillOpacity={0.2}
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </CardContent>
       </Card>
     </div>
   )
