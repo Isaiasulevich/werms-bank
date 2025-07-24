@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Shield } from "lucide-react"
+import { IconPlus } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
@@ -29,7 +29,7 @@ export function SiteHeader() {
               onClick={() => setShowAddPolicyDialog(true)}
               className="bg-card hover:bg-card/80 border-border text-muted-foreground hover:text-foreground hidden sm:flex items-center gap-1.5"
             >
-              <Shield className="h-3.5 w-3.5" />
+              <IconPlus className="h-3.5 w-3.5" />
               <span className="text-xs">Policy</span>
             </Button>
             <SimpleThemeToggle />

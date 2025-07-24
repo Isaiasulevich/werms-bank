@@ -4,8 +4,6 @@ import * as React from "react"
 import {
   IconDashboard,
   IconDatabase,
-  IconFileWord,
-  IconHelp,
   IconReport,
   IconSearch,
   IconSettings,
@@ -30,10 +28,10 @@ import {
 
 const data = {
   user: {
-    name: "Isa",
-    email: "isa@nakatomi.com",
+    name: "Sarah",
+    email: "sarah@werms.com",
     avatar: "/avatars/shadcn.jpg",
-    slack_username: "@isa",
+    slack_username: "@sarah",
     role: "Operations Lead"
   },
   navMain: [
@@ -95,11 +93,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#" className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-gradient-to-br from-brand-500 to-brand-600 rounded-md flex items-center justify-center">
-                  <span className="text-white font-bold text-xs">WC</span>
+              <a href="/dashboard" className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-600 rounded-md flex items-center justify-center">
+                  <span className="text-white font-bold text-xs">WB</span>
                 </div>
-                <span className="text-base font-semibold">Werms Central Bank</span>
+                <span className="text-base font-semibold">Werms Bank</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
