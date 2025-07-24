@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Worms Bank",
+  title: "Werms Central Bank",
   description: "A modern banking application built with Next.js, Supabase, and Tailwind CSS",
 };
 

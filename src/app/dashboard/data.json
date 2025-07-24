@@ -1,182 +1,182 @@
 [
   {
     "id": 1,
-    "header": "Salary Deposit",
-    "type": "Income",
+    "header": "Daily Mint - December 15",
+    "type": "Mint",
     "status": "Completed",
-    "target": "$3,200.00",
-    "limit": "Direct Deposit",
-    "reviewer": "Your Employer"
+    "target": "+156 Werms",
+    "limit": "Auto Mint",
+    "reviewer": "Bank System"
   },
   {
     "id": 2,
-    "header": "Rent Payment",
-    "type": "Expense",
+    "header": "Distribution to Sarah Chen",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "-$1,200.00",
-    "limit": "Auto Pay",
-    "reviewer": "Property Management"
+    "target": "-5 Gold",
+    "limit": "Performance Bonus",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 3,
-    "header": "Grocery Store",
-    "type": "Expense",
+    "header": "Distribution to Mike Rodriguez",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "-$85.32",
-    "limit": "Debit Card",
-    "reviewer": "Whole Foods"
+    "target": "-10 Silver",
+    "limit": "Weekly Recognition",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 4,
-    "header": "Coffee Shop",
-    "type": "Expense",
+    "header": "Physical Coin Return - Alex Kim",
+    "type": "Reconciliation",
     "status": "Completed",
-    "target": "-$4.75",
-    "limit": "Mobile Pay",
-    "reviewer": "Starbucks"
+    "target": "+2 Bronze",
+    "limit": "Physical Return",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 5,
-    "header": "Gas Station",
-    "type": "Expense",
+    "header": "Distribution to Jessica Park",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "-$45.20",
-    "limit": "Credit Card",
-    "reviewer": "Shell"
+    "target": "-3 Gold",
+    "limit": "Project Completion",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 6,
-    "header": "Netflix Subscription",
-    "type": "Expense",
+    "header": "Manual Adjustment - David Liu",
+    "type": "Adjustment",
     "status": "Completed",
-    "target": "-$15.99",
-    "limit": "Auto Pay",
-    "reviewer": "Netflix Inc."
+    "target": "+5 Silver",
+    "limit": "Correction",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 7,
-    "header": "Investment Transfer",
-    "type": "Transfer",
+    "header": "Distribution to Emma Thompson",
+    "type": "Distribution",
     "status": "Processing",
-    "target": "-$500.00",
-    "limit": "Online Transfer",
-    "reviewer": "Investment Account"
+    "target": "-8 Silver",
+    "limit": "Team Achievement",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 8,
-    "header": "Freelance Payment",
-    "type": "Income",
-    "status": "Pending",
-    "target": "$850.00",
-    "limit": "Wire Transfer",
-    "reviewer": "ABC Company"
+    "header": "Daily Mint - December 14",
+    "type": "Mint",
+    "status": "Completed",
+    "target": "+156 Werms",
+    "limit": "Auto Mint",
+    "reviewer": "Bank System"
   },
   {
     "id": 9,
-    "header": "Utility Bill",
-    "type": "Expense",
+    "header": "Distribution to Carlos Mendez",
+    "type": "Distribution",
     "status": "Scheduled",
-    "target": "-$120.45",
-    "limit": "Auto Pay",
-    "reviewer": "City Electric"
+    "target": "-15 Bronze",
+    "limit": "Monthly Reward",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 10,
-    "header": "Refund",
-    "type": "Income",
+    "header": "Physical Coin Deposit - Lisa Wong",
+    "type": "Reconciliation",
     "status": "Completed",
-    "target": "$29.99",
-    "limit": "Credit Card Refund",
-    "reviewer": "Amazon"
+    "target": "-1 Gold",
+    "limit": "Physical Deposit",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 11,
-    "header": "ATM Withdrawal",
-    "type": "Expense",
+    "header": "Distribution to James Foster",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "-$100.00",
-    "limit": "ATM",
-    "reviewer": "Chase ATM"
+    "target": "-12 Silver",
+    "limit": "Innovation Bonus",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 12,
-    "header": "Online Purchase",
-    "type": "Expense",
+    "header": "Manual Reserve Adjustment",
+    "type": "Adjustment",
     "status": "Completed",
-    "target": "-$67.89",
-    "limit": "Debit Card",
-    "reviewer": "Target.com"
+    "target": "+50 Mixed",
+    "limit": "Reserve Correction",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 13,
-    "header": "Interest Earned",
-    "type": "Income",
+    "header": "Distribution to Rachel Green",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "$12.45",
-    "limit": "Savings Interest",
-    "reviewer": "Worms Bank"
+    "target": "-6 Gold",
+    "limit": "Leadership Award",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 14,
-    "header": "Phone Bill",
-    "type": "Expense",
+    "header": "Physical Coin Return - Tom Wilson",
+    "type": "Reconciliation",
     "status": "Completed",
-    "target": "-$89.99",
-    "limit": "Auto Pay",
-    "reviewer": "Verizon"
+    "target": "+8 Bronze",
+    "limit": "Physical Return",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 15,
-    "header": "Restaurant",
-    "type": "Expense",
+    "header": "Distribution to Amanda Davis",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "-$42.50",
-    "limit": "Credit Card",
-    "reviewer": "Local Bistro"
+    "target": "-4 Gold",
+    "limit": "Client Success",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 16,
-    "header": "Savings Transfer",
-    "type": "Transfer",
+    "header": "Daily Mint - December 13",
+    "type": "Mint",
     "status": "Completed",
-    "target": "-$200.00",
-    "limit": "Online Transfer",
-    "reviewer": "High-Yield Savings"
+    "target": "+156 Werms",
+    "limit": "Auto Mint",
+    "reviewer": "Bank System"
   },
   {
     "id": 17,
-    "header": "Insurance Payment",
-    "type": "Expense",
+    "header": "Distribution to Kevin Zhang",
+    "type": "Distribution",
     "status": "Scheduled",
-    "target": "-$150.00",
-    "limit": "Auto Pay",
-    "reviewer": "State Farm"
+    "target": "-20 Silver",
+    "limit": "Quarterly Bonus",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 18,
-    "header": "Gym Membership",
-    "type": "Expense",
+    "header": "Distribution to Maria Garcia",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "-$39.99",
-    "limit": "Auto Pay",
-    "reviewer": "Planet Fitness"
+    "target": "-7 Bronze",
+    "limit": "Team Contribution",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 19,
-    "header": "Cash Back Reward",
-    "type": "Income",
+    "header": "Physical Coin Audit",
+    "type": "Reconciliation",
     "status": "Completed",
-    "target": "$25.00",
-    "limit": "Credit Card Reward",
-    "reviewer": "Worms Bank Credit"
+    "target": "0 Net",
+    "limit": "Weekly Audit",
+    "reviewer": "Operations Lead"
   },
   {
     "id": 20,
-    "header": "Car Payment",
-    "type": "Expense",
+    "header": "Distribution to Robert Johnson",
+    "type": "Distribution",
     "status": "Completed",
-    "target": "-$325.00",
-    "limit": "Auto Pay",
-    "reviewer": "Honda Finance"
+    "target": "-9 Silver",
+    "limit": "Process Improvement",
+    "reviewer": "Operations Lead"
   }
 ]

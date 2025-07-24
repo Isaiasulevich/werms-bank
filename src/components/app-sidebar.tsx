@@ -17,6 +17,9 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
+  IconCoins,
+  IconStack,
+  IconChart,
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/nav-documents"
@@ -35,8 +38,8 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Operations Lead",
+    email: "ops@nakatomi.com",
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
@@ -46,69 +49,73 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
+      title: "Minting & Reserve",
       url: "#",
-      icon: IconListDetails,
+      icon: IconCoins,
     },
     {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
+      title: "Employee Balances",
       url: "#",
       icon: IconUsers,
+    },
+    {
+      title: "Distribution",
+      url: "#",
+      icon: IconStack,
+    },
+    {
+      title: "Monetary Policy",
+      url: "#",
+      icon: IconChart,
     },
   ],
   navClouds: [
     {
-      title: "Capture",
+      title: "Coin Reconciliation",
       icon: IconCamera,
       isActive: true,
       url: "#",
       items: [
         {
-          title: "Active Proposals",
+          title: "Physical Deposits",
           url: "#",
         },
         {
-          title: "Archived",
+          title: "Physical Returns",
           url: "#",
         },
       ],
     },
     {
-      title: "Proposal",
+      title: "Reports",
       icon: IconFileDescription,
       url: "#",
       items: [
         {
-          title: "Active Proposals",
+          title: "Mint History",
           url: "#",
         },
         {
-          title: "Archived",
+          title: "Distribution Log",
+          url: "#",
+        },
+        {
+          title: "Employee Holdings",
           url: "#",
         },
       ],
     },
     {
-      title: "Prompts",
+      title: "Adjustments",
       icon: IconFileAi,
       url: "#",
       items: [
         {
-          title: "Active Proposals",
+          title: "Manual Overrides",
           url: "#",
         },
         {
-          title: "Archived",
+          title: "Balance Corrections",
           url: "#",
         },
       ],
@@ -116,34 +123,34 @@ const data = {
   ],
   navSecondary: [
     {
-      title: "Settings",
+      title: "Policy Settings",
       url: "#",
       icon: IconSettings,
     },
     {
-      title: "Get Help",
+      title: "Help & Documentation",
       url: "#",
       icon: IconHelp,
     },
     {
-      title: "Search",
+      title: "Audit Trail",
       url: "#",
       icon: IconSearch,
     },
   ],
   documents: [
     {
-      name: "Data Library",
+      name: "Employee Directory",
       url: "#",
       icon: IconDatabase,
     },
     {
-      name: "Reports",
+      name: "Monetary Reports",
       url: "#",
       icon: IconReport,
     },
     {
-      name: "Word Assistant",
+      name: "Policy Documents",
       url: "#",
       icon: IconFileWord,
     },
@@ -160,9 +167,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+              <a href="#" className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-brand-500 to-brand-600 rounded-md flex items-center justify-center">
+                  <span className="text-white font-bold text-xs">WC</span>
+                </div>
+                <span className="text-base font-semibold">Werms Central Bank</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

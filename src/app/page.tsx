@@ -10,9 +10,9 @@ export default function HomePage() {
       <nav className="flex items-center justify-between px-6 py-4 bg-card/80 backdrop-blur-sm border-b border-border">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">W</span>
+            <span className="text-white font-bold text-sm">WC</span>
           </div>
-          <span className="text-xl font-bold text-foreground">Worms Bank</span>
+          <span className="text-xl font-bold text-foreground">Werms Central Bank</span>
         </div>
         
         <div className="flex items-center gap-4">
