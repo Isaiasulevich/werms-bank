@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -20,6 +21,7 @@ export function LoginForm({
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -30,12 +32,26 @@ export function LoginForm({
     
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    // For now, any email/password combination will "log in"
+    if (email && password) {
+      // Redirect to dashboard
+      router.push("/dashboard")
+    }
+    
     setIsLoading(false)
   }
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
+    setIsLoading(true)
     // TODO: Add Google authentication logic
     console.log("Google login attempt")
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 500))
+    
+    // Redirect to dashboard
+    router.push("/dashboard")
   }
 
   return (
@@ -94,7 +110,7 @@ export function LoginForm({
                   onClick={handleGoogleLogin}
                   disabled={isLoading}
                 >
-                  Login with Google
+                  {isLoading ? "Signing in..." : "Login with Google"}
                 </Button>
               </div>
             </div>

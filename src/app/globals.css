@@ -38,7 +38,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  
+
   /* Custom color palette */
   --color-white-50: var(--white-050);
   --color-white-100: var(--white-100);
@@ -51,7 +51,7 @@
   --color-white-800: var(--white-800);
   --color-white-900: var(--white-900);
   --color-white-1000: var(--white-1000);
-  
+
   --color-brand-50: var(--brand-050);
   --color-brand-100: var(--brand-100);
   --color-brand-150: var(--brand-150);
@@ -64,7 +64,7 @@
   --color-brand-800: var(--brand-800);
   --color-brand-900: var(--brand-900);
   --color-brand-1000: var(--brand-1000);
-  
+
   --color-red-100: var(--red-100);
   --color-red-200: var(--red-200);
   --color-red-300: var(--red-300);
@@ -75,7 +75,7 @@
   --color-red-800: var(--red-800);
   --color-red-900: var(--red-900);
   --color-red-1000: var(--red-1000);
-  
+
   --color-yellow-100: var(--yellow-100);
   --color-yellow-200: var(--yellow-200);
   --color-yellow-300: var(--yellow-300);
@@ -86,7 +86,7 @@
   --color-yellow-800: var(--yellow-800);
   --color-yellow-900: var(--yellow-900);
   --color-yellow-1000: var(--yellow-1000);
-  
+
   --color-green-100: var(--green-100);
   --color-green-200: var(--green-200);
   --color-green-300: var(--green-300);
@@ -97,7 +97,7 @@
   --color-green-800: var(--green-800);
   --color-green-900: var(--green-900);
   --color-green-1000: var(--green-1000);
-  
+
   --color-black-50: var(--black-050);
   --color-black-100: var(--black-100);
   --color-black-200: var(--black-200);
@@ -109,7 +109,7 @@
   --color-black-800: var(--black-800);
   --color-black-900: var(--black-900);
   --color-black-1000: var(--black-1000);
-  
+
   --color-gray-100: var(--gray-100);
   --color-gray-200: var(--gray-200);
   --color-gray-300: var(--gray-300);
@@ -120,7 +120,7 @@
   --color-gray-800: var(--gray-800);
   --color-gray-900: var(--gray-900);
   --color-gray-1000: var(--gray-1000);
-  
+
   --color-brand-alt-light-blue-100: var(--brand-alt-light-blue-100);
   --color-brand-alt-light-blue-200: var(--brand-alt-light-blue-200);
   --color-brand-alt-light-blue-300: var(--brand-alt-light-blue-300);
@@ -131,7 +131,7 @@
   --color-brand-alt-light-blue-800: var(--brand-alt-light-blue-800);
   --color-brand-alt-light-blue-900: var(--brand-alt-light-blue-900);
   --color-brand-alt-light-blue-1000: var(--brand-alt-light-blue-1000);
-  
+
   --color-brand-alt-yellow-100: var(--brand-alt-yellow-100);
   --color-brand-alt-yellow-200: var(--brand-alt-yellow-200);
   --color-brand-alt-yellow-300: var(--brand-alt-yellow-300);
@@ -142,7 +142,7 @@
   --color-brand-alt-yellow-800: var(--brand-alt-yellow-800);
   --color-brand-alt-yellow-900: var(--brand-alt-yellow-900);
   --color-brand-alt-yellow-1000: var(--brand-alt-yellow-1000);
-  
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -162,7 +162,7 @@
   --white-800: #ffffff;
   --white-900: #ffffff;
   --white-1000: #ffffff;
-  
+
   --brand-050: #ffe8ef;
   --brand-100: #ffd1df;
   --brand-150: #ffbbcf;
@@ -175,7 +175,7 @@
   --brand-800: #660b26;
   --brand-900: #4d081d;
   --brand-1000: #1a030a;
-  
+
   --red-100: #fee9e7;
   --red-200: #fdd3d0;
   --red-300: #fcb3ad;
@@ -186,7 +186,7 @@
   --red-800: #690807;
   --red-900: #4d0b0a;
   --red-1000: #300603;
-  
+
   --yellow-100: #fffbeb;
   --yellow-200: #fff1c2;
   --yellow-300: #ffe8a3;
@@ -197,7 +197,7 @@
   --yellow-800: #682d03;
   --yellow-900: #522504;
   --yellow-1000: #401b01;
-  
+
   --green-100: #ebffee;
   --green-200: #cff7d3;
   --green-300: #aff4c6;
@@ -208,7 +208,7 @@
   --green-800: #02542d;
   --green-900: #024023;
   --green-1000: #062d1b;
-  
+
   --black-050: #0c0c0d;
   --black-100: #0c0c0d;
   --black-200: #0c0c0d;
@@ -220,7 +220,7 @@
   --black-800: #0c0c0d;
   --black-900: #0c0c0d;
   --black-1000: #0c0c0d;
-  
+
   --gray-100: #f5f5f5;
   --gray-200: #e6e6e6;
   --gray-300: #d9d9d9;
@@ -231,7 +231,7 @@
   --gray-800: #2c2c2c;
   --gray-900: #1e1e1e;
   --gray-1000: #111111;
-  
+
   --brand-alt-light-blue-100: #f5f5f5;
   --brand-alt-light-blue-200: #e6e6e6;
   --brand-alt-light-blue-300: #d9d9d9;
@@ -242,7 +242,7 @@
   --brand-alt-light-blue-800: #770000;
   --brand-alt-light-blue-900: #1e1e1e;
   --brand-alt-light-blue-1000: #111111;
-  
+
   --brand-alt-yellow-100: #f5f5f5;
   --brand-alt-yellow-200: #e6e6e6;
   --brand-alt-yellow-300: #d9d9d9;
@@ -277,14 +277,14 @@
   --border: var(--gray-200);
   --input: var(--gray-200);
   --ring: var(--brand-500);
-  
+
   /* Chart colors */
   --chart-1: var(--brand-500);
   --chart-2: var(--brand-alt-light-blue-500);
   --chart-3: var(--green-500);
   --chart-4: var(--yellow-500);
   --chart-5: var(--red-500);
-  
+
   /* Sidebar colors */
   --sidebar: var(--white-100);
   --sidebar-foreground: var(--gray-600);
@@ -317,14 +317,14 @@
   --border: var(--gray-800);
   --input: var(--gray-800);
   --ring: var(--brand-400);
-  
+
   /* Chart colors for dark mode */
   --chart-1: var(--brand-400);
   --chart-2: var(--brand-alt-light-blue-500);
   --chart-3: var(--green-400);
   --chart-4: var(--yellow-400);
   --chart-5: var(--red-400);
-  
+
   /* Sidebar colors for dark mode */
   --sidebar: var(--gray-900);
   --sidebar-foreground: var(--gray-300);
