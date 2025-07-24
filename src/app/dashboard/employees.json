@@ -1,7 +1,7 @@
 [
   {
     "id": "EMP-2024-0001",
-    "employee_id": "EMP-2024-0001",
+    "employee_id": "EMP-2024-0001", 
     "name": "Isa",
     "email": "isa@nakatomi.com",
     "slack_username": "@isa",
@@ -11,43 +11,65 @@
     "status": "active",
     "manager_id": null,
     "permissions": ["admin", "approve_distributions", "view_all_balances"],
-    "current_balance": {
-      "gold": 25,
-      "silver": 45,
-      "bronze": 120,
-      "worms": 93
+    "werm_balances": {
+      "gold": {
+        "count": 8,
+        "total_value": 80.00
+      },
+      "silver": {
+        "count": 15,
+        "total_value": 45.00
+      },
+      "bronze": {
+        "count": 70,
+        "total_value": 70.00
+      },
+      "total_werms": 93,
+      "total_value_usd": 195.00
     },
-    "total_earned": {
-      "gold": 89,
-      "silver": 234,
-      "bronze": 567,
-      "worms": 93
+    "lifetime_earned": {
+      "gold": 25,
+      "silver": 89,
+      "bronze": 234,
+      "total_werms": 348,
+      "total_value_usd": 797.00
     },
     "avatar_url": "/avatars/isa.jpg"
   },
   {
     "id": "EMP-2024-0002",
     "employee_id": "EMP-2024-0002",
-    "name": "Sarah",
+    "name": "Sarah", 
     "email": "sarah@nakatomi.com",
     "slack_username": "@sarah",
     "department": "Engineering",
     "role": "Senior Software Engineer",
     "hire_date": "2024-03-10",
     "status": "active",
-    "manager_id": "EMP-2024-0003",
+    "manager_id": "EMP-2024-0007",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 15,
-      "silver": 42,
-      "bronze": 88,
-      "worms": 90
+    "werm_balances": {
+      "gold": {
+        "count": 7,
+        "total_value": 70.00
+      },
+      "silver": {
+        "count": 18,
+        "total_value": 54.00
+      },
+      "bronze": {
+        "count": 65,
+        "total_value": 65.00
+      },
+      "total_werms": 90,
+      "total_value_usd": 189.00
     },
-    "total_earned": {
-      "gold": 45,
-      "silver": 156,
-      "bronze": 289,
-      "worms": 90
+    "lifetime_earned": {
+      "gold": 20,
+      "silver": 76,
+      "bronze": 198,
+      "total_werms": 294,
+      "total_value_usd": 628.00
     },
     "avatar_url": "/avatars/sarah.jpg"
   },
@@ -55,7 +77,7 @@
     "id": "EMP-2024-0003",
     "employee_id": "EMP-2024-0003",
     "name": "Tom",
-    "email": "tom@nakatomi.com",
+    "email": "tom@nakatomi.com", 
     "slack_username": "@tom",
     "department": "Operations",
     "role": "Operations Specialist",
@@ -63,17 +85,28 @@
     "status": "active",
     "manager_id": "EMP-2024-0001",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 7,
-      "silver": 24,
-      "bronze": 61,
-      "worms": 74
+    "werm_balances": {
+      "gold": {
+        "count": 5,
+        "total_value": 50.00
+      },
+      "silver": {
+        "count": 14,
+        "total_value": 42.00
+      },
+      "bronze": {
+        "count": 55,
+        "total_value": 55.00
+      },
+      "total_werms": 74,
+      "total_value_usd": 147.00
     },
-    "total_earned": {
-      "gold": 19,
+    "lifetime_earned": {
+      "gold": 15,
       "silver": 67,
       "bronze": 145,
-      "worms": 74
+      "total_werms": 227,
+      "total_value_usd": 502.00
     },
     "avatar_url": "/avatars/tom.jpg"
   },
@@ -82,24 +115,35 @@
     "employee_id": "EMP-2024-0004",
     "name": "Ollie",
     "email": "ollie@nakatomi.com",
-    "slack_username": "@ollie",
+    "slack_username": "@ollie", 
     "department": "Product",
     "role": "Product Manager",
     "hire_date": "2024-02-20",
     "status": "active",
     "manager_id": "EMP-2024-0008",
     "permissions": ["view_own_balance", "view_team_balances"],
-    "current_balance": {
-      "gold": 22,
-      "silver": 35,
-      "bronze": 92,
-      "worms": 72
+    "werm_balances": {
+      "gold": {
+        "count": 6,
+        "total_value": 60.00
+      },
+      "silver": {
+        "count": 12,
+        "total_value": 36.00
+      },
+      "bronze": {
+        "count": 54,
+        "total_value": 54.00
+      },
+      "total_werms": 72,
+      "total_value_usd": 150.00
     },
-    "total_earned": {
-      "gold": 67,
-      "silver": 134,
-      "bronze": 267,
-      "worms": 72
+    "lifetime_earned": {
+      "gold": 18,
+      "silver": 58,
+      "bronze": 167,
+      "total_werms": 243,
+      "total_value_usd": 507.00
     },
     "avatar_url": "/avatars/ollie.jpg"
   },
@@ -109,29 +153,40 @@
     "name": "Jasmine",
     "email": "jasmine@nakatomi.com",
     "slack_username": "@jasmine",
-    "department": "Marketing",
+    "department": "Marketing", 
     "role": "Marketing Specialist",
     "hire_date": "2024-05-12",
     "status": "active",
     "manager_id": "EMP-2024-0012",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 12,
-      "silver": 25,
-      "bronze": 54,
-      "worms": 69
+    "werm_balances": {
+      "gold": {
+        "count": 4,
+        "total_value": 40.00
+      },
+      "silver": {
+        "count": 15,
+        "total_value": 45.00
+      },
+      "bronze": {
+        "count": 50,
+        "total_value": 50.00
+      },
+      "total_werms": 69,
+      "total_value_usd": 135.00
     },
-    "total_earned": {
-      "gold": 28,
-      "silver": 67,
-      "bronze": 134,
-      "worms": 69
+    "lifetime_earned": {
+      "gold": 12,
+      "silver": 45,
+      "bronze": 98,
+      "total_werms": 155,
+      "total_value_usd": 375.00
     },
     "avatar_url": "/avatars/jasmine.jpg"
   },
   {
     "id": "EMP-2024-0006",
-    "employee_id": "EMP-2024-0006",
+    "employee_id": "EMP-2024-0006", 
     "name": "Ruby",
     "email": "ruby@nakatomi.com",
     "slack_username": "@ruby",
@@ -141,17 +196,28 @@
     "status": "active",
     "manager_id": "EMP-2024-0016",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 8,
-      "silver": 28,
-      "bronze": 65,
-      "worms": 66
+    "werm_balances": {
+      "gold": {
+        "count": 3,
+        "total_value": 30.00
+      },
+      "silver": {
+        "count": 13,
+        "total_value": 39.00
+      },
+      "bronze": {
+        "count": 50,
+        "total_value": 50.00
+      },
+      "total_werms": 66,
+      "total_value_usd": 119.00
     },
-    "total_earned": {
-      "gold": 23,
-      "silver": 89,
-      "bronze": 178,
-      "worms": 66
+    "lifetime_earned": {
+      "gold": 9,
+      "silver": 38,
+      "bronze": 89,
+      "total_werms": 136,
+      "total_value_usd": 293.00
     },
     "avatar_url": "/avatars/ruby.jpg"
   },
@@ -164,20 +230,31 @@
     "department": "Engineering",
     "role": "Engineering Manager",
     "hire_date": "2024-01-08",
-    "status": "active",
+    "status": "active", 
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
-    "current_balance": {
-      "gold": 28,
-      "silver": 48,
-      "bronze": 115,
-      "worms": 65
+    "werm_balances": {
+      "gold": {
+        "count": 5,
+        "total_value": 50.00
+      },
+      "silver": {
+        "count": 12,
+        "total_value": 36.00
+      },
+      "bronze": {
+        "count": 48,
+        "total_value": 48.00
+      },
+      "total_werms": 65,
+      "total_value_usd": 134.00
     },
-    "total_earned": {
-      "gold": 82,
-      "silver": 201,
-      "bronze": 456,
-      "worms": 65
+    "lifetime_earned": {
+      "gold": 22,
+      "silver": 67,
+      "bronze": 201,
+      "total_werms": 290,
+      "total_value_usd": 721.00
     },
     "avatar_url": "/avatars/prince.jpg"
   },
@@ -193,17 +270,28 @@
     "status": "active",
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
-    "current_balance": {
-      "gold": 35,
-      "silver": 52,
-      "bronze": 128,
-      "worms": 63
+    "werm_balances": {
+      "gold": {
+        "count": 4,
+        "total_value": 40.00
+      },
+      "silver": {
+        "count": 11,
+        "total_value": 33.00
+      },
+      "bronze": {
+        "count": 48,
+        "total_value": 48.00
+      },
+      "total_werms": 63,
+      "total_value_usd": 121.00
     },
-    "total_earned": {
-      "gold": 95,
-      "silver": 234,
-      "bronze": 502,
-      "worms": 63
+    "lifetime_earned": {
+      "gold": 19,
+      "silver": 78,
+      "bronze": 234,
+      "total_werms": 331,
+      "total_value_usd": 814.00
     },
     "avatar_url": "/avatars/matt.jpg"
   },
@@ -219,17 +307,28 @@
     "status": "active",
     "manager_id": "EMP-2024-0014",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 6,
-      "silver": 18,
-      "bronze": 42,
-      "worms": 63
+    "werm_balances": {
+      "gold": {
+        "count": 3,
+        "total_value": 30.00
+      },
+      "silver": {
+        "count": 10,
+        "total_value": 30.00
+      },
+      "bronze": {
+        "count": 50,
+        "total_value": 50.00
+      },
+      "total_werms": 63,
+      "total_value_usd": 110.00
     },
-    "total_earned": {
-      "gold": 15,
-      "silver": 38,
-      "bronze": 87,
-      "worms": 63
+    "lifetime_earned": {
+      "gold": 8,
+      "silver": 25,
+      "bronze": 67,
+      "total_werms": 100,
+      "total_value_usd": 222.00
     },
     "avatar_url": "/avatars/ben.jpg"
   },
@@ -245,17 +344,28 @@
     "status": "active",
     "manager_id": "EMP-2024-0003",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 9,
-      "silver": 22,
-      "bronze": 58,
-      "worms": 59
+    "werm_balances": {
+      "gold": {
+        "count": 2,
+        "total_value": 20.00
+      },
+      "silver": {
+        "count": 12,
+        "total_value": 36.00
+      },
+      "bronze": {
+        "count": 45,
+        "total_value": 45.00
+      },
+      "total_werms": 59,
+      "total_value_usd": 101.00
     },
-    "total_earned": {
-      "gold": 24,
-      "silver": 76,
-      "bronze": 156,
-      "worms": 59
+    "lifetime_earned": {
+      "gold": 7,
+      "silver": 34,
+      "bronze": 89,
+      "total_werms": 130,
+      "total_value_usd": 241.00
     },
     "avatar_url": "/avatars/andy.jpg"
   },
@@ -271,17 +381,28 @@
     "status": "active",
     "manager_id": "EMP-2024-0007",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 11,
-      "silver": 32,
-      "bronze": 78,
-      "worms": 35
+    "werm_balances": {
+      "gold": {
+        "count": 1,
+        "total_value": 10.00
+      },
+      "silver": {
+        "count": 6,
+        "total_value": 18.00
+      },
+      "bronze": {
+        "count": 28,
+        "total_value": 28.00
+      },
+      "total_werms": 35,
+      "total_value_usd": 56.00
     },
-    "total_earned": {
-      "gold": 34,
-      "silver": 98,
-      "bronze": 201,
-      "worms": 35
+    "lifetime_earned": {
+      "gold": 5,
+      "silver": 18,
+      "bronze": 67,
+      "total_werms": 90,
+      "total_value_usd": 171.00
     },
     "avatar_url": "/avatars/nick.jpg"
   },
@@ -297,17 +418,28 @@
     "status": "active",
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances"],
-    "current_balance": {
-      "gold": 18,
-      "silver": 38,
-      "bronze": 89,
-      "worms": 29
+    "werm_balances": {
+      "gold": {
+        "count": 1,
+        "total_value": 10.00
+      },
+      "silver": {
+        "count": 5,
+        "total_value": 15.00
+      },
+      "bronze": {
+        "count": 23,
+        "total_value": 23.00
+      },
+      "total_werms": 29,
+      "total_value_usd": 48.00
     },
-    "total_earned": {
-      "gold": 52,
-      "silver": 145,
-      "bronze": 298,
-      "worms": 29
+    "lifetime_earned": {
+      "gold": 8,
+      "silver": 32,
+      "bronze": 89,
+      "total_werms": 129,
+      "total_value_usd": 256.00
     },
     "avatar_url": "/avatars/mike.jpg"
   },
@@ -323,17 +455,28 @@
     "status": "active",
     "manager_id": "EMP-2024-0007",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 5,
-      "silver": 16,
-      "bronze": 38,
-      "worms": 6
+    "werm_balances": {
+      "gold": {
+        "count": 0,
+        "total_value": 0.00
+      },
+      "silver": {
+        "count": 1,
+        "total_value": 3.00
+      },
+      "bronze": {
+        "count": 5,
+        "total_value": 5.00
+      },
+      "total_werms": 6,
+      "total_value_usd": 8.00
     },
-    "total_earned": {
-      "gold": 12,
-      "silver": 34,
-      "bronze": 78,
-      "worms": 6
+    "lifetime_earned": {
+      "gold": 1,
+      "silver": 8,
+      "bronze": 23,
+      "total_werms": 32,
+      "total_value_usd": 67.00
     },
     "avatar_url": "/avatars/kailash.jpg"
   },
@@ -349,17 +492,28 @@
     "status": "active",
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
-    "current_balance": {
-      "gold": 24,
-      "silver": 41,
-      "bronze": 97,
-      "worms": 6
+    "werm_balances": {
+      "gold": {
+        "count": 0,
+        "total_value": 0.00
+      },
+      "silver": {
+        "count": 1,
+        "total_value": 3.00
+      },
+      "bronze": {
+        "count": 5,
+        "total_value": 5.00
+      },
+      "total_werms": 6,
+      "total_value_usd": 8.00
     },
-    "total_earned": {
-      "gold": 68,
-      "silver": 167,
-      "bronze": 334,
-      "worms": 6
+    "lifetime_earned": {
+      "gold": 3,
+      "silver": 15,
+      "bronze": 45,
+      "total_werms": 63,
+      "total_value_usd": 150.00
     },
     "avatar_url": "/avatars/kislay.jpg"
   },
@@ -375,44 +529,29 @@
     "status": "active",
     "manager_id": "EMP-2024-0001",
     "permissions": ["view_own_balance"],
-    "current_balance": {
-      "gold": 13,
-      "silver": 29,
-      "bronze": 72,
-      "worms": 6
+    "werm_balances": {
+      "gold": {
+        "count": 0,
+        "total_value": 0.00
+      },
+      "silver": {
+        "count": 1,
+        "total_value": 3.00
+      },
+      "bronze": {
+        "count": 5,
+        "total_value": 5.00
+      },
+      "total_werms": 6,
+      "total_value_usd": 8.00
     },
-    "total_earned": {
-      "gold": 36,
-      "silver": 89,
-      "bronze": 187,
-      "worms": 6
+    "lifetime_earned": {
+      "gold": 2,
+      "silver": 12,
+      "bronze": 34,
+      "total_werms": 48,
+      "total_value_usd": 98.00
     },
     "avatar_url": "/avatars/zac.jpg"
-  },
-  {
-    "id": "EMP-2024-0016",
-    "employee_id": "EMP-2024-0016",
-    "name": "Ollie",
-    "email": "ollie.design@nakatomi.com",
-    "slack_username": "@ollie.design",
-    "department": "Design",
-    "role": "Design Lead",
-    "hire_date": "2024-01-30",
-    "status": "active",
-    "manager_id": null,
-    "permissions": ["view_own_balance", "view_team_balances"],
-    "current_balance": {
-      "gold": 21,
-      "silver": 44,
-      "bronze": 102,
-      "worms": 72
-    },
-    "total_earned": {
-      "gold": 63,
-      "silver": 178,
-      "bronze": 378,
-      "worms": 72
-    },
-    "avatar_url": "/avatars/ollie.jpg"
   }
 ] 

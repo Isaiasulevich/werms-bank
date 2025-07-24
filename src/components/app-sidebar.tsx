@@ -2,24 +2,16 @@
 
 import * as React from "react"
 import {
-  IconCamera,
-  IconChartBar,
   IconDashboard,
   IconDatabase,
-  IconFileAi,
-  IconFileDescription,
   IconFileWord,
-  IconFolder,
   IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
   IconReport,
   IconSearch,
   IconSettings,
   IconUsers,
-  IconCoins,
-  IconStack,
-  IconChart,
+  IconFileDescription,
+  IconShield,
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/nav-documents"
@@ -47,13 +39,8 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
-    },
-    {
-      title: "Minting & Reserve",
-      url: "#",
-      icon: IconCoins,
     },
     {
       title: "Employee Balances",
@@ -61,81 +48,25 @@ const data = {
       icon: IconUsers,
     },
     {
-      title: "Distribution",
-      url: "#",
-      icon: IconStack,
+      title: "Policies",
+      url: "/policies",
+      icon: IconShield,
     },
     {
-      title: "Monetary Policy",
+      title: "Logs & Audit",
       url: "#",
-      icon: IconChart,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Coin Reconciliation",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Physical Deposits",
-          url: "#",
-        },
-        {
-          title: "Physical Returns",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Reports",
       icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Mint History",
-          url: "#",
-        },
-        {
-          title: "Distribution Log",
-          url: "#",
-        },
-        {
-          title: "Employee Holdings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Adjustments",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Manual Overrides",
-          url: "#",
-        },
-        {
-          title: "Balance Corrections",
-          url: "#",
-        },
-      ],
     },
   ],
+
   navSecondary: [
     {
-      title: "Policy Settings",
+      title: "Settings",
       url: "#",
       icon: IconSettings,
     },
     {
-      title: "Help & Documentation",
-      url: "#",
-      icon: IconHelp,
-    },
-    {
-      title: "Audit Trail",
+      title: "Search & Help",
       url: "#",
       icon: IconSearch,
     },
@@ -147,14 +78,9 @@ const data = {
       icon: IconDatabase,
     },
     {
-      name: "Monetary Reports",
+      name: "Reports & Analytics",
       url: "#",
       icon: IconReport,
-    },
-    {
-      name: "Policy Documents",
-      url: "#",
-      icon: IconFileWord,
     },
   ],
 }
@@ -190,3 +116,4 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   )
 }
+
