@@ -6,6 +6,8 @@
  * state synchronization.
  */
 
+'use client';
+
 import { useState, useCallback } from 'react';
 import { Policy, PolicyFormData, PolicyStats } from './types';
 

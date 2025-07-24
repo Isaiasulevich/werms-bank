@@ -44,17 +44,17 @@ const data = {
     },
     {
       title: "Employee Balances",
-      url: "#",
+      url: "/dashboard?section=employees",
       icon: IconUsers,
     },
     {
       title: "Policies",
-      url: "/policies",
+      url: "/dashboard?section=policies",
       icon: IconShield,
     },
     {
       title: "Logs & Audit",
-      url: "#",
+      url: "/dashboard?section=audit",
       icon: IconFileDescription,
     },
   ],

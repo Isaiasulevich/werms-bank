@@ -424,7 +424,7 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
                   onChange={(e) => updateFormData({ expirationDate: e.target.value || undefined })}
                 />
                 <div className="text-xs text-muted-foreground">
-                  Leave blank for policies that don't expire
+                  Leave blank for policies that don&apos;t expire
                 </div>
               </div>
             </div>
@@ -434,21 +434,11 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
         {/* Conditions Step */}
         {currentStep === 'conditions' && (
           <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-medium">Policy Conditions</h3>
-                <p className="text-sm text-muted-foreground">
-                  Add up to 4 conditions that trigger worm distribution. Each condition defines when and how many worms are awarded.
-                </p>
-              </div>
-              <Button
-                onClick={addCondition}
-                disabled={formData.conditions.length >= 4}
-                className="flex items-center gap-2"
-              >
-                <Plus className="h-4 w-4" />
-                Add Condition
-              </Button>
+            <div>
+              <h3 className="text-lg font-medium">Policy Conditions</h3>
+              <p className="text-sm text-muted-foreground">
+                Add up to 4 conditions that trigger worm distribution. Each condition defines when and how many worms are awarded.
+              </p>
             </div>
 
             {formData.conditions.length === 0 ? (

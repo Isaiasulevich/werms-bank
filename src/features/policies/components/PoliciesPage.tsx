@@ -128,14 +128,16 @@ export function PoliciesPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
       {/* Main Policy List */}
-      <PolicyList
-        onCreatePolicy={handleCreatePolicy}
-        onEditPolicy={handleEditPolicy}
-        onViewPolicy={handleViewPolicy}
-        onDeletePolicy={handleDeletePolicy}
-      />
+      <div className="px-4 lg:px-6">
+        <PolicyList
+          onCreatePolicy={handleCreatePolicy}
+          onEditPolicy={handleEditPolicy}
+          onViewPolicy={handleViewPolicy}
+          onDeletePolicy={handleDeletePolicy}
+        />
+      </div>
 
       {/* Add Policy Dialog */}
       <AddPolicyDialog
