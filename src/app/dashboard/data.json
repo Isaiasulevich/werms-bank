@@ -6,61 +6,144 @@
     "status": "Completed",
     "target": "+156 Werms",
     "limit": "Auto Mint",
-    "reviewer": "Bank System"
+    "reviewer": {
+      "name": "Bank System",
+      "type": "system"
+    },
+    "employee": null,
+    "timestamp": "2024-12-15T09:00:00Z"
   },
   {
     "id": 2,
-    "header": "Distribution to Sarah Chen",
+    "header": "Distribution to Sarah",
     "type": "Distribution",
     "status": "Completed",
     "target": "-5 Gold",
     "limit": "Performance Bonus",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Sarah",
+      "email": "sarah@nakatomi.com",
+      "slack_username": "@sarah",
+      "department": "Engineering",
+      "employee_id": "EMP-2024-0002"
+    },
+    "timestamp": "2024-12-15T14:30:00Z"
   },
   {
     "id": 3,
-    "header": "Distribution to Mike Rodriguez",
+    "header": "Distribution to Mike",
     "type": "Distribution",
     "status": "Completed",
     "target": "-10 Silver",
     "limit": "Weekly Recognition",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Mike",
+      "email": "mike@nakatomi.com",
+      "slack_username": "@mike",
+      "department": "HR",
+      "employee_id": "EMP-2024-0012"
+    },
+    "timestamp": "2024-12-15T11:15:00Z"
   },
   {
     "id": 4,
-    "header": "Physical Coin Return - Alex Kim",
+    "header": "Physical Coin Return - Ollie",
     "type": "Reconciliation",
     "status": "Completed",
     "target": "+2 Bronze",
     "limit": "Physical Return",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Ollie",
+      "email": "ollie@nakatomi.com",
+      "slack_username": "@ollie",
+      "department": "Product",
+      "employee_id": "EMP-2024-0004"
+    },
+    "timestamp": "2024-12-15T16:45:00Z"
   },
   {
     "id": 5,
-    "header": "Distribution to Jessica Park",
+    "header": "Distribution to Jasmine",
     "type": "Distribution",
     "status": "Completed",
     "target": "-3 Gold",
     "limit": "Project Completion",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Jasmine",
+      "email": "jasmine@nakatomi.com",
+      "slack_username": "@jasmine",
+      "department": "Marketing",
+      "employee_id": "EMP-2024-0005"
+    },
+    "timestamp": "2024-12-14T17:20:00Z"
   },
   {
     "id": 6,
-    "header": "Manual Adjustment - David Liu",
+    "header": "Manual Adjustment - Prince",
     "type": "Adjustment",
     "status": "Completed",
     "target": "+5 Silver",
     "limit": "Correction",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Prince",
+      "email": "prince@nakatomi.com",
+      "slack_username": "@prince",
+      "department": "Engineering",
+      "employee_id": "EMP-2024-0007"
+    },
+    "timestamp": "2024-12-14T13:10:00Z"
   },
   {
     "id": 7,
-    "header": "Distribution to Emma Thompson",
+    "header": "Distribution to Ben",
     "type": "Distribution",
     "status": "Processing",
     "target": "-8 Silver",
     "limit": "Team Achievement",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Matt",
+      "email": "matt@nakatomi.com",
+      "slack_username": "@matt",
+      "role": "Product Director"
+    },
+    "employee": {
+      "name": "Ben",
+      "email": "ben@nakatomi.com",
+      "slack_username": "@ben",
+      "department": "Sales",
+      "employee_id": "EMP-2024-0009"
+    },
+    "timestamp": "2024-12-14T15:45:00Z"
   },
   {
     "id": 8,
@@ -69,34 +152,78 @@
     "status": "Completed",
     "target": "+156 Werms",
     "limit": "Auto Mint",
-    "reviewer": "Bank System"
+    "reviewer": {
+      "name": "Bank System",
+      "type": "system"
+    },
+    "employee": null,
+    "timestamp": "2024-12-14T09:00:00Z"
   },
   {
     "id": 9,
-    "header": "Distribution to Carlos Mendez",
+    "header": "Distribution to Andy",
     "type": "Distribution",
     "status": "Scheduled",
     "target": "-15 Bronze",
     "limit": "Monthly Reward",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Andy",
+      "email": "andy@nakatomi.com",
+      "slack_username": "@andy",
+      "department": "Support",
+      "employee_id": "EMP-2024-0010"
+    },
+    "timestamp": "2024-12-16T10:00:00Z"
   },
   {
     "id": 10,
-    "header": "Physical Coin Deposit - Lisa Wong",
+    "header": "Physical Coin Deposit - Nick",
     "type": "Reconciliation",
     "status": "Completed",
     "target": "-1 Gold",
     "limit": "Physical Deposit",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Nick",
+      "email": "nick@nakatomi.com",
+      "slack_username": "@nick",
+      "department": "Engineering",
+      "employee_id": "EMP-2024-0011"
+    },
+    "timestamp": "2024-12-13T12:30:00Z"
   },
   {
     "id": 11,
-    "header": "Distribution to James Foster",
+    "header": "Distribution to Tom",
     "type": "Distribution",
     "status": "Completed",
     "target": "-12 Silver",
     "limit": "Innovation Bonus",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Tom",
+      "email": "tom@nakatomi.com",
+      "slack_username": "@tom",
+      "department": "Operations",
+      "employee_id": "EMP-2024-0003"
+    },
+    "timestamp": "2024-12-13T14:15:00Z"
   },
   {
     "id": 12,
@@ -105,34 +232,80 @@
     "status": "Completed",
     "target": "+50 Mixed",
     "limit": "Reserve Correction",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Matt",
+      "email": "matt@nakatomi.com",
+      "slack_username": "@matt",
+      "role": "Product Director"
+    },
+    "employee": null,
+    "timestamp": "2024-12-13T10:00:00Z"
   },
   {
     "id": 13,
-    "header": "Distribution to Rachel Green",
+    "header": "Distribution to Ruby",
     "type": "Distribution",
     "status": "Completed",
     "target": "-6 Gold",
     "limit": "Leadership Award",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Ruby",
+      "email": "ruby@nakatomi.com",
+      "slack_username": "@ruby",
+      "department": "Design",
+      "employee_id": "EMP-2024-0006"
+    },
+    "timestamp": "2024-12-13T16:30:00Z"
   },
   {
     "id": 14,
-    "header": "Physical Coin Return - Tom Wilson",
+    "header": "Physical Coin Return - Kailash",
     "type": "Reconciliation",
     "status": "Completed",
     "target": "+8 Bronze",
     "limit": "Physical Return",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Kailash",
+      "email": "kailash@nakatomi.com",
+      "slack_username": "@kailash",
+      "department": "Engineering",
+      "employee_id": "EMP-2024-0013"
+    },
+    "timestamp": "2024-12-12T11:45:00Z"
   },
   {
     "id": 15,
-    "header": "Distribution to Amanda Davis",
+    "header": "Distribution to Kislay",
     "type": "Distribution",
     "status": "Completed",
     "target": "-4 Gold",
     "limit": "Client Success",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Kislay",
+      "email": "kislay@nakatomi.com",
+      "slack_username": "@kislay",
+      "role": "Sales Manager"
+    },
+    "employee": {
+      "name": "Kislay",
+      "email": "kislay@nakatomi.com",
+      "slack_username": "@kislay",
+      "department": "Sales",
+      "employee_id": "EMP-2024-0014"
+    },
+    "timestamp": "2024-12-12T15:20:00Z"
   },
   {
     "id": 16,
@@ -141,25 +314,56 @@
     "status": "Completed",
     "target": "+156 Werms",
     "limit": "Auto Mint",
-    "reviewer": "Bank System"
+    "reviewer": {
+      "name": "Bank System",
+      "type": "system"
+    },
+    "employee": null,
+    "timestamp": "2024-12-13T09:00:00Z"
   },
   {
     "id": 17,
-    "header": "Distribution to Kevin Zhang",
+    "header": "Distribution to Zac",
     "type": "Distribution",
     "status": "Scheduled",
     "target": "-20 Silver",
     "limit": "Quarterly Bonus",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Zac",
+      "email": "zac@nakatomi.com",
+      "slack_username": "@zac",
+      "department": "Operations",
+      "employee_id": "EMP-2024-0015"
+    },
+    "timestamp": "2024-12-17T14:00:00Z"
   },
   {
     "id": 18,
-    "header": "Distribution to Maria Garcia",
+    "header": "Distribution to Matt",
     "type": "Distribution",
     "status": "Completed",
     "target": "-7 Bronze",
     "limit": "Team Contribution",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Matt",
+      "email": "matt@nakatomi.com",
+      "slack_username": "@matt",
+      "department": "Product",
+      "employee_id": "EMP-2024-0008"
+    },
+    "timestamp": "2024-12-11T13:45:00Z"
   },
   {
     "id": 19,
@@ -168,15 +372,35 @@
     "status": "Completed",
     "target": "0 Net",
     "limit": "Weekly Audit",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Matt",
+      "email": "matt@nakatomi.com",
+      "slack_username": "@matt",
+      "role": "Product Director"
+    },
+    "employee": null,
+    "timestamp": "2024-12-11T17:00:00Z"
   },
   {
     "id": 20,
-    "header": "Distribution to Robert Johnson",
+    "header": "Distribution to Prince",
     "type": "Distribution",
     "status": "Completed",
     "target": "-9 Silver",
     "limit": "Process Improvement",
-    "reviewer": "Operations Lead"
+    "reviewer": {
+      "name": "Isa",
+      "email": "isa@nakatomi.com",
+      "slack_username": "@isa",
+      "role": "Operations Lead"
+    },
+    "employee": {
+      "name": "Prince",
+      "email": "prince@nakatomi.com",
+      "slack_username": "@prince",
+      "department": "Engineering",
+      "employee_id": "EMP-2024-0007"
+    },
+    "timestamp": "2024-12-11T10:30:00Z"
   }
 ]

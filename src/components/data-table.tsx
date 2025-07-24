@@ -113,7 +113,26 @@ export const schema = z.object({
   status: z.string(),
   target: z.string(),
   limit: z.string(),
-  reviewer: z.string(),
+  reviewer: z.union([
+    z.object({
+      name: z.string(),
+      type: z.literal("system"),
+    }),
+    z.object({
+      name: z.string(),
+      email: z.string(),
+      slack_username: z.string(),
+      role: z.string(),
+    }),
+  ]),
+  employee: z.object({
+    name: z.string(),
+    email: z.string(),
+    slack_username: z.string(),
+    department: z.string(),
+    employee_id: z.string(),
+  }).nullable(),
+  timestamp: z.string(),
 })
 
 // Create a separate component for the drag handle
@@ -255,10 +274,25 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     accessorKey: "reviewer",
     header: "Authorized By",
     cell: ({ row }) => {
-      const isAssigned = row.original.reviewer !== "Assign reviewer"
+      const reviewer = row.original.reviewer
+      const isAssigned = reviewer && reviewer.name !== "Assign reviewer"
 
       if (isAssigned) {
-        return row.original.reviewer
+        const isSystem = "type" in reviewer && reviewer.type === "system"
+        if (isSystem) {
+          return (
+            <div className="flex flex-col">
+              <span className="font-medium text-muted-foreground">{reviewer.name}</span>
+            </div>
+          )
+        } else {
+          return (
+            <div className="flex flex-col">
+              <span className="font-medium">{reviewer.name}</span>
+              <span className="text-xs text-muted-foreground">{reviewer.slack_username}</span>
+            </div>
+          )
+        }
       }
 
       return (
@@ -275,7 +309,8 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
               <SelectValue placeholder="Assign authorizer" />
             </SelectTrigger>
             <SelectContent align="end">
-              <SelectItem value="Operations Lead">Operations Lead</SelectItem>
+              <SelectItem value="Alexandra Rodriguez">Alexandra Rodriguez</SelectItem>
+              <SelectItem value="Marcus Williams">Marcus Williams</SelectItem>
               <SelectItem value="Bank System">Bank System</SelectItem>
             </SelectContent>
           </Select>

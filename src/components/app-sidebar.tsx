@@ -38,9 +38,11 @@ import {
 
 const data = {
   user: {
-    name: "Operations Lead",
-    email: "ops@nakatomi.com",
+    name: "Isa",
+    email: "isa@nakatomi.com",
     avatar: "/avatars/shadcn.jpg",
+    slack_username: "@isa",
+    role: "Operations Lead"
   },
   navMain: [
     {

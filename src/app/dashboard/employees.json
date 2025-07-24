@@ -1,0 +1,418 @@
+[
+  {
+    "id": "EMP-2024-0001",
+    "employee_id": "EMP-2024-0001",
+    "name": "Isa",
+    "email": "isa@nakatomi.com",
+    "slack_username": "@isa",
+    "department": "Operations",
+    "role": "Operations Lead",
+    "hire_date": "2024-01-15",
+    "status": "active",
+    "manager_id": null,
+    "permissions": ["admin", "approve_distributions", "view_all_balances"],
+    "current_balance": {
+      "gold": 25,
+      "silver": 45,
+      "bronze": 120,
+      "worms": 93
+    },
+    "total_earned": {
+      "gold": 89,
+      "silver": 234,
+      "bronze": 567,
+      "worms": 93
+    },
+    "avatar_url": "/avatars/isa.jpg"
+  },
+  {
+    "id": "EMP-2024-0002",
+    "employee_id": "EMP-2024-0002",
+    "name": "Sarah",
+    "email": "sarah@nakatomi.com",
+    "slack_username": "@sarah",
+    "department": "Engineering",
+    "role": "Senior Software Engineer",
+    "hire_date": "2024-03-10",
+    "status": "active",
+    "manager_id": "EMP-2024-0003",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 15,
+      "silver": 42,
+      "bronze": 88,
+      "worms": 90
+    },
+    "total_earned": {
+      "gold": 45,
+      "silver": 156,
+      "bronze": 289,
+      "worms": 90
+    },
+    "avatar_url": "/avatars/sarah.jpg"
+  },
+  {
+    "id": "EMP-2024-0003",
+    "employee_id": "EMP-2024-0003",
+    "name": "Tom",
+    "email": "tom@nakatomi.com",
+    "slack_username": "@tom",
+    "department": "Operations",
+    "role": "Operations Specialist",
+    "hire_date": "2024-04-10",
+    "status": "active",
+    "manager_id": "EMP-2024-0001",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 7,
+      "silver": 24,
+      "bronze": 61,
+      "worms": 74
+    },
+    "total_earned": {
+      "gold": 19,
+      "silver": 67,
+      "bronze": 145,
+      "worms": 74
+    },
+    "avatar_url": "/avatars/tom.jpg"
+  },
+  {
+    "id": "EMP-2024-0004",
+    "employee_id": "EMP-2024-0004",
+    "name": "Ollie",
+    "email": "ollie@nakatomi.com",
+    "slack_username": "@ollie",
+    "department": "Product",
+    "role": "Product Manager",
+    "hire_date": "2024-02-20",
+    "status": "active",
+    "manager_id": "EMP-2024-0008",
+    "permissions": ["view_own_balance", "view_team_balances"],
+    "current_balance": {
+      "gold": 22,
+      "silver": 35,
+      "bronze": 92,
+      "worms": 72
+    },
+    "total_earned": {
+      "gold": 67,
+      "silver": 134,
+      "bronze": 267,
+      "worms": 72
+    },
+    "avatar_url": "/avatars/ollie.jpg"
+  },
+  {
+    "id": "EMP-2024-0005",
+    "employee_id": "EMP-2024-0005",
+    "name": "Jasmine",
+    "email": "jasmine@nakatomi.com",
+    "slack_username": "@jasmine",
+    "department": "Marketing",
+    "role": "Marketing Specialist",
+    "hire_date": "2024-05-12",
+    "status": "active",
+    "manager_id": "EMP-2024-0012",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 12,
+      "silver": 25,
+      "bronze": 54,
+      "worms": 69
+    },
+    "total_earned": {
+      "gold": 28,
+      "silver": 67,
+      "bronze": 134,
+      "worms": 69
+    },
+    "avatar_url": "/avatars/jasmine.jpg"
+  },
+  {
+    "id": "EMP-2024-0006",
+    "employee_id": "EMP-2024-0006",
+    "name": "Ruby",
+    "email": "ruby@nakatomi.com",
+    "slack_username": "@ruby",
+    "department": "Design",
+    "role": "UX Designer",
+    "hire_date": "2024-04-05",
+    "status": "active",
+    "manager_id": "EMP-2024-0016",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 8,
+      "silver": 28,
+      "bronze": 65,
+      "worms": 66
+    },
+    "total_earned": {
+      "gold": 23,
+      "silver": 89,
+      "bronze": 178,
+      "worms": 66
+    },
+    "avatar_url": "/avatars/ruby.jpg"
+  },
+  {
+    "id": "EMP-2024-0007",
+    "employee_id": "EMP-2024-0007",
+    "name": "Prince",
+    "email": "prince@nakatomi.com",
+    "slack_username": "@prince",
+    "department": "Engineering",
+    "role": "Engineering Manager",
+    "hire_date": "2024-01-08",
+    "status": "active",
+    "manager_id": null,
+    "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
+    "current_balance": {
+      "gold": 28,
+      "silver": 48,
+      "bronze": 115,
+      "worms": 65
+    },
+    "total_earned": {
+      "gold": 82,
+      "silver": 201,
+      "bronze": 456,
+      "worms": 65
+    },
+    "avatar_url": "/avatars/prince.jpg"
+  },
+  {
+    "id": "EMP-2024-0008",
+    "employee_id": "EMP-2024-0008",
+    "name": "Matt",
+    "email": "matt@nakatomi.com",
+    "slack_username": "@matt",
+    "department": "Product",
+    "role": "Product Director",
+    "hire_date": "2024-01-20",
+    "status": "active",
+    "manager_id": null,
+    "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
+    "current_balance": {
+      "gold": 35,
+      "silver": 52,
+      "bronze": 128,
+      "worms": 63
+    },
+    "total_earned": {
+      "gold": 95,
+      "silver": 234,
+      "bronze": 502,
+      "worms": 63
+    },
+    "avatar_url": "/avatars/matt.jpg"
+  },
+  {
+    "id": "EMP-2024-0009",
+    "employee_id": "EMP-2024-0009",
+    "name": "Ben",
+    "email": "ben@nakatomi.com",
+    "slack_username": "@ben",
+    "department": "Sales",
+    "role": "Sales Representative",
+    "hire_date": "2024-06-01",
+    "status": "active",
+    "manager_id": "EMP-2024-0014",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 6,
+      "silver": 18,
+      "bronze": 42,
+      "worms": 63
+    },
+    "total_earned": {
+      "gold": 15,
+      "silver": 38,
+      "bronze": 87,
+      "worms": 63
+    },
+    "avatar_url": "/avatars/ben.jpg"
+  },
+  {
+    "id": "EMP-2024-0010",
+    "employee_id": "EMP-2024-0010",
+    "name": "Andy",
+    "email": "andy@nakatomi.com",
+    "slack_username": "@andy",
+    "department": "Support",
+    "role": "Customer Support Specialist",
+    "hire_date": "2024-04-18",
+    "status": "active",
+    "manager_id": "EMP-2024-0003",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 9,
+      "silver": 22,
+      "bronze": 58,
+      "worms": 59
+    },
+    "total_earned": {
+      "gold": 24,
+      "silver": 76,
+      "bronze": 156,
+      "worms": 59
+    },
+    "avatar_url": "/avatars/andy.jpg"
+  },
+  {
+    "id": "EMP-2024-0011",
+    "employee_id": "EMP-2024-0011",
+    "name": "Nick",
+    "email": "nick@nakatomi.com",
+    "slack_username": "@nick",
+    "department": "Engineering",
+    "role": "Frontend Developer",
+    "hire_date": "2024-03-25",
+    "status": "active",
+    "manager_id": "EMP-2024-0007",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 11,
+      "silver": 32,
+      "bronze": 78,
+      "worms": 35
+    },
+    "total_earned": {
+      "gold": 34,
+      "silver": 98,
+      "bronze": 201,
+      "worms": 35
+    },
+    "avatar_url": "/avatars/nick.jpg"
+  },
+  {
+    "id": "EMP-2024-0012",
+    "employee_id": "EMP-2024-0012",
+    "name": "Mike",
+    "email": "mike@nakatomi.com",
+    "slack_username": "@mike",
+    "department": "HR",
+    "role": "HR Manager",
+    "hire_date": "2024-02-14",
+    "status": "active",
+    "manager_id": null,
+    "permissions": ["view_own_balance", "view_team_balances"],
+    "current_balance": {
+      "gold": 18,
+      "silver": 38,
+      "bronze": 89,
+      "worms": 29
+    },
+    "total_earned": {
+      "gold": 52,
+      "silver": 145,
+      "bronze": 298,
+      "worms": 29
+    },
+    "avatar_url": "/avatars/mike.jpg"
+  },
+  {
+    "id": "EMP-2024-0013",
+    "employee_id": "EMP-2024-0013",
+    "name": "Kailash",
+    "email": "kailash@nakatomi.com",
+    "slack_username": "@kailash",
+    "department": "Engineering",
+    "role": "Backend Developer",
+    "hire_date": "2024-05-20",
+    "status": "active",
+    "manager_id": "EMP-2024-0007",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 5,
+      "silver": 16,
+      "bronze": 38,
+      "worms": 6
+    },
+    "total_earned": {
+      "gold": 12,
+      "silver": 34,
+      "bronze": 78,
+      "worms": 6
+    },
+    "avatar_url": "/avatars/kailash.jpg"
+  },
+  {
+    "id": "EMP-2024-0014",
+    "employee_id": "EMP-2024-0014",
+    "name": "Kislay",
+    "email": "kislay@nakatomi.com",
+    "slack_username": "@kislay",
+    "department": "Sales",
+    "role": "Sales Manager",
+    "hire_date": "2024-02-28",
+    "status": "active",
+    "manager_id": null,
+    "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
+    "current_balance": {
+      "gold": 24,
+      "silver": 41,
+      "bronze": 97,
+      "worms": 6
+    },
+    "total_earned": {
+      "gold": 68,
+      "silver": 167,
+      "bronze": 334,
+      "worms": 6
+    },
+    "avatar_url": "/avatars/kislay.jpg"
+  },
+  {
+    "id": "EMP-2024-0015",
+    "employee_id": "EMP-2024-0015",
+    "name": "Zac",
+    "email": "zac@nakatomi.com",
+    "slack_username": "@zac",
+    "department": "Operations",
+    "role": "Operations Analyst",
+    "hire_date": "2024-03-15",
+    "status": "active",
+    "manager_id": "EMP-2024-0001",
+    "permissions": ["view_own_balance"],
+    "current_balance": {
+      "gold": 13,
+      "silver": 29,
+      "bronze": 72,
+      "worms": 6
+    },
+    "total_earned": {
+      "gold": 36,
+      "silver": 89,
+      "bronze": 187,
+      "worms": 6
+    },
+    "avatar_url": "/avatars/zac.jpg"
+  },
+  {
+    "id": "EMP-2024-0016",
+    "employee_id": "EMP-2024-0016",
+    "name": "Ollie",
+    "email": "ollie.design@nakatomi.com",
+    "slack_username": "@ollie.design",
+    "department": "Design",
+    "role": "Design Lead",
+    "hire_date": "2024-01-30",
+    "status": "active",
+    "manager_id": null,
+    "permissions": ["view_own_balance", "view_team_balances"],
+    "current_balance": {
+      "gold": 21,
+      "silver": 44,
+      "bronze": 102,
+      "worms": 72
+    },
+    "total_earned": {
+      "gold": 63,
+      "silver": 178,
+      "bronze": 378,
+      "worms": 72
+    },
+    "avatar_url": "/avatars/ollie.jpg"
+  }
+] 
