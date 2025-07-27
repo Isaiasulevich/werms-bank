@@ -7,8 +7,7 @@
  */
 
 import { DashboardLayout } from '@/components/dashboard-layout';
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui';
-import { Plus } from 'lucide-react';
+import { PoliciesPage } from '@/features/policies';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -20,41 +19,8 @@ export default function Policies() {
   return (
     <DashboardLayout>
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 lg:px-6">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">Policies</h1>
-            <p className="text-muted-foreground">
-              Create and manage worm distribution policies for your organization.
-            </p>
-          </div>
-          <Button className="flex items-center gap-2">
-            <Plus className="h-4 w-4" />
-            Add Policy
-          </Button>
-        </div>
-
-        {/* Content */}
-        <div className="px-4 lg:px-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Policy Management</CardTitle>
-              <CardDescription>
-                Define rules and conditions for automatic worm distribution
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8">
-                <p className="text-muted-foreground">
-                  Policy management interface will be restored shortly.
-                </p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Working on fixing component compilation issues...
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Policies Content */}
+        <PoliciesPage />
       </div>
     </DashboardLayout>
   );
