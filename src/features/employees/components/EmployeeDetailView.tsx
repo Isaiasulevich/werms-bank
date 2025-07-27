@@ -8,15 +8,10 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { User, Building, Shield, TrendingUp, Calendar, MapPin, Phone, Mail, MessageSquare, Crown, Users, Save, X, Edit3, Receipt, Info } from 'lucide-react';
+import { TrendingUp, Save, X, Receipt, Info } from 'lucide-react';
 import {
   Badge,
   Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
   Separator,
   Avatar,
   Input,
@@ -26,7 +21,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Textarea,
   Tabs,
   TabsContent,
   TabsList,
