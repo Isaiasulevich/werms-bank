@@ -1,18 +1,16 @@
 import { IconTrendingDown, IconTrendingUp, IconCoins, IconUsers, IconClock, IconStack } from "@tabler/icons-react"
 import { Area, AreaChart, ResponsiveContainer } from "recharts"
 
-import { Badge } from "@/components/ui/badge"
 import {
+  Badge,
   Card,
   CardAction,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import {
   ChartContainer,
-} from "@/components/ui/chart"
+} from "@/components/ui"
 
 // Mock data for mini charts
 const bankReserveData = [

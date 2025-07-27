@@ -4,14 +4,14 @@ import { IconCirclePlusFilled, IconMail, IconPlus, type Icon } from "@tabler/ico
 import Link from "next/link"
 import { useSearchParams, usePathname } from "next/navigation"
 
-import { Button } from "@/components/ui/button"
 import {
+  Button,
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui"
 
 export function NavMain({
   items,

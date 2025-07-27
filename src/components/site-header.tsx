@@ -3,10 +3,12 @@
 import Link from "next/link"
 import { useState } from "react"
 import { IconPlus } from "@tabler/icons-react"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from "@/components/ui/sidebar"
-import { SimpleThemeToggle } from "@/components/ui/theme-toggle"
+import {
+  Button,
+  Separator,
+  SidebarTrigger,
+  SimpleThemeToggle,
+} from "@/components/ui"
 import { AddPolicyDialog } from "@/features/policies"
 
 export function SiteHeader() {

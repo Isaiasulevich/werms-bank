@@ -1,36 +1,28 @@
 /**
- * Policies Page
+ * Employees Page Route
  * 
- * Next.js page component for policy management.
- * Provides bank managers with tools to create, edit, and manage
- * worm distribution policies.
+ * Main page for employee management accessible at /employees
  */
 
 import { DashboardLayout } from '@/components/dashboard-layout';
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui';
-import { Plus } from 'lucide-react';
-import { Metadata } from 'next';
+import { Plus, Users } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Policy Management | Worms Bank',
-  description: 'Create and manage worm distribution policies for your organization',
-};
-
-export default function Policies() {
+export default function EmployeesPageRoute() {
   return (
     <DashboardLayout>
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
         {/* Header */}
         <div className="flex items-center justify-between px-4 lg:px-6">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Policies</h1>
+            <h1 className="text-2xl font-bold tracking-tight">Employees</h1>
             <p className="text-muted-foreground">
-              Create and manage worm distribution policies for your organization.
+              Manage employee accounts, permissions, and worm balances.
             </p>
           </div>
           <Button className="flex items-center gap-2">
             <Plus className="h-4 w-4" />
-            Add Policy
+            Add Employee
           </Button>
         </div>
 
@@ -38,15 +30,18 @@ export default function Policies() {
         <div className="px-4 lg:px-6">
           <Card>
             <CardHeader>
-              <CardTitle>Policy Management</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                Employee Management
+              </CardTitle>
               <CardDescription>
-                Define rules and conditions for automatic worm distribution
+                View and manage employee accounts, worm balances, and permissions
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
                 <p className="text-muted-foreground">
-                  Policy management interface will be restored shortly.
+                  Employee management interface will be restored shortly.
                 </p>
                 <p className="text-sm text-muted-foreground mt-2">
                   Working on fixing component compilation issues...
@@ -58,4 +53,9 @@ export default function Policies() {
       </div>
     </DashboardLayout>
   );
-} 
+}
+
+export const metadata = {
+  title: 'Employees - Worm Bank',
+  description: 'Manage employee accounts, permissions, and worm balances.',
+}; 

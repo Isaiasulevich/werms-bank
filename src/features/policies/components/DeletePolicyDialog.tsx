@@ -9,11 +9,22 @@
 
 import { useCallback } from 'react';
 import { AlertTriangle, Shield, Users, Clock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  Separator,
+} from '@/components/ui';
 import { usePolicies } from '../hooks';
 import { Policy } from '../types';
 
@@ -79,13 +90,13 @@ export function DeletePolicyDialog({ open, onOpenChange, policy }: DeletePolicyD
   /**
    * Format worm reward display
    */
-  function formatWormReward(totals: { gold: number; silver: number; bronze: number }) {
-    const parts = [];
-    if (totals.gold > 0) parts.push(`${totals.gold} Gold`);
-    if (totals.silver > 0) parts.push(`${totals.silver} Silver`);
-    if (totals.bronze > 0) parts.push(`${totals.bronze} Bronze`);
-    return parts.length > 0 ? parts.join(', ') : 'No rewards';
-  }
+  function formatWormReward(totals: { gold: number; silver: number; platinum: number }) {
+  const parts = [];
+  if (totals.gold > 0) parts.push(`${totals.gold} Gold`);
+  if (totals.silver > 0) parts.push(`${totals.silver} Silver`);
+  if (totals.platinum > 0) parts.push(`${totals.platinum} Platinum`);
+  return parts.length > 0 ? parts.join(', ') : 'No rewards';
+}
 
   if (!policy) return null;
 
@@ -147,7 +158,7 @@ export function DeletePolicyDialog({ open, onOpenChange, policy }: DeletePolicyD
                 </div>
               </div>
 
-              {(totalRewards.gold > 0 || totalRewards.silver > 0 || totalRewards.bronze > 0) && (
+              {(totalRewards.gold > 0 || totalRewards.silver > 0 || totalRewards.platinum > 0) && (
                 <div className="mt-3 pt-3 border-t border-red-200">
                   <div className="text-xs text-red-700 font-medium mb-1">Total Rewards:</div>
                   <div className="text-xs text-red-800">{formatWormReward(totalRewards)}</div>

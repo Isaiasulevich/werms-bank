@@ -9,16 +9,31 @@
 
 import { useState, useCallback } from 'react';
 import { Plus, X, AlertCircle, Info, Clock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Checkbox,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Separator,
+  Textarea,
+} from '@/components/ui';
 import { usePolicies, usePolicyForm } from '../hooks';
 import { PolicyCondition, ConditionType, PolicyCategory, PolicyStatus } from '../types';
 
@@ -45,11 +60,11 @@ function ConditionForm({
    * Get worm reward display text
    */
   function getRewardDisplay() {
-    const { gold = 0, silver = 0, bronze = 0 } = condition.wormReward || {};
+    const { gold = 0, silver = 0, platinum = 0 } = condition.wormReward || {};
     const parts = [];
     if (gold > 0) parts.push(`${gold} Gold`);
     if (silver > 0) parts.push(`${silver} Silver`);
-    if (bronze > 0) parts.push(`${bronze} Bronze`);
+    if (platinum > 0) parts.push(`${platinum} Platinum`);
     return parts.length > 0 ? parts.join(', ') : 'No reward set';
   }
 
@@ -144,7 +159,7 @@ function ConditionForm({
           <Label>Worm Rewards *</Label>
           <div className="grid grid-cols-3 gap-3">
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`gold-${condition.id}`} className="text-xs text-yellow-600">🥇 Gold</Label>
+              <Label htmlFor={`gold-${condition.id}`} className="text-xs text-worm-gold">🥇 Gold</Label>
               <Input
                 id={`gold-${condition.id}`}
                 type="number"
@@ -160,7 +175,7 @@ function ConditionForm({
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`silver-${condition.id}`} className="text-xs text-gray-500">🥈 Silver</Label>
+              <Label htmlFor={`silver-${condition.id}`} className="text-xs text-worm-silver">🥈 Silver</Label>
               <Input
                 id={`silver-${condition.id}`}
                 type="number"
@@ -176,17 +191,17 @@ function ConditionForm({
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`bronze-${condition.id}`} className="text-xs text-amber-600">🥉 Bronze</Label>
+              <Label htmlFor={`platinum-${condition.id}`} className="text-xs text-worm-platinum">🏆 Platinum</Label>
               <Input
-                id={`bronze-${condition.id}`}
+                id={`platinum-${condition.id}`}
                 type="number"
                 min="0"
                 placeholder="0"
-                value={condition.wormReward?.bronze || ''}
+                value={condition.wormReward?.platinum || ''}
                 onChange={(e) => onUpdate({
                   wormReward: {
                     ...condition.wormReward,
-                    bronze: e.target.value ? parseInt(e.target.value) : 0
+                    platinum: e.target.value ? parseInt(e.target.value) : 0
                   }
                 })}
               />
@@ -263,7 +278,7 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
       type: 'attendance',
       description: '',
       trigger: '',
-      wormReward: { bronze: 1 },
+              wormReward: { platinum: 1 },
       requiresApproval: false,
       isActive: true,
     };
@@ -309,7 +324,7 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
       case 'conditions':
         return formData.conditions.length > 0 && formData.conditions.every(c => 
           c.description?.trim() && c.trigger?.trim() && 
-          ((c.wormReward?.gold || 0) + (c.wormReward?.silver || 0) + (c.wormReward?.bronze || 0) > 0)
+          ((c.wormReward?.gold || 0) + (c.wormReward?.silver || 0) + (c.wormReward?.platinum || 0) > 0)
         );
       case 'review':
         return true;

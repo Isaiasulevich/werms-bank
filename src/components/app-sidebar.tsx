@@ -41,13 +41,13 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Employee Balances",
-      url: "/dashboard?section=employees",
+      title: "Employees",
+      url: "/employees",
       icon: IconUsers,
     },
     {
       title: "Policies",
-      url: "/dashboard?section=policies",
+      url: "/policies",
       icon: IconShield,
     },
     {

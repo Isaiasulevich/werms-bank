@@ -143,6 +143,14 @@
   --color-brand-alt-yellow-900: var(--brand-alt-yellow-900);
   --color-brand-alt-yellow-1000: var(--brand-alt-yellow-1000);
 
+  /* Worm type colors */
+  --color-worm-silver: var(--gray-500);
+  --color-worm-silver-foreground: var(--white-100);
+  --color-worm-gold: var(--yellow-500);
+  --color-worm-gold-foreground: var(--black-100);
+  --color-worm-platinum: var(--brand-alt-light-blue-500);
+  --color-worm-platinum-foreground: var(--black-100);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -334,6 +342,14 @@
   --sidebar-accent-foreground: var(--gray-100);
   --sidebar-border: var(--gray-800);
   --sidebar-ring: var(--brand-400);
+
+  /* Worm type colors for dark mode */
+  --color-worm-silver: var(--gray-400);
+  --color-worm-silver-foreground: var(--black-100);
+  --color-worm-gold: var(--yellow-400);
+  --color-worm-gold-foreground: var(--black-100);
+  --color-worm-platinum: var(--brand-alt-light-blue-500);
+  --color-worm-platinum-foreground: var(--black-100);
 }
 
 @layer base {

@@ -1,7 +1,7 @@
 "use client"
 
 import { LoginForm } from "@/components/LoginForm"
-import { SimpleThemeToggle } from "@/components/ui/theme-toggle"
+import { SimpleThemeToggle } from "@/components/ui"
 
 export default function HomePage() {
   return (

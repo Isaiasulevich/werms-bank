@@ -14,8 +14,6 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -23,14 +21,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SimpleThemeToggle,
   useSidebar,
-} from "@/components/ui/sidebar"
-import { SimpleThemeToggle } from "@/components/ui/theme-toggle"
+} from "@/components/ui"
 
 export function NavUser({
   user,

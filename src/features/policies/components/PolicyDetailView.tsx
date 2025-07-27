@@ -9,12 +9,25 @@
 
 import { useState } from 'react';
 import { ArrowLeft, Edit, Trash2, Calendar, User, Shield, Clock, CheckCircle, XCircle, AlertCircle, Settings } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  Separator,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui';
 import { Policy, PolicyCondition } from '../types';
 
 interface PolicyDetailViewProps {
@@ -88,11 +101,11 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
    * Format worm reward
    */
   function formatWormReward() {
-    const { gold = 0, silver = 0, bronze = 0 } = condition.wormReward || {};
+    const { gold = 0, silver = 0, platinum = 0 } = condition.wormReward || {};
     const parts = [];
     if (gold > 0) parts.push(`${gold} 🥇 Gold`);
     if (silver > 0) parts.push(`${silver} 🥈 Silver`);
-    if (bronze > 0) parts.push(`${bronze} 🥉 Bronze`);
+    if (platinum > 0) parts.push(`${platinum} 🏆 Platinum`);
     return parts.length > 0 ? parts.join(', ') : 'No reward set';
   }
 
@@ -170,7 +183,7 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
                 {[
                   { type: 'Gold', value: condition.wormReward?.gold || 0, icon: '🥇', color: 'text-yellow-600' },
                   { type: 'Silver', value: condition.wormReward?.silver || 0, icon: '🥈', color: 'text-gray-500' },
-                  { type: 'Bronze', value: condition.wormReward?.bronze || 0, icon: '🥉', color: 'text-amber-600' }
+                  { type: 'Platinum', value: condition.wormReward?.platinum || 0, icon: '🏆', color: 'text-worm-platinum' }
                 ].map((reward) => (
                   <div key={reward.type} className="text-center p-2 bg-gray-50 rounded">
                     <div className="text-lg mb-1">{reward.icon}</div>
@@ -327,7 +340,7 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                 <Card className="text-center">
                   <CardContent className="pt-4">
                     <div className="text-2xl font-bold text-orange-600">
-                      {totalRewards.gold + totalRewards.silver + totalRewards.bronze}
+                      {totalRewards.gold + totalRewards.silver + totalRewards.platinum}
                     </div>
                     <div className="text-xs text-muted-foreground">Total Rewards</div>
                   </CardContent>
@@ -377,8 +390,8 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                     </div>
                     <div className="text-center p-4 bg-amber-50 rounded-lg">
                       <div className="text-3xl mb-2">🥉</div>
-                      <div className="text-2xl font-bold text-amber-600">{totalRewards.bronze}</div>
-                      <div className="text-sm text-amber-700">Bronze Worms</div>
+                                      <div className="text-2xl font-bold text-worm-platinum">{totalRewards.platinum}</div>
+                <div className="text-sm text-worm-platinum">Platinum Worms</div>
                     </div>
                   </div>
                 </CardContent>
