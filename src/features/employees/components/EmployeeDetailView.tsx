@@ -198,23 +198,23 @@ function EmployeeHeader({
 }) {
   return (
     <div className="flex items-start justify-between">
-      <div className="flex items-center gap-4">
-        <Avatar className="h-16 w-16">
+      <div className="flex flex-col text-center w-full items-center gap-4">
+        <Avatar className="h-16 w-16 border-1  border-primary">
           <img
             src={employee.avatar_url}
             alt={employee.name}
             className="h-16 w-16 rounded-full object-cover"
           />
         </Avatar>
-        <div>
-          <div className="flex items-center gap-3 mb-1">
+        <div className="flex flex-col items-center gap-1">
+          <div className="flex items-center gap-3">
             <h1 className="text-xl font-bold">{editedData.name}</h1>
           </div>
           <div className="text-sm text-muted-foreground">
             {getDepartmentIcon(editedData.department)} {editedData.department} • {editedData.role}
           </div>
           <div className="text-xs text-muted-foreground">
-            {editedData.employee_id} • Hired {new Date(editedData.hire_date).toLocaleDateString()}
+            {editedData.employee_id}
           </div>
         </div>
       </div>
@@ -431,16 +431,12 @@ function TransactionsTab({ transactions }: { transactions: Transaction[] }) {
  */
 function DetailsTab({ 
   editedData, 
-  updateField, 
-  manager, 
-  directReports, 
-  potentialManagers 
+  updateField,
+  directReports
 }: {
   editedData: Employee;
   updateField: <K extends keyof Employee>(field: K, value: Employee[K]) => void;
-  manager: Employee | null;
   directReports: Employee[];
-  potentialManagers: Employee[];
 }) {
   return (
     <div className="space-y-6">
@@ -472,26 +468,6 @@ function DetailsTab({
               value={editedData.slack_username}
               onChange={(e) => updateField('slack_username', e.target.value)}
               className="h-8 mt-1"
-            />
-          </div>
-
-          <div>
-            <Label className="text-xs text-muted-foreground">Phone</Label>
-            <Input
-              value={editedData.phone || ''}
-              onChange={(e) => updateField('phone', e.target.value || undefined)}
-              className="h-8 mt-1"
-              placeholder="Phone number"
-            />
-          </div>
-
-          <div>
-            <Label className="text-xs text-muted-foreground">Location</Label>
-            <Input
-              value={editedData.location || ''}
-              onChange={(e) => updateField('location', e.target.value || undefined)}
-              className="h-8 mt-1"
-              placeholder="Location"
             />
           </div>
         </form>
@@ -535,81 +511,30 @@ function DetailsTab({
               className="h-8 mt-1"
             />
           </div>
-
-          <div>
-            <Label className="text-xs text-muted-foreground">Manager</Label>
-            <Select
-              value={editedData.manager_id || 'none'}
-              onValueChange={(value) => updateField('manager_id', value === 'none' ? null : value)}
-            >
-              <SelectTrigger className="h-8 mt-1">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">No Manager</SelectItem>
-                {potentialManagers.map((manager) => (
-                  <SelectItem key={manager.id} value={manager.id}>
-                    {manager.name} - {manager.role}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label className="text-xs text-muted-foreground">Hire Date</Label>
-            <Input
-              type="date"
-              value={editedData.hire_date}
-              onChange={(e) => updateField('hire_date', e.target.value)}
-              className="h-8 mt-1"
-            />
-          </div>
         </form>
       </div>
 
       <Separator />
 
-      {/* Organization */}
+      {/* Direct Reports */}
       <div>
-        <h3 className="font-medium text-sm text-muted-foreground mb-4">Organization</h3>
-        
-        {/* Manager Display */}
-        {manager && (
-          <div className="mb-4">
-            <Label className="text-xs text-muted-foreground">Reports to</Label>
-            <div className="flex items-center gap-2 mt-1">
-              <Avatar className="h-6 w-6">
-                <img src={manager.avatar_url} alt={manager.name} className="h-6 w-6 rounded-full object-cover" />
-              </Avatar>
-              <div>
-                <div className="font-medium text-sm">{manager.name}</div>
-                <div className="text-xs text-muted-foreground">{manager.role}</div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Direct Reports */}
-        <div>
-          <Label className="text-xs text-muted-foreground">Direct Reports ({directReports.length})</Label>
-          <div className="mt-2 space-y-2">
-            {directReports.length > 0 ? (
-              directReports.map((report) => (
-                <div key={report.id} className="flex items-center gap-2">
-                  <Avatar className="h-6 w-6">
-                    <img src={report.avatar_url} alt={report.name} className="h-6 w-6 rounded-full object-cover" />
-                  </Avatar>
-                  <div>
-                    <div className="font-medium text-sm">{report.name}</div>
-                    <div className="text-xs text-muted-foreground">{report.role}</div>
-                  </div>
+        <h3 className="font-medium text-sm text-muted-foreground mb-4">Direct Reports ({directReports.length})</h3>
+        <div className="mt-2 space-y-2">
+          {directReports.length > 0 ? (
+            directReports.map((report) => (
+              <div key={report.id} className="flex items-center gap-2">
+                <Avatar className="h-6 w-6">
+                  <img src={report.avatar_url} alt={report.name} className="h-6 w-6 rounded-full object-cover" />
+                </Avatar>
+                <div>
+                  <div className="font-medium text-sm">{report.name}</div>
+                  <div className="text-xs text-muted-foreground">{report.role}</div>
                 </div>
-              ))
-            ) : (
-              <div className="text-sm text-muted-foreground">No direct reports</div>
-            )}
-          </div>
+              </div>
+            ))
+          ) : (
+            <div className="text-sm text-muted-foreground">No direct reports</div>
+          )}
         </div>
       </div>
 
@@ -640,7 +565,7 @@ function DetailsTab({
 }
 
 export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
-  const { updateEmployee, isLoading, getEmployeesByManager, getEmployeeById, getPotentialManagers } = useEmployees();
+  const { updateEmployee, isLoading, getEmployeesByManager } = useEmployees();
   
   // Editing state
   const [editedData, setEditedData] = useState(employee);
@@ -651,17 +576,10 @@ export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
   const wormData = useMemo(() => generateMockWormData(employee), [employee]);
   const transactions = useMemo(() => generateMockTransactions(employee), [employee]);
 
-  // Relationships - memoized for performance
-  const manager = useMemo(() => {
-    if (!employee.manager_id) return null;
-    return getEmployeeById(employee.manager_id) || null;
-  }, [employee.manager_id, getEmployeeById]);
-
+  // Direct reports - memoized for performance
   const directReports = useMemo(() => {
     return getEmployeesByManager(employee.id);
   }, [employee.id, getEmployeesByManager]);
-
-  const potentialManagers = getPotentialManagers(employee.id);
 
   // Reset data when employee changes
   useEffect(() => {
@@ -741,9 +659,7 @@ export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
             <DetailsTab
               editedData={editedData}
               updateField={updateField}
-              manager={manager}
               directReports={directReports}
-              potentialManagers={potentialManagers}
             />
           </TabsContent>
         </div>
