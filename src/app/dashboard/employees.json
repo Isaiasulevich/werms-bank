@@ -24,14 +24,14 @@
         "total_value": 70.00
       },
       "total_werms": 93,
-      "total_value_usd": 195.00
+      "total_value_aud": 195.00
     },
     "lifetime_earned": {
       "gold": 25,
       "silver": 89,
       "bronze": 234,
       "total_werms": 348,
-      "total_value_usd": 797.00
+      "total_value_aud": 797.00
     },
     "avatar_url": "/avatars/isa.jpg"
   },
@@ -60,14 +60,14 @@
         "total_value": 65.00
       },
       "total_werms": 90,
-      "total_value_usd": 189.00
+      "total_value_aud": 189.00
     },
     "lifetime_earned": {
       "gold": 20,
       "silver": 76,
       "bronze": 198,
       "total_werms": 294,
-      "total_value_usd": 628.00
+      "total_value_aud": 628.00
     },
     "avatar_url": "/avatars/sarah.jpg"
   },
@@ -96,14 +96,14 @@
         "total_value": 55.00
       },
       "total_werms": 74,
-      "total_value_usd": 147.00
+      "total_value_aud": 147.00
     },
     "lifetime_earned": {
       "gold": 15,
       "silver": 67,
       "bronze": 145,
       "total_werms": 227,
-      "total_value_usd": 502.00
+      "total_value_aud": 502.00
     },
     "avatar_url": "/avatars/tom.jpg"
   },
@@ -132,14 +132,14 @@
         "total_value": 54.00
       },
       "total_werms": 72,
-      "total_value_usd": 150.00
+      "total_value_aud": 150.00
     },
     "lifetime_earned": {
       "gold": 18,
       "silver": 58,
       "bronze": 167,
       "total_werms": 243,
-      "total_value_usd": 507.00
+      "total_value_aud": 507.00
     },
     "avatar_url": "/avatars/ollie.jpg"
   },
@@ -168,14 +168,14 @@
         "total_value": 50.00
       },
       "total_werms": 69,
-      "total_value_usd": 135.00
+      "total_value_aud": 135.00
     },
     "lifetime_earned": {
       "gold": 12,
       "silver": 45,
       "bronze": 98,
       "total_werms": 155,
-      "total_value_usd": 375.00
+      "total_value_aud": 375.00
     },
     "avatar_url": "/avatars/jasmine.jpg"
   },
@@ -204,14 +204,14 @@
         "total_value": 50.00
       },
       "total_werms": 66,
-      "total_value_usd": 119.00
+      "total_value_aud": 119.00
     },
     "lifetime_earned": {
       "gold": 9,
       "silver": 38,
       "bronze": 89,
       "total_werms": 136,
-      "total_value_usd": 293.00
+      "total_value_aud": 293.00
     },
     "avatar_url": "/avatars/ruby.jpg"
   },
@@ -240,14 +240,14 @@
         "total_value": 48.00
       },
       "total_werms": 65,
-      "total_value_usd": 134.00
+      "total_value_aud": 134.00
     },
     "lifetime_earned": {
       "gold": 22,
       "silver": 67,
       "bronze": 201,
       "total_werms": 290,
-      "total_value_usd": 721.00
+      "total_value_aud": 721.00
     },
     "avatar_url": "/avatars/prince.jpg"
   },
@@ -276,14 +276,14 @@
         "total_value": 48.00
       },
       "total_werms": 63,
-      "total_value_usd": 121.00
+      "total_value_aud": 121.00
     },
     "lifetime_earned": {
       "gold": 19,
       "silver": 78,
       "bronze": 234,
       "total_werms": 331,
-      "total_value_usd": 814.00
+      "total_value_aud": 814.00
     },
     "avatar_url": "/avatars/matt.jpg"
   },
@@ -312,14 +312,14 @@
         "total_value": 50.00
       },
       "total_werms": 63,
-      "total_value_usd": 110.00
+      "total_value_aud": 110.00
     },
     "lifetime_earned": {
       "gold": 8,
       "silver": 25,
       "bronze": 67,
       "total_werms": 100,
-      "total_value_usd": 222.00
+      "total_value_aud": 222.00
     },
     "avatar_url": "/avatars/ben.jpg"
   },
@@ -348,14 +348,14 @@
         "total_value": 45.00
       },
       "total_werms": 59,
-      "total_value_usd": 101.00
+      "total_value_aud": 101.00
     },
     "lifetime_earned": {
       "gold": 7,
       "silver": 34,
       "bronze": 89,
       "total_werms": 130,
-      "total_value_usd": 241.00
+      "total_value_aud": 241.00
     },
     "avatar_url": "/avatars/andy.jpg"
   },
@@ -384,14 +384,14 @@
         "total_value": 28.00
       },
       "total_werms": 35,
-      "total_value_usd": 56.00
+      "total_value_aud": 56.00
     },
     "lifetime_earned": {
       "gold": 5,
       "silver": 18,
       "bronze": 67,
       "total_werms": 90,
-      "total_value_usd": 171.00
+      "total_value_aud": 171.00
     },
     "avatar_url": "/avatars/nick.jpg"
   },
@@ -420,14 +420,14 @@
         "total_value": 23.00
       },
       "total_werms": 29,
-      "total_value_usd": 48.00
+      "total_value_aud": 48.00
     },
     "lifetime_earned": {
       "gold": 8,
       "silver": 32,
       "bronze": 89,
       "total_werms": 129,
-      "total_value_usd": 256.00
+      "total_value_aud": 256.00
     },
     "avatar_url": "/avatars/mike.jpg"
   },
@@ -456,14 +456,14 @@
         "total_value": 5.00
       },
       "total_werms": 6,
-      "total_value_usd": 8.00
+      "total_value_aud": 8.00
     },
     "lifetime_earned": {
       "gold": 1,
       "silver": 8,
       "bronze": 23,
       "total_werms": 32,
-      "total_value_usd": 67.00
+      "total_value_aud": 67.00
     },
     "avatar_url": "/avatars/kailash.jpg"
   },
@@ -492,14 +492,14 @@
         "total_value": 5.00
       },
       "total_werms": 6,
-      "total_value_usd": 8.00
+      "total_value_aud": 8.00
     },
     "lifetime_earned": {
       "gold": 3,
       "silver": 15,
       "bronze": 45,
       "total_werms": 63,
-      "total_value_usd": 150.00
+      "total_value_aud": 150.00
     },
     "avatar_url": "/avatars/kislay.jpg"
   },
@@ -528,14 +528,14 @@
         "total_value": 5.00
       },
       "total_werms": 6,
-      "total_value_usd": 8.00
+      "total_value_aud": 8.00
     },
     "lifetime_earned": {
       "gold": 2,
       "silver": 12,
       "bronze": 34,
       "total_werms": 48,
-      "total_value_usd": 98.00
+      "total_value_aud": 98.00
     },
     "avatar_url": "/avatars/zac.jpg"
   }
