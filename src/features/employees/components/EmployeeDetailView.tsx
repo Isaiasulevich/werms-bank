@@ -286,7 +286,7 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
         {/* Earnings Chart */}
         <div>
           <div className="text-xs text-muted-foreground mb-3">Worm Earnings - Last 7 Days</div>
-          <div className="space-y-1">
+          <div className="grid grid-cols-7 gap-2">
             {wormData.slice(-7).map((day) => (
               <div key={day.date} className="flex items-center gap-3">
                 <div className="text-xs text-muted-foreground w-16">
@@ -294,12 +294,12 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
                 </div>
                 <div className="flex-1 bg-muted/30 rounded h-6 relative overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded transition-all duration-300"
+                    className="bg-primary h-full rounded transition-all duration-300"
                     style={{ width: `${(day.earned / maxEarnings) * 100}%` }}
                   />
                   <div className="absolute inset-0 flex items-center px-2">
-                    <span className="text-xs font-medium text-white mix-blend-difference">
-                      +{day.earned} worms
+                    <span className={`text-xs font-medium ${day.earned > 0 ? 'text-primary-foreground' : 'text-muted-foreground'}`}>
+                      {day.earned > 0 ? `+${day.earned} worms` : '0 worms'}
                     </span>
                   </div>
                 </div>
