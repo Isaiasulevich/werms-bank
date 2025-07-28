@@ -137,8 +137,9 @@ export function EmployeeList({
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Employees</h1>
           <p className="text-muted-foreground">
-            Manage employee accounts, permissions, and worm balances.
+            {filteredCountText}
           </p>
+          
         </div>
         {onAddEmployee && (
           <Button onClick={onAddEmployee} className="flex items-center gap-2">
@@ -150,25 +151,17 @@ export function EmployeeList({
 
       {/* Filters */}
       <div className="px-4 lg:px-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Filter className="h-5 w-5" />
-              Filters
-            </CardTitle>
-            <CardDescription>
-              {filteredCountText}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+        <Card className="p-0  bg-transparent border-none shadow-none">
+        
+          <CardContent className="p-0">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* Search */}
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Search</label>
+               
                 <div className="relative">
                   <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Name, email, role..."
+                    placeholder="Search by name, email, role..."
                     value={filters.search || ''}
                     onChange={(e) => updateFilters({ search: e.target.value || undefined })}
                     className="pl-9"
@@ -178,7 +171,7 @@ export function EmployeeList({
 
               {/* Department Filter */}
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Department</label>
+                
                 <Select
                   value={filters.department || 'all'}
                   onValueChange={(value) => updateFilters({ department: value === 'all' ? undefined : value as Department })}
@@ -188,24 +181,24 @@ export function EmployeeList({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Departments</SelectItem>
-                    <SelectItem value="Operations">⚡ Operations</SelectItem>
-                    <SelectItem value="Engineering">👨‍💻 Engineering</SelectItem>
-                    <SelectItem value="Product">📱 Product</SelectItem>
-                    <SelectItem value="Marketing">📢 Marketing</SelectItem>
-                    <SelectItem value="Design">🎨 Design</SelectItem>
-                    <SelectItem value="Sales">💼 Sales</SelectItem>
-                    <SelectItem value="Support">🛟 Support</SelectItem>
-                    <SelectItem value="HR">👥 HR</SelectItem>
-                    <SelectItem value="Finance">💰 Finance</SelectItem>
-                    <SelectItem value="Legal">⚖️ Legal</SelectItem>
+                    <SelectItem value="Operations">Operations</SelectItem>
+                    <SelectItem value="Engineering">Engineering</SelectItem>
+                    <SelectItem value="Product">Product</SelectItem>
+                    <SelectItem value="Marketing">Marketing</SelectItem>
+                    <SelectItem value="Design">Design</SelectItem>
+                    <SelectItem value="Sales">Sales</SelectItem>
+                    <SelectItem value="Support">Support</SelectItem>
+                    <SelectItem value="HR">HR</SelectItem>
+                    <SelectItem value="Finance">Finance</SelectItem>
+                    <SelectItem value="Legal">Legal</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Clear Filters */}
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">&nbsp;</label>
-                <Button variant="outline" onClick={clearFilters}>
+              <div className="flex flex-col w-full gap-2 items-end justify-end">
+                
+                <Button variant="outline" onClick={clearFilters} className="w-fit">
                   Clear Filters
                 </Button>
               </div>
