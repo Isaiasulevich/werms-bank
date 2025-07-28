@@ -8,6 +8,9 @@
 // Avatar
 export * from './avatar'
 
+// Background Gradient
+export * from './background-gradient'
+
 // Badge
 export * from './badge'
 
