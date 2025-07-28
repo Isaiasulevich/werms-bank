@@ -35,7 +35,7 @@ import {
   Textarea,
 } from '@/components/ui';
 import { useEmployees, useEmployeeForm } from '../hooks';
-import { Department, EmployeeStatus, EmployeePermission } from '../types';
+import { Department, EmployeePermission } from '../types';
 
 interface AddEmployeeDialogProps {
   open: boolean;
@@ -260,7 +260,7 @@ export function AddEmployeeDialog({ open, onOpenChange }: AddEmployeeDialogProps
                     onValueChange={(value) => updateFormData({ department: value as Department })}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select department" />
+                      <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Operations">⚡ Operations</SelectItem>
@@ -273,23 +273,6 @@ export function AddEmployeeDialog({ open, onOpenChange }: AddEmployeeDialogProps
                       <SelectItem value="HR">👥 HR</SelectItem>
                       <SelectItem value="Finance">💰 Finance</SelectItem>
                       <SelectItem value="Legal">⚖️ Legal</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="employee-status">Employment Status *</Label>
-                  <Select 
-                    value={formData.status} 
-                    onValueChange={(value) => updateFormData({ status: value as EmployeeStatus })}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="active">✅ Active</SelectItem>
-                      <SelectItem value="inactive">⏸️ Inactive</SelectItem>
-                      <SelectItem value="on_leave">🏖️ On Leave</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -453,10 +436,6 @@ export function AddEmployeeDialog({ open, onOpenChange }: AddEmployeeDialogProps
                   <div>
                     <Label className="text-xs text-muted-foreground">Role</Label>
                     <div className="font-medium">{formData.role}</div>
-                  </div>
-                  <div>
-                    <Label className="text-xs text-muted-foreground">Status</Label>
-                    <Badge>{formData.status}</Badge>
                   </div>
                   <div>
                     <Label className="text-xs text-muted-foreground">Hire Date</Label>

@@ -48,7 +48,6 @@ export const employeeSchema = z.object({
   department: z.enum(['Operations', 'Engineering', 'Product', 'Marketing', 'Design', 'Sales', 'Support', 'HR', 'Finance', 'Legal']),
   role: z.string().min(1, "Role is required").max(100, "Role must be less than 100 characters"),
   hire_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Hire date must be in YYYY-MM-DD format"),
-  status: z.enum(['active', 'inactive', 'terminated', 'on_leave']),
   manager_id: z.string().nullable(),
   permissions: z.array(z.enum([
     'admin',
@@ -78,7 +77,6 @@ export const employeeFormSchema = z.object({
   department: z.enum(['Operations', 'Engineering', 'Product', 'Marketing', 'Design', 'Sales', 'Support', 'HR', 'Finance', 'Legal']),
   role: z.string().min(1, "Role is required").max(100, "Role must be less than 100 characters"),
   hire_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Hire date must be in YYYY-MM-DD format"),
-  status: z.enum(['active', 'inactive', 'terminated', 'on_leave']),
   manager_id: z.string().nullable(),
   permissions: z.array(z.enum([
     'admin',
@@ -105,7 +103,6 @@ export const employeeFormSchema = z.object({
 
 // Employee filters schema
 export const employeeFiltersSchema = z.object({
-  status: z.enum(['active', 'inactive', 'terminated', 'on_leave']).optional(),
   department: z.enum(['Operations', 'Engineering', 'Product', 'Marketing', 'Design', 'Sales', 'Support', 'HR', 'Finance', 'Legal']).optional(),
   manager_id: z.string().optional(),
   search: z.string().optional(),

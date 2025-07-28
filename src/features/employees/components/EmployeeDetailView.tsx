@@ -34,7 +34,7 @@ import {
   TableRow,
 } from '@/components/ui';
 import { useEmployees } from '../hooks';
-import { Employee, EmployeePermission, Department, EmployeeStatus } from '../types';
+import { Employee, EmployeePermission, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
 
 // Schema for transaction data
@@ -92,16 +92,6 @@ const DEPARTMENT_CONFIG: Record<string, string> = {
   HR: '👥',
   Finance: '💰',
   Legal: '⚖️',
-};
-
-/**
- * Status configuration
- */
-const STATUS_CONFIG: Record<string, { icon: string; label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
-  active: { icon: '✅', label: 'Active', variant: 'default' },
-  inactive: { icon: '⏸️', label: 'Inactive', variant: 'secondary' },
-  terminated: { icon: '❌', label: 'Terminated', variant: 'destructive' },
-  on_leave: { icon: '🏖️', label: 'On Leave', variant: 'outline' },
 };
 
 /**
@@ -184,13 +174,6 @@ function getDepartmentIcon(department: string) {
 }
 
 /**
- * Get status info
- */
-function getStatusInfo(status: string) {
-  return STATUS_CONFIG[status] || { icon: '❓', label: status, variant: 'outline' as const };
-}
-
-/**
  * Header component with save/cancel controls
  */
 function EmployeeHeader({ 
@@ -208,8 +191,6 @@ function EmployeeHeader({
   onSave: () => void;
   onCancel: () => void;
 }) {
-  const statusInfo = getStatusInfo(editedData.status);
-
   return (
     <div className="flex items-start justify-between">
       <div className="flex items-center gap-4">
@@ -223,9 +204,6 @@ function EmployeeHeader({
         <div>
           <div className="flex items-center gap-3 mb-1">
             <h1 className="text-xl font-bold">{editedData.name}</h1>
-            <Badge variant={statusInfo.variant}>
-              {statusInfo.icon} {statusInfo.label}
-            </Badge>
           </div>
           <div className="text-sm text-muted-foreground">
             {getDepartmentIcon(editedData.department)} {editedData.department} • {editedData.role}
@@ -507,24 +485,6 @@ function DetailsTab({
           </div>
 
           <div>
-            <Label className="text-xs text-muted-foreground">Status</Label>
-            <Select
-              value={editedData.status}
-              onValueChange={(value) => updateField('status', value as EmployeeStatus)}
-            >
-              <SelectTrigger className="h-8 mt-1">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="active">✅ Active</SelectItem>
-                <SelectItem value="inactive">⏸️ Inactive</SelectItem>
-                <SelectItem value="on_leave">🏖️ On Leave</SelectItem>
-                <SelectItem value="terminated">❌ Terminated</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
             <Label className="text-xs text-muted-foreground">Manager</Label>
             <Select
               value={editedData.manager_id || 'none'}
@@ -686,7 +646,7 @@ export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
   }, [employee]);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 min-h-0">
       {/* Header */}
       <EmployeeHeader
         employee={employee}
@@ -700,8 +660,8 @@ export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
       <Separator />
 
       {/* Tabbed Content */}
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col min-h-0">
+        <TabsList className="grid w-full grid-cols-3 mb-6">
           <TabsTrigger value="overview" className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4" />
             Overview
@@ -716,23 +676,25 @@ export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview" className="mt-6">
-          <OverviewTab employee={employee} wormData={wormData} />
-        </TabsContent>
+        <div className="flex-1 min-h-0">
+          <TabsContent value="overview" className="mt-0 h-full">
+            <OverviewTab employee={employee} wormData={wormData} />
+          </TabsContent>
 
-        <TabsContent value="transactions" className="mt-6">
-          <TransactionsTab transactions={transactions} />
-        </TabsContent>
+          <TabsContent value="transactions" className="mt-0 h-full">
+            <TransactionsTab transactions={transactions} />
+          </TabsContent>
 
-        <TabsContent value="details" className="mt-6">
-          <DetailsTab
-            editedData={editedData}
-            updateField={updateField}
-            manager={manager}
-            directReports={directReports}
-            potentialManagers={potentialManagers}
-          />
-        </TabsContent>
+          <TabsContent value="details" className="mt-0 h-full">
+            <DetailsTab
+              editedData={editedData}
+              updateField={updateField}
+              manager={manager}
+              directReports={directReports}
+              potentialManagers={potentialManagers}
+            />
+          </TabsContent>
+        </div>
       </Tabs>
     </div>
   );

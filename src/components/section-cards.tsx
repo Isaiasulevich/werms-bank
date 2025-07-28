@@ -11,6 +11,7 @@ import {
   CardTitle,
   ChartContainer,
 } from "@/components/ui"
+import { calculateWermValueAUD } from "@/shared/utils/format"
 
 // Mock data for mini charts
 const bankReserveData = [
@@ -55,6 +56,9 @@ export function SectionCards() {
             <IconStack className="size-6" />
             2,847 Werms
           </CardTitle>
+          <div className="text-sm text-muted-foreground mb-2">
+            {calculateWermValueAUD(2847)}
+          </div>
           <CardAction>
             <Badge variant="outline">
               <IconTrendingUp />
@@ -87,6 +91,9 @@ export function SectionCards() {
             <IconUsers className="size-6" />
             78
           </CardTitle>
+          <div className="text-sm text-muted-foreground mb-2 invisible">
+            Spacer for alignment
+          </div>
           <CardAction>
             <Badge variant="outline">
               <IconTrendingUp />
@@ -119,6 +126,9 @@ export function SectionCards() {
             <IconCoins className="size-6" />
             15,342 Werms
           </CardTitle>
+          <div className="text-sm text-muted-foreground mb-2">
+            {calculateWermValueAUD(15342)}
+          </div>
           <CardAction>
             <Badge variant="outline">
               <IconTrendingUp />
@@ -151,6 +161,9 @@ export function SectionCards() {
             <IconClock className="size-6" />
             47 days
           </CardTitle>
+          <div className="text-sm text-muted-foreground mb-2 invisible">
+            Spacer for alignment
+          </div>
           <CardAction>
             <Badge variant="outline">
               <IconTrendingDown />

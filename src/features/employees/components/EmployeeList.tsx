@@ -2,13 +2,13 @@
  * Employee List Component
  * 
  * Data table component for displaying employees with filtering, sorting,
- * and action buttons. Includes search, status filters, and bulk operations.
+ * and action buttons. Includes search and department filters.
  */
 
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Search, Plus, Filter, MoreHorizontal, Edit, Trash2, UserX, UserCheck, Eye } from 'lucide-react';
+import { Search, Plus, Filter, MoreHorizontal, Edit, Trash2, Eye } from 'lucide-react';
 import {
   Badge,
   Button,
@@ -37,7 +37,7 @@ import {
   Avatar,
 } from '@/components/ui';
 import { useEmployeeList, useEmployees } from '../hooks';
-import { Employee, EmployeeFilters, EmployeeSort, Department, EmployeeStatus } from '../types';
+import { Employee, EmployeeFilters, EmployeeSort, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
 
 interface EmployeeListProps {
@@ -45,42 +45,6 @@ interface EmployeeListProps {
   onEditEmployee?: (employee: Employee) => void;
   onDeleteEmployee?: (employee: Employee) => void;
   onViewEmployee?: (employee: Employee) => void;
-}
-
-/**
- * Get status badge variant
- */
-function getStatusBadgeVariant(status: EmployeeStatus) {
-  switch (status) {
-    case 'active':
-      return 'default';
-    case 'inactive':
-      return 'secondary';
-    case 'terminated':
-      return 'destructive';
-    case 'on_leave':
-      return 'outline';
-    default:
-      return 'secondary';
-  }
-}
-
-/**
- * Get status display text
- */
-function getStatusDisplay(status: EmployeeStatus) {
-  switch (status) {
-    case 'active':
-      return '✅ Active';
-    case 'inactive':
-      return '⏸️ Inactive';
-    case 'terminated':
-      return '❌ Terminated';
-    case 'on_leave':
-      return '🏖️ On Leave';
-    default:
-      return status;
-  }
 }
 
 /**
@@ -122,7 +86,7 @@ export function EmployeeList({
   const [filters, setFilters] = useState<EmployeeFilters>({});
   const [sort, setSort] = useState<EmployeeSort>({ field: 'name', direction: 'asc' });
   const { employees, total } = useEmployeeList(filters, sort);
-  const { deactivateEmployee, activateEmployee, isLoading } = useEmployees();
+  const { isLoading } = useEmployees();
 
   /**
    * Update filters
@@ -146,21 +110,6 @@ export function EmployeeList({
       field,
       direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc',
     }));
-  };
-
-  /**
-   * Handle employee status toggle
-   */
-  const handleToggleStatus = async (employee: Employee) => {
-    try {
-      if (employee.status === 'active') {
-        await deactivateEmployee(employee.id);
-      } else {
-        await activateEmployee(employee.id);
-      }
-    } catch (error) {
-      console.error('Failed to toggle employee status:', error);
-    }
   };
 
   /**
@@ -212,7 +161,7 @@ export function EmployeeList({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* Search */}
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-medium">Search</label>
@@ -225,26 +174,6 @@ export function EmployeeList({
                     className="pl-9"
                   />
                 </div>
-              </div>
-
-              {/* Status Filter */}
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Status</label>
-                <Select
-                  value={filters.status || 'all'}
-                  onValueChange={(value) => updateFilters({ status: value === 'all' ? undefined : value as EmployeeStatus })}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Statuses</SelectItem>
-                    <SelectItem value="active">✅ Active</SelectItem>
-                    <SelectItem value="inactive">⏸️ Inactive</SelectItem>
-                    <SelectItem value="on_leave">🏖️ On Leave</SelectItem>
-                    <SelectItem value="terminated">❌ Terminated</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
 
               {/* Department Filter */}
@@ -326,17 +255,6 @@ export function EmployeeList({
                 </TableHead>
                 <TableHead 
                   className="cursor-pointer hover:bg-muted/50"
-                  onClick={() => handleSort('status')}
-                >
-                  Status
-                  {sort.field === 'status' && (
-                    <span className="ml-1">
-                      {sort.direction === 'asc' ? '↑' : '↓'}
-                    </span>
-                  )}
-                </TableHead>
-                <TableHead 
-                  className="cursor-pointer hover:bg-muted/50"
                   onClick={() => handleSort('werm_balances')}
                 >
                   Worm Balance
@@ -363,7 +281,7 @@ export function EmployeeList({
             <TableBody>
               {employees.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
                     No employees found matching your filters.
                   </TableCell>
                 </TableRow>
@@ -410,11 +328,6 @@ export function EmployeeList({
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant={getStatusBadgeVariant(employee.status)}>
-                        {getStatusDisplay(employee.status)}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
                       <div>
                         <div className="font-medium">
                           {employee.werm_balances.total_werms} worms
@@ -457,23 +370,6 @@ export function EmployeeList({
                               Edit Employee
                             </DropdownMenuItem>
                           )}
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => handleToggleStatus(employee)}
-                            disabled={isLoading}
-                          >
-                            {employee.status === 'active' ? (
-                              <>
-                                <UserX className="h-4 w-4 mr-2" />
-                                Deactivate
-                              </>
-                            ) : (
-                              <>
-                                <UserCheck className="h-4 w-4 mr-2" />
-                                Activate
-                              </>
-                            )}
-                          </DropdownMenuItem>
                           {onDeleteEmployee && (
                             <>
                               <DropdownMenuSeparator />

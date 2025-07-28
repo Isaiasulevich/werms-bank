@@ -1,9 +1,8 @@
 /**
  * Employee Management Hooks
  * 
- * Custom React hooks for managing employee state, CRUD operations,
- * and data fetching. Uses React Query for efficient caching and
- * state synchronization.
+ * Custom hooks for managing employee data, including CRUD operations,
+ * filtering, sorting, and form management.
  */
 
 'use client';
@@ -17,7 +16,7 @@ import employeesData from '@/app/dashboard/employees.json';
 // Mock stats for development
 const mockStats: EmployeeStats = {
   totalEmployees: employeesData.length,
-  activeEmployees: employeesData.filter(emp => emp.status === 'active').length,
+  activeEmployees: employeesData.length,
   newHiresThisMonth: 3,
   totalWormDistributed: employeesData.reduce((acc, emp) => acc + emp.lifetime_earned.total_werms, 0),
   averageWormBalance: employeesData.reduce((acc, emp) => acc + emp.werm_balances.total_werms, 0) / employeesData.length,
@@ -168,14 +167,6 @@ export function useEmployees() {
     }
   }, [employees]);
 
-  const deactivateEmployee = useCallback(async (id: string): Promise<Employee> => {
-    return updateEmployee(id, { status: 'inactive' });
-  }, [updateEmployee]);
-
-  const activateEmployee = useCallback(async (id: string): Promise<Employee> => {
-    return updateEmployee(id, { status: 'active' });
-  }, [updateEmployee]);
-
   const getEmployeeById = useCallback((id: string): Employee | undefined => {
     return employees.find(emp => emp.id === id);
   }, [employees]);
@@ -187,7 +178,6 @@ export function useEmployees() {
   const getPotentialManagers = useCallback((excludeId?: string): Employee[] => {
     return employees.filter(emp => 
       emp.id !== excludeId && 
-      emp.status === 'active' && 
       emp.permissions.some(p => ['admin', 'approve_distributions', 'approve_small_distributions'].includes(p))
     );
   }, [employees]);
@@ -199,8 +189,6 @@ export function useEmployees() {
     createEmployee,
     updateEmployee,
     deleteEmployee,
-    deactivateEmployee,
-    activateEmployee,
     getEmployeeById,
     getEmployeesByManager,
     getPotentialManagers,
@@ -217,10 +205,6 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
     let filtered = [...employees];
 
     // Apply filters
-    if (filters.status) {
-      filtered = filtered.filter(emp => emp.status === filters.status);
-    }
-
     if (filters.department) {
       filtered = filtered.filter(emp => emp.department === filters.department);
     }
@@ -229,46 +213,30 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
       filtered = filtered.filter(emp => emp.manager_id === filters.manager_id);
     }
 
+    if (filters.search) {
+      const searchTerm = filters.search.toLowerCase();
+      filtered = filtered.filter(emp => 
+        emp.name.toLowerCase().includes(searchTerm) ||
+        emp.email.toLowerCase().includes(searchTerm) ||
+        emp.role.toLowerCase().includes(searchTerm) ||
+        emp.employee_id.toLowerCase().includes(searchTerm)
+      );
+    }
+
     if (filters.hasPermission) {
       filtered = filtered.filter(emp => emp.permissions.includes(filters.hasPermission!));
     }
 
-    if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
-      filtered = filtered.filter(emp => 
-        emp.name.toLowerCase().includes(searchLower) ||
-        emp.email.toLowerCase().includes(searchLower) ||
-        emp.role.toLowerCase().includes(searchLower) ||
-        emp.employee_id.toLowerCase().includes(searchLower) ||
-        emp.slack_username.toLowerCase().includes(searchLower)
-      );
-    }
-
     // Apply sorting
     filtered.sort((a, b) => {
-      let aValue = a[sort.field as keyof Employee];
-      let bValue = b[sort.field as keyof Employee];
-
-      // Handle nested properties
-      if (sort.field === 'werm_balances.total_werms') {
-        aValue = a.werm_balances.total_werms;
-        bValue = b.werm_balances.total_werms;
-      } else if (sort.field === 'werm_balances.total_value_usd') {
-        aValue = a.werm_balances.total_value_usd;
-        bValue = b.werm_balances.total_value_usd;
-      }
-
-      if (typeof aValue === 'string' && typeof bValue === 'string') {
-        return sort.direction === 'asc' 
-          ? aValue.localeCompare(bValue)
-          : bValue.localeCompare(aValue);
-      }
-
-      if (typeof aValue === 'number' && typeof bValue === 'number') {
-        return sort.direction === 'asc' ? aValue - bValue : bValue - aValue;
-      }
-
-      return 0;
+      const aVal = a[sort.field];
+      const bVal = b[sort.field];
+      
+      let comparison = 0;
+      if (aVal < bVal) comparison = -1;
+      if (aVal > bVal) comparison = 1;
+      
+      return sort.direction === 'desc' ? -comparison : comparison;
     });
 
     return filtered;
@@ -311,7 +279,6 @@ export function useEmployeeForm(initialEmployee?: Employee) {
       department: 'Operations' as const,
       role: '',
       hire_date: new Date().toISOString().split('T')[0],
-      status: 'active' as const,
       manager_id: null,
       permissions: ['view_own_balance' as const],
     };
@@ -330,7 +297,6 @@ export function useEmployeeForm(initialEmployee?: Employee) {
       department: 'Operations',
       role: '',
       hire_date: new Date().toISOString().split('T')[0],
-      status: 'active',
       manager_id: null,
       permissions: ['view_own_balance'],
     });

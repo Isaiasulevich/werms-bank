@@ -110,14 +110,16 @@ export function EmployeesPage() {
           if (!open) handleCloseSheet();
         }}
       >
-        <SheetContent className="w-[90vw] sm:w-[80vw] lg:w-[60vw] max-w-4xl overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle>
-              Employee Details
-            </SheetTitle>
-          </SheetHeader>
-          <div className="mt-6">
-            {selectedEmployee && <EmployeeDetailView employee={selectedEmployee} />}
+        <SheetContent className="w-[95vw] sm:w-[85vw] lg:w-[50vw] max-w-none overflow-y-auto p-0">
+          <div className="flex flex-col h-full">
+            <SheetHeader className="px-6 py-4 border-b">
+              <SheetTitle>
+                Employee Details
+              </SheetTitle>
+            </SheetHeader>
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              {selectedEmployee && <EmployeeDetailView employee={selectedEmployee} />}
+            </div>
           </div>
         </SheetContent>
       </Sheet>
