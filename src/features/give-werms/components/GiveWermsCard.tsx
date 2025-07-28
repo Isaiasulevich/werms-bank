@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { IconCoins, IconGift } from "@tabler/icons-react"
 import {
   Card,
   CardContent,
@@ -19,21 +18,21 @@ export function GiveWermsCard() {
 
   return (
     <>
-      <BackgroundGradient className="rounded-[22px] max-w-sm p-4 bg-card" containerClassName="@container/card">
-        <Card className="border-0 shadow-none bg-transparent">
+      <BackgroundGradient className="rounded-[22px] max-w-sm p-4 " containerClassName="@container/card">
+        <Card className="flex flex-col border-0 items-center shadow-none bg-transparent">
         
           
-          <CardHeader className="p-0 pb-4">
+          <CardHeader className="p-0 flex flex-col items-center pb-4">
         <Image src="/images/werm-coin.png" alt="Werms" width={100} height={100} />
-            <CardTitle className="text-2xl font-semibold flex items-center gap-2 text-brand-700">
+            <CardTitle className="text-2xl font-semibold text-center flex items-center gap-2 text-brand-700">
               Give Werms
             </CardTitle>
-            <CardDescription className="text-sm text-muted-foreground">
+            <CardDescription className="text-sm text-center text-muted-foreground">
               Distribute werms to employees using company policies
             </CardDescription>
           </CardHeader>
           
-          <CardContent className="p-0">
+          <CardContent className="p-0 flex flex-col items-center w-full">
             <Button 
               onClick={() => setIsDialogOpen(true)}
               className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
