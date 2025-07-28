@@ -19,7 +19,7 @@ export const wormBalancesSchema = z.object({
   silver: wormBalanceSchema,
   bronze: wormBalanceSchema,
   total_werms: z.number().min(0),
-  total_value_usd: z.number().min(0),
+  total_value_aud: z.number().min(0),
 });
 
 // Lifetime earned schema
@@ -28,7 +28,7 @@ export const lifetimeEarnedSchema = z.object({
   silver: z.number().min(0),
   bronze: z.number().min(0),
   total_werms: z.number().min(0),
-  total_value_usd: z.number().min(0),
+  total_value_aud: z.number().min(0),
 });
 
 // Emergency contact schema
@@ -134,7 +134,7 @@ export const wormTransactionSchema = z.object({
   type: z.enum(['earn', 'spend', 'transfer', 'adjustment']),
   worm_type: z.enum(['gold', 'silver', 'bronze']),
   amount: z.number(),
-  value_usd: z.number(),
+  value_aud: z.number(),
   description: z.string().min(1, "Description is required").max(200, "Description must be less than 200 characters"),
   approved_by: z.string().optional(),
   created_at: z.string(),

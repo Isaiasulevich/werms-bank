@@ -44,7 +44,7 @@ const transactionSchema = z.object({
   type: z.enum(['earn', 'spend', 'transfer', 'adjustment']),
   worm_type: z.enum(['gold', 'silver', 'bronze']),
   amount: z.number(),
-  value_usd: z.number(),
+  value_aud: z.number(),
   description: z.string(),
   approved_by: z.string(),
   policy_id: z.string(),
@@ -159,7 +159,7 @@ function generateMockTransactions(employee: Employee): Transaction[] {
       type: types[Math.floor(Math.random() * types.length)],
       worm_type: wormType,
       amount,
-      value_usd: amount * multiplier,
+      value_aud: amount * multiplier,
       description: categories[Math.floor(Math.random() * categories.length)],
       approved_by: 'Isa',
       policy_id: 'pol-001',
@@ -301,7 +301,7 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
           <div className="text-2xl font-bold">{employee.lifetime_earned.total_werms}</div>
           <div className="text-sm text-muted-foreground">Total Worms Earned</div>
           <div className="text-lg font-medium">
-            {formatCurrency(employee.lifetime_earned.total_value_usd)}
+            {formatCurrency(employee.lifetime_earned.total_value_aud)}
           </div>
         </div>
 
@@ -379,7 +379,7 @@ function TransactionsTab({ transactions }: { transactions: Transaction[] }) {
                       {transaction.type === 'earn' ? '+' : '-'}{transaction.amount}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      ({formatCurrency(transaction.value_usd)})
+                      ({formatCurrency(transaction.value_aud)})
                     </span>
                   </div>
                 </TableCell>

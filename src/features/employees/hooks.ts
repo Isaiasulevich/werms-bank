@@ -77,14 +77,14 @@ export function useEmployees() {
           silver: { count: 0, total_value: 0 },
           bronze: { count: 0, total_value: 0 },
           total_werms: 0,
-          total_value_usd: 0,
+          total_value_aud: 0,
         },
         lifetime_earned: {
           gold: 0,
           silver: 0,
           bronze: 0,
           total_werms: 0,
-          total_value_usd: 0,
+          total_value_aud: 0,
         },
         avatar_url: employeeData.avatar_url || `/avatars/${employeeData.name.toLowerCase().replace(/\s+/g, '')}.jpg`,
       };
@@ -253,9 +253,9 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
       if (sort.field === 'werm_balances.total_werms') {
         aValue = a.werm_balances.total_werms;
         bValue = b.werm_balances.total_werms;
-      } else if (sort.field === 'werm_balances.total_value_usd') {
-        aValue = a.werm_balances.total_value_usd;
-        bValue = b.werm_balances.total_value_usd;
+      } else if (sort.field === 'werm_balances.total_value_aud') {
+        aValue = a.werm_balances.total_value_aud;
+        bValue = b.werm_balances.total_value_aud;
       }
 
       if (typeof aValue === 'string' && typeof bValue === 'string') {

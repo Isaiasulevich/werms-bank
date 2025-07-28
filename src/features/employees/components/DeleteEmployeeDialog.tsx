@@ -111,7 +111,7 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
                 {employee.werm_balances.total_werms} worms
               </div>
               <div className="text-sm text-muted-foreground">
-                {formatCurrency(employee.werm_balances.total_value_usd)}
+                {formatCurrency(employee.werm_balances.total_value_aud)}
               </div>
             </div>
           </CardContent>
@@ -157,7 +157,7 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
                 </CardTitle>
                 <CardDescription>
                   This employee has {employee.werm_balances.total_werms} worms worth{' '}
-                  {formatCurrency(employee.werm_balances.total_value_usd)}. These will be 
+                  {formatCurrency(employee.werm_balances.total_value_aud)}. These will be 
                   permanently lost when the employee is deleted.
                 </CardDescription>
               </CardHeader>

@@ -15,7 +15,7 @@ export interface WormBalances {
   silver: WormBalance;
   bronze: WormBalance;
   total_werms: number;
-  total_value_usd: number;
+  total_value_aud: number;
 }
 
 export interface LifetimeEarned {
@@ -23,7 +23,7 @@ export interface LifetimeEarned {
   silver: number;
   bronze: number;
   total_werms: number;
-  total_value_usd: number;
+  total_value_aud: number;
 }
 
 export type EmployeeStatus = 'active' | 'inactive' | 'terminated' | 'on_leave';
@@ -114,7 +114,7 @@ export interface WormTransaction {
   type: 'earn' | 'spend' | 'transfer' | 'adjustment';
   worm_type: 'gold' | 'silver' | 'bronze';
   amount: number;
-  value_usd: number;
+  value_aud: number;
   description: string;
   approved_by?: string;
   created_at: string;

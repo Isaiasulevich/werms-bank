@@ -68,7 +68,7 @@ function getStatusBadgeVariant(status: EmployeeStatus) {
 /**
  * Get status display text
  */
-function getStatusDisplay(status: EmployeeStatus) {
+function getStataudisplay(status: EmployeeStatus) {
   switch (status) {
     case 'active':
       return '✅ Active';
@@ -411,7 +411,7 @@ export function EmployeeList({
                     </TableCell>
                     <TableCell>
                       <Badge variant={getStatusBadgeVariant(employee.status)}>
-                        {getStatusDisplay(employee.status)}
+                        {getStataudisplay(employee.status)}
                       </Badge>
                     </TableCell>
                     <TableCell>
@@ -420,7 +420,7 @@ export function EmployeeList({
                           {employee.werm_balances.total_werms} worms
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          {formatCurrency(employee.werm_balances.total_value_usd)}
+                          {formatCurrency(employee.werm_balances.total_value_aud)}
                         </div>
                         <div className="text-xs text-muted-foreground">
                           🥇{employee.werm_balances.gold.count} 🥈{employee.werm_balances.silver.count} 🥉{employee.werm_balances.bronze.count}
