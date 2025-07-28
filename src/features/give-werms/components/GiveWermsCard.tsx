@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
   Button,
+  BackgroundGradient,
 } from "@/components/ui"
 import { GiveWermsDialog } from "./GiveWermsDialog"
 
@@ -17,8 +18,8 @@ export function GiveWermsCard() {
 
   return (
     <>
-      <Card className="@container/card relative overflow-hidden border-2 border-transparent bg-gradient-to-r from-brand-500/20 via-brand-400/10 to-brand-600/20 p-[2px]">
-        <div className="relative rounded-[calc(var(--radius)-2px)] bg-card p-6 h-full">
+      <BackgroundGradient className="rounded-[22px] max-w-sm p-4 bg-card" containerClassName="@container/card">
+        <Card className="border-0 shadow-none bg-transparent">
           {/* Coin decoration */}
           <div className="absolute -top-2 -right-2 opacity-20">
             <IconCoins className="size-16 text-brand-500 rotate-12" />
@@ -47,8 +48,8 @@ export function GiveWermsCard() {
               Start Distribution
             </Button>
           </CardContent>
-        </div>
-      </Card>
+        </Card>
+      </BackgroundGradient>
 
       <GiveWermsDialog 
         open={isDialogOpen}
