@@ -32,7 +32,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
 } from '@/components/ui';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts';
 import { useEmployees } from '../hooks';
 import { Employee, EmployeePermission, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
@@ -285,29 +290,76 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
 
         {/* Earnings Chart */}
         <div>
-          <div className="text-xs text-muted-foreground mb-3">Worm Earnings - Last 7 Days</div>
-          <div className="grid grid-cols-7 gap-2">
-            {wormData.slice(-7).map((day) => (
-              <div key={day.date} className="flex items-center gap-3">
-                <div className="text-xs text-muted-foreground w-16">
-                  {new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                </div>
-                <div className="flex-1 bg-muted/30 rounded h-6 relative overflow-hidden">
-                  <div
-                    className="bg-primary h-full rounded transition-all duration-300"
-                    style={{ width: `${(day.earned / maxEarnings) * 100}%` }}
+          <div className="text-xs text-muted-foreground mb-3">Werm Earnings - Last 7 Days</div>
+          <div className="h-[200px] w-full">
+            <ChartContainer
+              config={{
+                earned: {
+                  label: "Werms Earned",
+                  color: "hsl(var(--primary))",
+                },
+              } satisfies ChartConfig}
+              className="h-full w-full"
+            >
+              <BarChart
+                accessibilityLayer
+                data={wormData.slice(-7)}
+                layout="vertical"
+                margin={{
+                  left: 0,
+                  right: 40,
+                }}
+              >
+                <XAxis type="number" dataKey="earned" hide />
+                <YAxis
+                  dataKey="date"
+                  type="category"
+                  tickLine={false}
+                  tickMargin={10}
+                  axisLine={false}
+                  width={50}
+                  tickFormatter={(value) => {
+                    const date = new Date(value);
+                    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                  }}
+                />
+                <ChartTooltip
+                  cursor={false}
+                  content={
+                    <ChartTooltipContent
+                      labelFormatter={(value) => {
+                        return new Date(value).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          month: 'short',
+                          day: 'numeric',
+                        });
+                      }}
+                      formatter={(value, name) => [
+                        `${value} werms`,
+                        name === "earned" ? "Earned" : name
+                      ]}
+                    />
+                  }
+                />
+                <Bar
+                  dataKey="earned"
+                  fill="hsl(var(--chart-1))"
+                  radius={5}
+                >
+                  <LabelList 
+                    dataKey="earned" 
+                    position="right"
+                    offset={8}
+                    fontSize={12}
+                    className="fill-foreground font-medium"
                   />
-                  <div className="absolute inset-0 flex items-center px-2">
-                    <span className={`text-xs font-medium ${day.earned > 0 ? 'text-primary-foreground' : 'text-muted-foreground'}`}>
-                      {day.earned > 0 ? `+${day.earned} worms` : '0 worms'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
+                </Bar>
+              </BarChart>
+            </ChartContainer>
           </div>
           <div className="mt-3 text-xs text-muted-foreground text-center">
-            Trending up 8.2% this month ↗
+            <TrendingUp className="inline h-3 w-3 mr-1" />
+            Trending up 8.2% this month
           </div>
         </div>
       </div>
@@ -663,15 +715,15 @@ export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex flex-col min-h-0">
         <TabsList className="grid w-full grid-cols-3 mb-6">
           <TabsTrigger value="overview" className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4" />
+            
             Overview
           </TabsTrigger>
           <TabsTrigger value="transactions" className="flex items-center gap-2">
-            <Receipt className="h-4 w-4" />
+       
             Transactions
           </TabsTrigger>
           <TabsTrigger value="details" className="flex items-center gap-2">
-            <Info className="h-4 w-4" />
+           
             Details
           </TabsTrigger>
         </TabsList>
