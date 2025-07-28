@@ -12,6 +12,7 @@ import {
   ChartContainer,
 } from "@/components/ui"
 import { calculateWermValueAUD } from "@/shared/utils/format"
+import { GiveWermsCard } from "@/features/give-werms"
 
 // Mock data for mini charts
 const bankReserveData = [
@@ -48,7 +49,10 @@ const chartConfigDestructive = {
 
 export function SectionCards() {
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-5">
+      {/* Give Werms Quick Action Card */}
+      <GiveWermsCard />
+      
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Bank Reserve</CardDescription>
