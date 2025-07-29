@@ -229,29 +229,14 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
 
     // Apply sorting
     filtered.sort((a, b) => {
-      let aValue = a[sort.field as keyof Employee];
-      let bValue = b[sort.field as keyof Employee];
-
-      // Handle nested properties
-      if (sort.field === 'werm_balances.total_werms') {
-        aValue = a.werm_balances.total_werms;
-        bValue = b.werm_balances.total_werms;
-      } else if (sort.field === 'werm_balances.total_value_aud') {
-        aValue = a.werm_balances.total_value_aud;
-        bValue = b.werm_balances.total_value_aud;
-      }
-
-      if (typeof aValue === 'string' && typeof bValue === 'string') {
-        return sort.direction === 'asc' 
-          ? aValue.localeCompare(bValue)
-          : bValue.localeCompare(aValue);
-      }
-
-      if (typeof aValue === 'number' && typeof bValue === 'number') {
-        return sort.direction === 'asc' ? aValue - bValue : bValue - aValue;
-      }
-
-      return 0;
+      const aVal = a[sort.field];
+      const bVal = b[sort.field];
+      
+      let comparison = 0;
+      if (aVal < bVal) comparison = -1;
+      if (aVal > bVal) comparison = 1;
+      
+      return sort.direction === 'desc' ? -comparison : comparison;
     });
 
     return filtered;
