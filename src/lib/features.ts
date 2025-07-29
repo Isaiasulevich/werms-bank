@@ -103,8 +103,8 @@ function transferWerms(
 }
 
 // Simple test case for the function
-transferWerms(employeeData, 'isa@nakatomi.com', 'kislay@nakatomi.com', 
-  {gold: 100}, "Test Transfer"
+transferWerms(employeeData, 'kislay@nakatomi.com', 'andy@nakatomi.com', 
+  {gold: 1, bronze: 3}, "Test Transfer"
 );
 
 
