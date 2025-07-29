@@ -1,27 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import employeeData from '../app/dashboard/employees.json';
-import { number } from 'zod';
-
-
-// TODO: MOVE THIS TO A SEPARATE FILE
-type WermType = 'gold' | 'silver' | 'bronze';
-type WermBalances = {
-  [key in WermType]: {
-    count: number;
-    total_value: number;
-  };
-} & {
-  total_werms: number;
-  total_value_aud: number;
-};
-
-// TODO: MOVE THIS TO A SEPARATE FILE
-const WERM_PRICES: Record<WermType, number> = {
-  gold: 10.0,
-  silver: 3.0,
-  bronze: 1.0
-};
+import { WermType, WermBalances, WERM_PRICES } from './wermTypes';
 
 /*
 werm_balances: {
@@ -72,6 +52,8 @@ function recalculateTotals(werm_balances: WermBalances) {
   werm_balances.total_value_aud = parseFloat(totalValue.toFixed(2));
 }
 
+
+// TODO: Document function
 function transferWerms(
   employees: any[],
   senderEmail: string,
@@ -120,6 +102,7 @@ function transferWerms(
   
 }
 
+// Simple test case for the function
 transferWerms(employeeData, 'isa@nakatomi.com', 'kislay@nakatomi.com', 
   {gold: 100}, "Test Transfer"
 );
