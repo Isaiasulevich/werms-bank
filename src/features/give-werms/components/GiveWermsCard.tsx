@@ -22,7 +22,7 @@ export function GiveWermsCard() {
         className="rounded-[24px] max-w-sm w-full" 
         containerClassName="@container/card w-full flex justify-center"
       >
-        <Card className="flex flex-col items-center justify-center border-0 shadow-none bg-transparent p-4">
+        <Card className="flex flex-col items-center justify-center border-0 shadow-none bg-transparent">
           <CardHeader className="flex flex-col items-center pb-4">
             <Image src="/images/werm-coin.png" alt="Werms" width={100} height={100} />
             <CardTitle className="text-2xl font-semibold text-center text-primary-background">
