@@ -7,6 +7,7 @@
 
 'use client';
 
+import { computeWormBalances } from '@/lib/wermTypes';
 import { useState, useMemo } from 'react';
 import { Search, Plus, Filter, MoreHorizontal, Edit, Trash2, Eye } from 'lucide-react';
 import {
@@ -315,112 +316,122 @@ export function EmployeeList({
                   </TableCell>
                 </TableRow>
               ) : (
-                employees.map((employee) => (
-                  <TableRow key={employee.id} className="hover:bg-muted/50">
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-8 w-8">
-                          <img
-                            src={employee.avatar_url}
-                            alt={employee.name}
-                            className="h-8 w-8 rounded-full object-cover"
-                          />
-                        </Avatar>
+                employees.map((employee) => {
+                  const wormBalance = computeWormBalances(employee.werm_balances);
+
+                  return (
+                    <TableRow key={employee.id} className="hover:bg-muted/50">
+                      <TableCell>
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-8 w-8">
+                            <img
+                              src={employee.avatar_url}
+                              alt={employee.name}
+                              className="h-8 w-8 rounded-full object-cover"
+                            />
+                          </Avatar>
+                          <div>
+                            <button
+                              onClick={() => onViewEmployee?.(employee)}
+                              className="font-medium hover:text-primary cursor-pointer text-left"
+                            >
+                              {employee.name}
+                            </button>
+                            <div className="text-sm text-muted-foreground">
+                              {employee.email}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              {employee.employee_id}
+                            </div>
+                          </div>
+                        </div>
+                      </TableCell>
+
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <span>{getDepartmentIcon(employee.department)}</span>
+                          <span>{employee.department}</span>
+                        </div>
+                      </TableCell>
+
+                      <TableCell>
                         <div>
-                          <button
-                            onClick={() => onViewEmployee?.(employee)}
-                            className="font-medium hover:text-primary cursor-pointer text-left"
-                          >
-                            {employee.name}
-                          </button>
+                          <div className="font-medium">{employee.role}</div>
                           <div className="text-sm text-muted-foreground">
-                            {employee.email}
+                            Manager: {getManagerName(employee.manager_id)}
+                          </div>
+                        </div>
+                      </TableCell>
+
+                      <TableCell>
+                        <Badge variant={getStatusBadgeVariant(employee.status)}>
+                          {getStataudisplay(employee.status)}
+                        </Badge>
+                      </TableCell>
+
+                      <TableCell>
+                        <div>
+                          <div className="font-medium">
+                            {wormBalance.total_werms} worms
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {formatCurrency(wormBalance.total_werms)}
                           </div>
                           <div className="text-xs text-muted-foreground">
-                            {employee.employee_id}
+                            🥇{employee.werm_balances.gold} 🥈{employee.werm_balances.silver} 🥉{employee.werm_balances.bronze}
                           </div>
                         </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <span>{getDepartmentIcon(employee.department)}</span>
-                        <span>{employee.department}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div>
-                        <div className="font-medium">{employee.role}</div>
-                        <div className="text-sm text-muted-foreground">
-                          Manager: {getManagerName(employee.manager_id)}
+                      </TableCell>
+
+                      <TableCell>
+                        <div className="text-sm">
+                          {new Date(employee.hire_date).toLocaleDateString()}
                         </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={getStatusBadgeVariant(employee.status)}>
-                        {getStataudisplay(employee.status)}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div>
-                        <div className="font-medium">
-                          {employee.werm_balances.total_werms} worms
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {formatCurrency(employee.werm_balances.total_value_aud)}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          🥇{employee.werm_balances.gold} 🥈{employee.werm_balances.silver} 🥉{employee.werm_balances.bronze}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-sm">
-                        {new Date(employee.hire_date).toLocaleDateString()}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 w-8 p-0"
-                            disabled={isLoading}
-                          >
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          {onViewEmployee && (
-                            <DropdownMenuItem onClick={() => onViewEmployee(employee)}>
-                              <Eye className="h-4 w-4 mr-2" />
-                              View Details
-                            </DropdownMenuItem>
-                          )}
-                          {onEditEmployee && (
-                            <DropdownMenuItem onClick={() => onEditEmployee(employee)}>
-                              <Edit className="h-4 w-4 mr-2" />
-                              Edit Employee
-                            </DropdownMenuItem>
-                          )}
-                          {onDeleteEmployee && (
-                            <>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem
-                                onClick={() => onDeleteEmployee(employee)}
-                                className="text-destructive"
-                              >
-                                <Trash2 className="h-4 w-4 mr-2" />
-                                Delete Employee
+                      </TableCell>
+
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0"
+                              disabled={isLoading}
+                            >
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            {onViewEmployee && (
+                              <DropdownMenuItem onClick={() => onViewEmployee(employee)}>
+                                <Eye className="h-4 w-4 mr-2" />
+                                View Details
                               </DropdownMenuItem>
-                            </>
-                          )}
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))
+                            )}
+                            {onEditEmployee && (
+                              <DropdownMenuItem onClick={() => onEditEmployee(employee)}>
+                                <Edit className="h-4 w-4 mr-2" />
+                                Edit Employee
+                              </DropdownMenuItem>
+                            )}
+                            {onDeleteEmployee && (
+                              <>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem
+                                  onClick={() => onDeleteEmployee(employee)}
+                                  className="text-destructive"
+                                >
+                                  <Trash2 className="h-4 w-4 mr-2" />
+                                  Delete Employee
+                                </DropdownMenuItem>
+                              </>
+                            )}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
               )}
             </TableBody>
           </Table>

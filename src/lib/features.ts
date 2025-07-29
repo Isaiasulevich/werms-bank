@@ -33,23 +33,22 @@ function logWermCountByEmail(employees: any[], employeeEmail: string): void {
   console.log(`Total Werms: ${employee.werm_balances.total_werms}`);
 } 
 
-// TODO: EVENTUALLY, create this as a separate function to make api calls with
-// which can be used to calculate totals and display. Type interfaces must
-// be defined accordingly
-function recalculateTotals(werm_balances: WermBalances) {
-  let totalWerms = 0;
-  let totalValue = 0;
+/**
+ * Mutates the given `werm_balances` object by incrementing the count and total_value
+ * for the given type. Does NOT modify `total_werms` or `total_value_aud`.
+ */
+export function addToWermBalances(
+  werm_balances: Record<WermType, { count: number; total_value: number }>,
+  type: WermType,
+  amount: number
+) {
+  const current = werm_balances[type] ?? { count: 0, total_value: 0 };
+  const unitValue = WERM_PRICES[type];
 
-  (['gold', 'silver', 'bronze'] as WermType[]).forEach(type => {
-    const count = werm_balances[type]?.count || 0;
-    const value = count * WERM_PRICES[type];
-    werm_balances[type].total_value = parseFloat(value.toFixed(2));
-    totalWerms += count;
-    totalValue += value;
-  });
-
-  werm_balances.total_werms = totalWerms;
-  werm_balances.total_value_aud = parseFloat(totalValue.toFixed(2));
+  werm_balances[type] = {
+    count: current.count + amount,
+    total_value: parseFloat((current.total_value + amount * unitValue).toFixed(2)),
+  };
 }
 
 

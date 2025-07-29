@@ -5,7 +5,7 @@
  * employee creation, editing, worm balances, and permissions.
  */
 
-export interface WormBalances {
+export interface WermBalanceSummary {
   gold: number;
   silver: number;
   bronze: number;
@@ -13,13 +13,8 @@ export interface WormBalances {
   readonly total_werms: number;
 }
 
-export interface LifetimeEarned {
-  gold: number;
-  silver: number;
-  bronze: number;
-  readonly total_coins: number;
-  readonly total_werms: number;
-}
+export type WormBalances = WermBalanceSummary;
+export type LifetimeEarned = WermBalanceSummary;
 
 export type EmployeePermission = 
   | 'admin'
