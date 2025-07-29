@@ -15,18 +15,9 @@
       "view_all_balances"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 0,
-        "total_value": 0
-      },
-      "silver": {
-        "count": 15,
-        "total_value": 45
-      },
-      "bronze": {
-        "count": 64,
-        "total_value": 64
-      },
+      "gold": 0,
+      "silver": 0,
+      "bronze": 0,
       "total_werms": 79,
       "total_value_aud": 109
     },

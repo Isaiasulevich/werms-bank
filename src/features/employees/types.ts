@@ -5,25 +5,20 @@
  * employee creation, editing, worm balances, and permissions.
  */
 
-export interface WormBalance {
-  count: number;
-  total_value: number;
-}
-
 export interface WormBalances {
-  gold: WormBalance;
-  silver: WormBalance;
-  bronze: WormBalance;
-  total_werms: number;
-  total_value_aud: number;
+  gold: number;
+  silver: number;
+  bronze: number;
+  readonly total_coins: number;
+  readonly total_werms: number;
 }
 
 export interface LifetimeEarned {
   gold: number;
   silver: number;
   bronze: number;
-  total_werms: number;
-  total_value_aud: number;
+  readonly total_coins: number;
+  readonly total_werms: number;
 }
 
 export type EmployeePermission = 

@@ -1,14 +1,14 @@
+import { WermType } from "@/lib/wermTypes"
 import type { Employee } from "../employees/types"
-import type { Policy } from "../policies/types"
 
 export interface WermDistribution {
   id: string
   employeeId: string
   policyId: string
   amount: number
-  wermType: "gold" | "silver" | "platinum"
+  wermType: WermType
   createdAt: Date
-  createdBy: string // Sarah's user ID
+  createdBy: string
   notes?: string
 }
 
@@ -35,6 +35,6 @@ export interface DistributionFormData {
 export interface DistributionPreview {
   employee: Employee
   amount: number
-  wermType: "gold" | "silver" | "platinum"
+  wermType: WermType
   notes?: string
 } 

@@ -370,7 +370,7 @@ export function EmployeeList({
                           {formatCurrency(employee.werm_balances.total_value_aud)}
                         </div>
                         <div className="text-xs text-muted-foreground">
-                          🥇{employee.werm_balances.gold.count} 🥈{employee.werm_balances.silver.count} 🥉{employee.werm_balances.bronze.count}
+                          🥇{employee.werm_balances.gold} 🥈{employee.werm_balances.silver} 🥉{employee.werm_balances.bronze}
                         </div>
                       </div>
                     </TableCell>
