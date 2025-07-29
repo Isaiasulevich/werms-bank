@@ -11,6 +11,28 @@ export function formatCurrency(amount: number): string {
 }
 
 /**
+ * Formats a number as currency using AUD format
+ */
+export function formatCurrencyAUD(amount: number): string {
+  return new Intl.NumberFormat('en-AU', { 
+    style: 'currency', 
+    currency: 'AUD' 
+  }).format(amount);
+}
+
+/**
+ * Calculates the AUD value of werms based on estimated mixed werm composition
+ * Assumes roughly 60% silver ($1 USD), 35% gold ($10 USD), 5% platinum ($20 USD)
+ * Uses an approximate USD to AUD exchange rate of 1.55
+ */
+export function calculateWermValueAUD(wermCount: number): string {
+  const avgUSDValue = (0.6 * 1) + (0.35 * 10) + (0.05 * 20); // ~$5.10 USD per werm average
+  const usdToAudRate = 1.55; // Approximate exchange rate
+  const audValue = wermCount * avgUSDValue * usdToAudRate;
+  return formatCurrencyAUD(audValue);
+}
+
+/**
  * Formats a date using a relative format (e.g., "2 days ago")
  */
 export function formatRelativeDate(date: Date | string): string {

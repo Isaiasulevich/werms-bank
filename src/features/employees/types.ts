@@ -26,8 +26,6 @@ export interface LifetimeEarned {
   total_value_aud: number;
 }
 
-export type EmployeeStatus = 'active' | 'inactive' | 'terminated' | 'on_leave';
-
 export type EmployeePermission = 
   | 'admin'
   | 'approve_distributions'
@@ -59,7 +57,6 @@ export interface Employee {
   department: Department;
   role: string;
   hire_date: string;
-  status: EmployeeStatus;
   manager_id: string | null;
   permissions: EmployeePermission[];
   werm_balances: WormBalances;
@@ -89,7 +86,6 @@ export interface EmployeeStats {
 }
 
 export interface EmployeeFilters {
-  status?: EmployeeStatus;
   department?: Department;
   manager_id?: string;
   search?: string;

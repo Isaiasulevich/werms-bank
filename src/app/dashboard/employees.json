@@ -8,7 +8,6 @@
     "department": "Operations",
     "role": "Operations Lead",
     "hire_date": "2024-01-15",
-    "status": "active",
     "manager_id": null,
     "permissions": ["admin", "approve_distributions", "view_all_balances"],
     "werm_balances": {
@@ -45,7 +44,6 @@
     "department": "Engineering",
     "role": "Senior Software Engineer",
     "hire_date": "2024-03-10",
-    "status": "active",
     "manager_id": "EMP-2024-0007",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -82,7 +80,6 @@
     "department": "Operations",
     "role": "Operations Specialist",
     "hire_date": "2024-04-10",
-    "status": "active",
     "manager_id": "EMP-2024-0001",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -119,7 +116,6 @@
     "department": "Product",
     "role": "Product Manager",
     "hire_date": "2024-02-20",
-    "status": "active",
     "manager_id": "EMP-2024-0008",
     "permissions": ["view_own_balance", "view_team_balances"],
     "werm_balances": {
@@ -156,7 +152,6 @@
     "department": "Marketing", 
     "role": "Marketing Specialist",
     "hire_date": "2024-05-12",
-    "status": "active",
     "manager_id": "EMP-2024-0012",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -193,7 +188,6 @@
     "department": "Design",
     "role": "UX Designer",
     "hire_date": "2024-04-05",
-    "status": "active",
     "manager_id": "EMP-2024-0016",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -230,7 +224,6 @@
     "department": "Engineering",
     "role": "Engineering Manager",
     "hire_date": "2024-01-08",
-    "status": "active", 
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
     "werm_balances": {
@@ -267,7 +260,6 @@
     "department": "Product",
     "role": "Product Director",
     "hire_date": "2024-01-20",
-    "status": "active",
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
     "werm_balances": {
@@ -304,7 +296,6 @@
     "department": "Sales",
     "role": "Sales Representative",
     "hire_date": "2024-06-01",
-    "status": "active",
     "manager_id": "EMP-2024-0014",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -341,7 +332,6 @@
     "department": "Support",
     "role": "Customer Support Specialist",
     "hire_date": "2024-04-18",
-    "status": "active",
     "manager_id": "EMP-2024-0003",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -378,7 +368,6 @@
     "department": "Engineering",
     "role": "Frontend Developer",
     "hire_date": "2024-03-25",
-    "status": "active",
     "manager_id": "EMP-2024-0007",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -415,7 +404,6 @@
     "department": "HR",
     "role": "HR Manager",
     "hire_date": "2024-02-14",
-    "status": "active",
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances"],
     "werm_balances": {
@@ -452,7 +440,6 @@
     "department": "Engineering",
     "role": "Backend Developer",
     "hire_date": "2024-05-20",
-    "status": "active",
     "manager_id": "EMP-2024-0007",
     "permissions": ["view_own_balance"],
     "werm_balances": {
@@ -489,7 +476,6 @@
     "department": "Sales",
     "role": "Sales Manager",
     "hire_date": "2024-02-28",
-    "status": "active",
     "manager_id": null,
     "permissions": ["view_own_balance", "view_team_balances", "approve_small_distributions"],
     "werm_balances": {
@@ -526,7 +512,6 @@
     "department": "Operations",
     "role": "Operations Analyst",
     "hire_date": "2024-03-15",
-    "status": "active",
     "manager_id": "EMP-2024-0001",
     "permissions": ["view_own_balance"],
     "werm_balances": {
