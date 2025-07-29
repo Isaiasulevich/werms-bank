@@ -48,6 +48,42 @@ interface EmployeeListProps {
 }
 
 /**
+ * Get status badge variant
+ */
+function getStatusBadgeVariant(status: EmployeeStatus) {
+  switch (status) {
+    case 'active':
+      return 'default';
+    case 'inactive':
+      return 'secondary';
+    case 'terminated':
+      return 'destructive';
+    case 'on_leave':
+      return 'outline';
+    default:
+      return 'secondary';
+  }
+}
+
+/**
+ * Get status display text
+ */
+function getStataudisplay(status: EmployeeStatus) {
+  switch (status) {
+    case 'active':
+      return '✅ Active';
+    case 'inactive':
+      return '⏸️ Inactive';
+    case 'terminated':
+      return '❌ Terminated';
+    case 'on_leave':
+      return '🏖️ On Leave';
+    default:
+      return status;
+  }
+}
+
+/**
  * Get department icon
  */
 function getDepartmentIcon(department: Department) {
