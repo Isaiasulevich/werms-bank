@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import employeeData from '../data/employees.json';
 import { WermType, WERM_PRICES } from './wermTypes';
+import { Employee } from '@/features/employees';
 
 // TODO: TEST THIS FURTHER
 function logWermCountByEmail(employees: any[], employeeEmail: string): void {
@@ -25,52 +25,50 @@ export function addToWermBalances(
   werm_balances[type] = current + amount;
 }
 
-
-// TODO: Document function
-function transferWerms(
-  employees: any[],
+export function transferWerms(
   senderEmail: string,
-  receiverEmail: string,
+  receiverUsername: string,
   wermsToTransfer: Partial<Record<WermType, number>>,
   note?: string
 ): void {
-  const sender = employees.find(emp => emp.email === senderEmail);
-  const receiver = employees.find(emp => emp.email === receiverEmail);
+  const filePath = path.join(process.cwd(), 'src/data/employees.json');
+  const raw = fs.readFileSync(filePath, 'utf-8');
+
+  // We load it frech every time
+  const employeeData: Employee[] = JSON.parse(raw);
+
+  const sender = employeeData.find(emp => emp.email === senderEmail);
+  const receiver = employeeData.find(emp => emp.slack_username === receiverUsername);
 
   if (!sender || !receiver) {
-    console.log('Invalid email/s provided');
-    return;
+    throw new Error('Invalid sender or receiver email provided')
   }
 
   for (const [key, amount] of Object.entries(wermsToTransfer)) {
     const type = key as WermType;
     const count = amount || 0;
-  
-    if (sender.werm_balances[type] < count) {
-      console.log(`Not enough ${type} werms`);
-      return;
+
+    if ((sender.werm_balances[type] ?? 0) < count) {
+      throw new Error(`Not enough ${type} werms to complete the transfer.`);
     }
-  
+
     sender.werm_balances[type] -= count;
-    receiver.werm_balances[type] += count;
-    receiver.lifetime_earned[type] += count;
+    receiver.werm_balances[type] = (receiver.werm_balances[type] ?? 0) + count;
+    receiver.lifetime_earned[type] = (receiver.lifetime_earned[type] ?? 0) + count;
   }
 
-  const filePath = path.join(__dirname, '../data/employees.json');
-  fs.writeFileSync(filePath, JSON.stringify(employees, null, 2));
+  fs.writeFileSync(filePath, JSON.stringify(employeeData, null, 2));
 
-  // TODO: Add this in the transfer logs
-
-
-  // TODO: REMOVE DEBUGGING STATEMENTS
-  // console.log(`Werms transferred successfully.`);
-
-  // if (note) {
-  //   console.log("Note = ", note);
-  // }
+  const dashboardPath = path.join(process.cwd(), 'src/app/dashboard/employees.json');
+  fs.writeFileSync(dashboardPath, JSON.stringify(employeeData, null, 2));
 }
 
+
 // Simple test case for the function
-transferWerms(employeeData, 'isaias@nakatomi.com', 'kislay@nakatomi.com', 
-  {silver: 2, bronze: 2}, "Test Transfer"
-);
+// transferWerms(employeeData, 'kislay@nakatomi.com', 'isaias@nakatomi.com', 
+//   {silver: 2, bronze: 2}, "Test Transfer"
+// );
+
+// transferWerms('isaias@nakatomi.com', 'kislay@nakatomi.com', 
+//   {silver: 2, bronze: 2}, "Test Transfer"
+// );

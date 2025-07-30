@@ -17,7 +17,7 @@ const employeeData: Employee[] = normalizeEmployeeData(rawEmployeeData);
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const email = searchParams.get('email');
-
+  
   if (!email) {
     return NextResponse.json({ error: 'Missing email param' }, { status: 400 });
   }

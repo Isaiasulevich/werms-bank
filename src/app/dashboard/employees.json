@@ -4,7 +4,7 @@
     "employee_id": "EMP-2024-0001",
     "name": "Isa",
     "email": "isaias@nakatomi.com",
-    "slack_username": "@isa",
+    "slack_username": "@isaias",
     "department": "Operations",
     "role": "Operations Lead",
     "hire_date": "2024-01-15",
@@ -16,13 +16,13 @@
     ],
     "werm_balances": {
       "gold": 2,
-      "silver": 2,
+      "silver": 0,
       "bronze": 2
     },
     "lifetime_earned": {
       "gold": 5,
-      "silver": 5,
-      "bronze": 10
+      "silver": 7,
+      "bronze": 18
     },
     "avatar_url": "/avatars/isa.jpg"
   },
@@ -323,12 +323,12 @@
     "werm_balances": {
       "gold": 1,
       "silver": 2,
-      "bronze": 3
+      "bronze": 5
     },
     "lifetime_earned": {
       "gold": 4,
       "silver": 5,
-      "bronze": 6
+      "bronze": 8
     },
     "avatar_url": "/avatars/kailash.jpg"
   },
@@ -349,13 +349,13 @@
     ],
     "werm_balances": {
       "gold": 1,
-      "silver": 4,
-      "bronze": 5
+      "silver": 6,
+      "bronze": 3
     },
     "lifetime_earned": {
       "gold": 4,
-      "silver": 7,
-      "bronze": 8
+      "silver": 11,
+      "bronze": 20
     },
     "avatar_url": "/avatars/kislay.jpg"
   },

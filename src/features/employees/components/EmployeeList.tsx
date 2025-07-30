@@ -379,13 +379,13 @@ export function EmployeeList({
                       <TableCell>
                         <div>
                           <div className="font-medium">
-                            {wormBalance.total_werms} worms
+                            {wormBalance.total_werms} werms
                           </div>
                           <div className="text-sm text-muted-foreground">
                             {wormBalance.total_coins} coins
                           </div>
                           <div className="text-xs text-muted-foreground">
-                            🥇{employee.werm_balances.gold} 🥈{employee.werm_balances.silver} 🥉{employee.werm_balances.bronze}
+                            🥇{wormBalance.gold} 🥈{wormBalance.silver} 🥉{wormBalance.bronze}
                           </div>
                         </div>
                       </TableCell>

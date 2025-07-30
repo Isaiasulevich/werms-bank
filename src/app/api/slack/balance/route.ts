@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const ngrokUrl = "https://d4f12a7c7755.ngrok-free.app"; // Update if needed
+const ngrokUrl = "https://d4f12a7c7755.ngrok-free.app";
 
 export async function POST(req: Request) {
   try {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       console.error("❌ No user_id found in request");
       return NextResponse.json({ error: 'Missing user_id' }, { status: 400 });
     }
-
+    
     // Get Slack user info
     const slackRes = await fetch(`https://slack.com/api/users.info?user=${userId}`, {
       headers: {
