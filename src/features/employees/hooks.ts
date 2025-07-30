@@ -12,6 +12,8 @@ import { Employee, EmployeeFormData, EmployeeStats, EmployeeFilters, EmployeeSor
 
 // Import mock data from the existing employees.json
 import employeesData from '@/app/dashboard/employees.json';
+// Apply sorting
+import { computeWormBalances } from '@/lib/wermTypes'; 
 
 // Mock stats for development
 const mockStats: EmployeeStats = {
@@ -226,9 +228,6 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
     if (filters.hasPermission) {
       filtered = filtered.filter(emp => emp.permissions.includes(filters.hasPermission!));
     }
-
-    // Apply sorting
-    import { computeWormBalances } from '@/lib/wermTypes'; // ensure this is imported
 
     // Apply sorting
     filtered.sort((a, b) => {

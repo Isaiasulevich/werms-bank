@@ -3,7 +3,7 @@
     "id": "EMP-2024-0001",
     "employee_id": "EMP-2024-0001",
     "name": "Isa",
-    "email": "isa@nakatomi.com",
+    "email": "isaias@nakatomi.com",
     "slack_username": "@isa",
     "department": "Operations",
     "role": "Operations Lead",
@@ -16,8 +16,8 @@
     ],
     "werm_balances": {
       "gold": 2,
-      "silver": 4,
-      "bronze": 4
+      "silver": 2,
+      "bronze": 2
     },
     "lifetime_earned": {
       "gold": 5,
@@ -349,13 +349,13 @@
     ],
     "werm_balances": {
       "gold": 1,
-      "silver": 2,
-      "bronze": 3
+      "silver": 4,
+      "bronze": 5
     },
     "lifetime_earned": {
       "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "silver": 7,
+      "bronze": 8
     },
     "avatar_url": "/avatars/kislay.jpg"
   },

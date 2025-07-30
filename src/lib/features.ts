@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import employeeData from '../app/dashboard/employees.json';
+import employeeData from '../data/employees.json';
 import { WermType, WERM_PRICES } from './wermTypes';
 
 // TODO: TEST THIS FURTHER
@@ -56,7 +56,7 @@ function transferWerms(
     receiver.lifetime_earned[type] += count;
   }
 
-  const filePath = path.join(__dirname, '../app/dashboard/employees.json');
+  const filePath = path.join(__dirname, '../data/employees.json');
   fs.writeFileSync(filePath, JSON.stringify(employees, null, 2));
 
   // TODO: Add this in the transfer logs
@@ -71,6 +71,6 @@ function transferWerms(
 }
 
 // Simple test case for the function
-transferWerms(employeeData, 'ben@nakatomi.com', 'andy@nakatomi.com', 
-  {gold: 1, silver: 2, bronze: 6}, "Test Transfer"
+transferWerms(employeeData, 'isaias@nakatomi.com', 'kislay@nakatomi.com', 
+  {silver: 2, bronze: 2}, "Test Transfer"
 );

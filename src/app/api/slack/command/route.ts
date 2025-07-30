@@ -65,6 +65,10 @@ export async function POST(req: Request) {
     const totalWerms = data.werm_balances?.total_werms ?? null;
     const totalCoins = data.werm_balances?.total_coins ?? null;
 
+    const currGold = data.werm_balances?.gold;
+    const currSilver = data.werm_balances?.silver;
+    const currBronze = data.werm_balances?.bronze;
+
     if (totalWerms === null || totalCoins === null) {
       return NextResponse.json({
         response_type: 'ephemeral',
@@ -74,7 +78,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       response_type: 'ephemeral',
-      text: `🐛 Hello ${data.name}! You currently have *${totalWerms} werms* (${totalCoins} coins).`,
+      text: `You currently have *${totalWerms} werms*. (${currGold} 🥇, ${currSilver} 🥈, ${currBronze} 🥉)`,
     });
 
   } catch (err: any) {
