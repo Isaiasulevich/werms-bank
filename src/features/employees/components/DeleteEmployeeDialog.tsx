@@ -30,6 +30,7 @@ import {
 import { useEmployees } from '../hooks';
 import { Employee } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 interface DeleteEmployeeDialogProps {
   open: boolean;
@@ -162,22 +163,25 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div>
+                <div className="grid grid-cols-3 gap-6 text-sm">
+                  <div className="text-center flex flex-col items-center gap-2">
+                    <CoinIndicator value={employee.werm_balances.gold.count} type="gold" />
                     <div className="font-medium">Gold</div>
                     <div>{employee.werm_balances.gold.count} worms</div>
                     <div className="text-muted-foreground">
                       {formatCurrency(employee.werm_balances.gold.total_value)}
                     </div>
                   </div>
-                  <div>
+                  <div className="text-center flex flex-col items-center gap-2">
+                    <CoinIndicator value={employee.werm_balances.silver.count} type="silver" />
                     <div className="font-medium">Silver</div>
                     <div>{employee.werm_balances.silver.count} worms</div>
                     <div className="text-muted-foreground">
                       {formatCurrency(employee.werm_balances.silver.total_value)}
                     </div>
                   </div>
-                  <div>
+                  <div className="text-center flex flex-col items-center gap-2">
+                    <CoinIndicator value={employee.werm_balances.bronze.count} type="bronze" />
                     <div className="font-medium">Bronze</div>
                     <div>{employee.werm_balances.bronze.count} worms</div>
                     <div className="text-muted-foreground">

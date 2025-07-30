@@ -61,11 +61,10 @@ function ConditionForm({
    * Get worm reward display text
    */
   function getRewardDisplay() {
-    const { gold = 0, silver = 0, platinum = 0 } = condition.wormReward || {};
+    const { gold = 0, silver = 0 } = condition.wormReward || {};
     const parts = [];
     if (gold > 0) parts.push(`${gold} Gold`);
     if (silver > 0) parts.push(`${silver} Silver`);
-    if (platinum > 0) parts.push(`${platinum} Platinum`);
     return parts.length > 0 ? parts.join(', ') : 'No reward set';
   }
 
@@ -191,22 +190,7 @@ function ConditionForm({
                 })}
               />
             </div>
-            <div className="flex flex-col gap-1">
-                                    <Label htmlFor={`platinum-${condition.id}`} className="text-xs text-worm-platinum">Platinum</Label>
-              <Input
-                id={`platinum-${condition.id}`}
-                type="number"
-                min="0"
-                placeholder="0"
-                value={condition.wormReward?.platinum || ''}
-                onChange={(e) => onUpdate({
-                  wormReward: {
-                    ...condition.wormReward,
-                    platinum: e.target.value ? parseInt(e.target.value) : 0
-                  }
-                })}
-              />
-            </div>
+
           </div>
           <div className="text-xs text-muted-foreground">
             Reward: {getRewardDisplay()}
@@ -289,7 +273,7 @@ export function EditPolicyDialog({ open, onOpenChange, policy }: EditPolicyDialo
       type: 'attendance',
       description: '',
       trigger: '',
-              wormReward: { platinum: 1 },
+              wormReward: { gold: 1 },
       requiresApproval: false,
       isActive: true,
     };
@@ -335,7 +319,7 @@ export function EditPolicyDialog({ open, onOpenChange, policy }: EditPolicyDialo
       case 'conditions':
         return formData.conditions.length > 0 && formData.conditions.every(c => 
           c.description?.trim() && c.trigger?.trim() && 
-          ((c.wormReward?.gold || 0) + (c.wormReward?.silver || 0) + (c.wormReward?.platinum || 0) > 0)
+          ((c.wormReward?.gold || 0) + (c.wormReward?.silver || 0) > 0)
         );
       case 'review':
         return true;

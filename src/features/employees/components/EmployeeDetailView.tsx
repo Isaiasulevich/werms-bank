@@ -41,6 +41,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts'
 import { useEmployees } from '../hooks';
 import { Employee, EmployeePermission, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 // Schema for transaction data
 const transactionSchema = z.object({
@@ -255,24 +256,24 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
       {/* Worm Balances */}
       <div>
         <h3 className="font-medium text-sm text-muted-foreground mb-4">Current Balance</h3>
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="text-center p-3 bg-yellow-50 dark:bg-yellow-950 rounded-lg border">
-                                    <div className="text-xs text-muted-foreground">Gold</div>
-            <div className="text-lg font-bold">{employee.werm_balances.gold.count}</div>
+        <div className="grid grid-cols-3 gap-6 mb-6">
+          <div className="text-center flex flex-col items-center gap-2">
+            <CoinIndicator value={employee.werm_balances.gold.count} type="gold" />
+            <div className="text-xs text-muted-foreground">Gold</div>
             <div className="text-xs text-muted-foreground">
               {formatCurrency(employee.werm_balances.gold.total_value)}
             </div>
           </div>
-          <div className="text-center p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border">
-                                    <div className="text-xs text-muted-foreground">Silver</div>
-            <div className="text-lg font-bold">{employee.werm_balances.silver.count}</div>
+          <div className="text-center flex flex-col items-center gap-2">
+            <CoinIndicator value={employee.werm_balances.silver.count} type="silver" />
+            <div className="text-xs text-muted-foreground">Silver</div>
             <div className="text-xs text-muted-foreground">
               {formatCurrency(employee.werm_balances.silver.total_value)}
             </div>
           </div>
-          <div className="text-center p-3 bg-orange-50 dark:bg-orange-950 rounded-lg border">
-                                    <div className="text-xs text-muted-foreground">Bronze</div>
-            <div className="text-lg font-bold">{employee.werm_balances.bronze.count}</div>
+          <div className="text-center flex flex-col items-center gap-2">
+            <CoinIndicator value={employee.werm_balances.bronze.count} type="bronze" />
+            <div className="text-xs text-muted-foreground">Bronze</div>
             <div className="text-xs text-muted-foreground">
               {formatCurrency(employee.werm_balances.bronze.total_value)}
             </div>
@@ -400,11 +401,8 @@ function TransactionsTab({ transactions }: { transactions: Transaction[] }) {
                   </Badge>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-1">
-                    <span>
-                                              {transaction.worm_type === 'gold' ? 'G' :
-                        transaction.worm_type === 'silver' ? 'S' : 'B'}
-                    </span>
+                  <div className="flex items-center gap-2">
+                    <CoinIndicator value={transaction.amount} type={transaction.worm_type} size="xs" animate={false} />
                     <span className="font-medium">
                       {transaction.type === 'earn' ? '+' : '-'}{transaction.amount}
                     </span>

@@ -39,6 +39,7 @@ import {
 import { useEmployeeList, useEmployees } from '../hooks';
 import { Employee, EmployeeFilters, EmployeeSort, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 interface EmployeeListProps {
   onAddEmployee?: () => void;
@@ -328,8 +329,19 @@ export function EmployeeList({
                         <div className="text-sm text-muted-foreground">
                           {formatCurrency(employee.werm_balances.total_value_usd)}
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          Gold: {employee.werm_balances.gold.count} | Silver: {employee.werm_balances.silver.count} | Bronze: {employee.werm_balances.bronze.count}
+                        <div className="flex items-center gap-2 mt-1">
+                          <div className="flex items-center gap-1">
+                            <CoinIndicator value={employee.werm_balances.gold.count} type="gold" size="xxs" />
+                            <span className="text-xs text-muted-foreground">{employee.werm_balances.gold.count}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <CoinIndicator value={employee.werm_balances.silver.count} type="silver" size="xxs" />
+                            <span className="text-xs text-muted-foreground">{employee.werm_balances.silver.count}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <CoinIndicator value={employee.werm_balances.bronze.count} type="bronze" size="xxs" />
+                            <span className="text-xs text-muted-foreground">{employee.werm_balances.bronze.count}</span>
+                          </div>
                         </div>
                       </div>
                     </TableCell>

@@ -29,6 +29,7 @@ import {
   TabsTrigger,
 } from '@/components/ui';
 import { Policy, PolicyCondition } from '../types';
+import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 interface PolicyDetailViewProps {
   open: boolean;
@@ -101,11 +102,10 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
    * Format worm reward
    */
   function formatWormReward() {
-    const { gold = 0, silver = 0, platinum = 0 } = condition.wormReward || {};
-    const parts = [];
-    if (gold > 0) parts.push(`${gold} Gold`);
-    if (silver > 0) parts.push(`${silver} Silver`);
-    if (platinum > 0) parts.push(`${platinum} Platinum`);
+      const { gold = 0, silver = 0 } = condition.wormReward || {};
+  const parts = [];
+  if (gold > 0) parts.push(`${gold} Gold`);
+  if (silver > 0) parts.push(`${silver} Silver`);
     return parts.length > 0 ? parts.join(', ') : 'No reward set';
   }
 
@@ -179,11 +179,10 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
             {/* Rewards */}
             <div>
               <h4 className="text-sm font-medium text-foreground mb-2">Worm Rewards</h4>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 {[
-                  { type: 'Gold', value: condition.wormReward?.gold || 0, icon: 'G', color: 'text-worm-gold' },
-                  { type: 'Silver', value: condition.wormReward?.silver || 0, icon: 'S', color: 'text-worm-silver' },
-                  { type: 'Platinum', value: condition.wormReward?.platinum || 0, icon: 'P', color: 'text-worm-platinum' }
+                              { type: 'Gold', value: condition.wormReward?.gold || 0, icon: 'G', color: 'text-worm-gold' },
+            { type: 'Silver', value: condition.wormReward?.silver || 0, icon: 'S', color: 'text-worm-silver' }
                 ].map((reward) => (
                   <div key={reward.type} className="text-center p-2 bg-muted/50 rounded">
                     <div className="text-lg mb-1">{reward.icon}</div>
@@ -261,13 +260,12 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
    * Get total rewards across all conditions
    */
   function getTotalRewards() {
-    const totals = { gold: 0, silver: 0, bronze: 0 };
+    const totals = { gold: 0, silver: 0 };
     
     policy?.conditions.forEach(condition => {
       if (condition.wormReward) {
         totals.gold += condition.wormReward.gold || 0;
         totals.silver += condition.wormReward.silver || 0;
-        totals.bronze += condition.wormReward.bronze || 0;
       }
     });
 
@@ -340,7 +338,7 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                 <Card className="text-center">
                   <CardContent className="pt-4">
                     <div className="text-2xl font-bold text-chart-4">
-                      {totalRewards.gold + totalRewards.silver + totalRewards.platinum}
+                      {totalRewards.gold + totalRewards.silver}
                     </div>
                     <div className="text-xs text-muted-foreground">Total Rewards</div>
                   </CardContent>
@@ -377,21 +375,20 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-3 gap-6">
+                  <div className="grid grid-cols-2 gap-6">
                     <div className="text-center p-4 bg-worm-gold/10 rounded-lg">
-                      <div className="text-3xl mb-2 font-bold border rounded-lg w-12 h-12 flex items-center justify-center text-worm-gold">G</div>
+                      <div className="flex justify-center mb-3">
+                        <CoinIndicator value={totalRewards.gold} type="gold" size="lg" />
+                      </div>
                       <div className="text-2xl font-bold text-worm-gold">{totalRewards.gold}</div>
                       <div className="text-sm text-worm-gold-foreground">Gold Worms</div>
                     </div>
                     <div className="text-center p-4 bg-worm-silver/10 rounded-lg">
-                      <div className="text-3xl mb-2 font-bold border rounded-lg w-12 h-12 flex items-center justify-center text-worm-silver">S</div>
+                      <div className="flex justify-center mb-3">
+                        <CoinIndicator value={totalRewards.silver} type="silver" size="lg" />
+                      </div>
                       <div className="text-2xl font-bold text-worm-silver">{totalRewards.silver}</div>
                       <div className="text-sm text-worm-silver-foreground">Silver Worms</div>
-                    </div>
-                    <div className="text-center p-4 bg-worm-platinum/10 rounded-lg">
-                      <div className="text-3xl mb-2 font-bold border rounded-lg w-12 h-12 flex items-center justify-center text-worm-platinum">P</div>
-                      <div className="text-2xl font-bold text-worm-platinum">{totalRewards.platinum}</div>
-                      <div className="text-sm text-worm-platinum-foreground">Platinum Worms</div>
                     </div>
                   </div>
                 </CardContent>

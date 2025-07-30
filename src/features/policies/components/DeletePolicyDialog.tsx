@@ -74,13 +74,12 @@ export function DeletePolicyDialog({ open, onOpenChange, policy }: DeletePolicyD
    * Get total worm reward from all conditions
    */
   function getTotalWormReward(policy: Policy) {
-    const totals = { gold: 0, silver: 0, bronze: 0 };
+    const totals = { gold: 0, silver: 0 };
     
     policy.conditions.forEach(condition => {
       if (condition.wormReward) {
         totals.gold += condition.wormReward.gold || 0;
         totals.silver += condition.wormReward.silver || 0;
-        totals.bronze += condition.wormReward.bronze || 0;
       }
     });
 
@@ -90,13 +89,12 @@ export function DeletePolicyDialog({ open, onOpenChange, policy }: DeletePolicyD
   /**
    * Format worm reward display
    */
-  function formatWormReward(totals: { gold: number; silver: number; platinum: number }) {
-  const parts = [];
-  if (totals.gold > 0) parts.push(`${totals.gold} Gold`);
-  if (totals.silver > 0) parts.push(`${totals.silver} Silver`);
-  if (totals.platinum > 0) parts.push(`${totals.platinum} Platinum`);
-  return parts.length > 0 ? parts.join(', ') : 'No rewards';
-}
+    function formatWormReward(totals: { gold: number; silver: number }) {
+    const parts = [];
+    if (totals.gold > 0) parts.push(`${totals.gold} Gold`);
+    if (totals.silver > 0) parts.push(`${totals.silver} Silver`);
+    return parts.length > 0 ? parts.join(', ') : 'No rewards';
+  }
 
   if (!policy) return null;
 
@@ -158,7 +156,7 @@ export function DeletePolicyDialog({ open, onOpenChange, policy }: DeletePolicyD
                 </div>
               </div>
 
-              {(totalRewards.gold > 0 || totalRewards.silver > 0 || totalRewards.platinum > 0) && (
+              {(totalRewards.gold > 0 || totalRewards.silver > 0) && (
                 <div className="mt-3 pt-3 border-t border-destructive/20">
                   <div className="text-xs text-destructive/80 font-medium mb-1">Total Rewards:</div>
                   <div className="text-xs text-destructive/90">{formatWormReward(totalRewards)}</div>
