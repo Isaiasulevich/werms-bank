@@ -17,12 +17,12 @@
     "werm_balances": {
       "gold": 5,
       "silver": 15,
-      "bronze": 12
+      "bronze": 14
     },
     "lifetime_earned": {
       "gold": 8,
       "silver": 22,
-      "bronze": 28
+      "bronze": 30
     },
     "avatar_url": "/avatars/isa.jpg"
   },
@@ -31,7 +31,7 @@
     "employee_id": "EMP-2024-0002",
     "name": "Sarah",
     "email": "sarah@nakatomi.com",
-    "slack_username": "@sarah",
+    "slack_username": "@sarah236",
     "department": "Engineering",
     "role": "Senior Software Engineer",
     "hire_date": "2024-03-10",
@@ -42,12 +42,12 @@
     "werm_balances": {
       "gold": 2,
       "silver": 2,
-      "bronze": 5
+      "bronze": 7
     },
     "lifetime_earned": {
       "gold": 4,
       "silver": 5,
-      "bronze": 6
+      "bronze": 8
     },
     "avatar_url": "/avatars/sarah.jpg"
   },
@@ -350,7 +350,7 @@
     "werm_balances": {
       "gold": 7,
       "silver": 45,
-      "bronze": 20
+      "bronze": 16
     },
     "lifetime_earned": {
       "gold": 4,
