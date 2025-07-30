@@ -8,6 +8,7 @@
 
 import { DashboardLayout } from '@/components/dashboard-layout';
 import { EmployeesPage } from '@/features/employees';
+import { AuthGuard } from '@/lib/supabase';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,13 +18,15 @@ export const metadata: Metadata = {
 
 export default function Employees() {
   return (
-    <DashboardLayout>
-      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        
+    <AuthGuard>
+      <DashboardLayout>
+        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          
 
-        {/* Employees Content */}
-        <EmployeesPage />
-      </div>
-    </DashboardLayout>
+          {/* Employees Content */}
+          <EmployeesPage />
+        </div>
+      </DashboardLayout>
+    </AuthGuard>
   );
 } 
