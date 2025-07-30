@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { signIn, signUp } from "@/lib/supabase/auth"
 import {
   Button,
   Card,
@@ -21,25 +22,36 @@ export function LoginForm({
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     
-    // TODO: Add authentication logic here
-    console.log("Login attempt:", { email, password })
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // For now, any email/password combination will "log in"
-    if (email && password) {
-      // Redirect to dashboard
-      router.push("/dashboard")
+    try {
+      const { data, error } = isSignUp 
+        ? await signUp(email, password)
+        : await signIn(email, password)
+      
+      if (error) {
+        console.error(`${isSignUp ? 'Signup' : 'Login'} error:`, error.message)
+        alert(error.message)
+      } else if (data.user) {
+        console.log(`${isSignUp ? 'Signup' : 'Login'} successful:`, data.user)
+        if (isSignUp) {
+          alert("Account created! Please check your email to verify your account, then try logging in.")
+          setIsSignUp(false) // Switch back to login mode
+        } else {
+          router.push("/dashboard")
+        }
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error)
+      alert("An unexpected error occurred")
+    } finally {
+      setIsLoading(false)
     }
-    
-    setIsLoading(false)
   }
 
   const handleGoogleLogin = async () => {
@@ -58,9 +70,12 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>{isSignUp ? "Create an account" : "Login to your account"}</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {isSignUp 
+              ? "Enter your email below to create your account"
+              : "Enter your email below to login to your account"
+            }
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -101,7 +116,10 @@ export function LoginForm({
                   className="w-full"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Signing in..." : "Login"}
+                  {isLoading 
+                    ? (isSignUp ? "Creating account..." : "Signing in...") 
+                    : (isSignUp ? "Create Account" : "Login")
+                  }
                 </Button>
                 <Button 
                   type="button"
@@ -115,10 +133,14 @@ export function LoginForm({
               </div>
             </div>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
-                Sign up
-              </a>
+              {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+              <button
+                type="button"
+                onClick={() => setIsSignUp(!isSignUp)}
+                className="underline underline-offset-4 hover:text-primary"
+              >
+                {isSignUp ? "Login" : "Sign up"}
+              </button>
             </div>
           </form>
         </CardContent>

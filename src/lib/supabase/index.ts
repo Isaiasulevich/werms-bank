@@ -9,4 +9,8 @@ export * from './types'
 export * from './auth'
 
 // Re-export query functions  
-export * from './queries' 
+export * from './queries'
+
+// Re-export auth components
+export { AuthProvider, useAuth } from './AuthProvider'
+export { AuthGuard } from './AuthGuard' 

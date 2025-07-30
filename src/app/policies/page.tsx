@@ -8,6 +8,7 @@
 
 import { DashboardLayout } from '@/components/dashboard-layout';
 import { PoliciesPage } from '@/features/policies';
+import { AuthGuard } from '@/lib/supabase';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,11 +18,13 @@ export const metadata: Metadata = {
 
 export default function Policies() {
   return (
-    <DashboardLayout>
-      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        {/* Policies Content */}
-        <PoliciesPage />
-      </div>
-    </DashboardLayout>
+    <AuthGuard>
+      <DashboardLayout>
+        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          {/* Policies Content */}
+          <PoliciesPage />
+        </div>
+      </DashboardLayout>
+    </AuthGuard>
   );
 } 

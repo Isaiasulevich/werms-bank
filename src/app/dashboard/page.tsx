@@ -9,6 +9,7 @@ import {
 } from "@/components"
 import { PoliciesPage } from "@/features/policies"
 import { useSearchParams } from "next/navigation"
+import { AuthGuard } from "@/lib/supabase"
 
 import data from "./employees.json"
 
@@ -74,10 +75,12 @@ function DashboardContent() {
 
 export default function Page() {
   return (
-    <DashboardLayout>
-      <Suspense fallback={<div>Loading...</div>}>
-        <DashboardContent />
-      </Suspense>
-    </DashboardLayout>
+    <AuthGuard>
+      <DashboardLayout>
+        <Suspense fallback={<div>Loading...</div>}>
+          <DashboardContent />
+        </Suspense>
+      </DashboardLayout>
+    </AuthGuard>
   )
 }
