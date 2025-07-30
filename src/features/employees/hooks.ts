@@ -72,18 +72,18 @@ export function useEmployees() {
         id: `emp-${Date.now()}`,
         employee_id: employeeData.employee_id || generateEmployeeId(),
         werm_balances: {
-          gold: { count: 0, total_value: 0 },
-          silver: { count: 0, total_value: 0 },
-          bronze: { count: 0, total_value: 0 },
+          gold: 0,
+          silver: 0,
+          bronze: 0,
           total_werms: 0,
-          total_value_aud: 0,
+          total_coins: 0,
         },
         lifetime_earned: {
           gold: 0,
           silver: 0,
           bronze: 0,
           total_werms: 0,
-          total_value_aud: 0,
+          total_coins: 0,
         },
         avatar_url: employeeData.avatar_url || `/avatars/${employeeData.name.toLowerCase().replace(/\s+/g, '')}.jpg`,
       };

@@ -283,6 +283,14 @@ export function EmployeeList({
                     </span>
                   )}
                 </TableHead>
+                <TableHead>
+                  Status
+                  {sort.field === 'status' && (
+                    <span className="ml-1">
+                      {sort.direction === 'asc' ? '↑' : '↓'}
+                    </span>
+                  )}
+                </TableHead>
                 <TableHead 
                   className="cursor-pointer hover:bg-muted/50"
                   onClick={() => handleSort('werm_balances')}
@@ -375,7 +383,7 @@ export function EmployeeList({
                             {wormBalance.total_werms} worms
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            {formatCurrency(wormBalance.total_werms)}
+                            {wormBalance.total_coins} coins
                           </div>
                           <div className="text-xs text-muted-foreground">
                             🥇{employee.werm_balances.gold} 🥈{employee.werm_balances.silver} 🥉{employee.werm_balances.bronze}

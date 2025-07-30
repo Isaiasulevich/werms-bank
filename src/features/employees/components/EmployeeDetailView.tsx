@@ -41,6 +41,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts'
 import { useEmployees } from '../hooks';
 import { Employee, EmployeePermission, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { computeWormBalances, WERM_PRICES } from '@/lib/wermTypes';
 
 // Schema for transaction data
 const transactionSchema = z.object({
@@ -249,6 +250,8 @@ function EmployeeHeader({
  */
 function OverviewTab({ employee, wormData }: { employee: Employee; wormData: WormDataPoint[] }) {
   const maxEarnings = Math.max(...wormData.map(d => d.earned));
+  const currentBalance = computeWormBalances(employee.werm_balances);
+  const lifetimeBalance = computeWormBalances(employee.lifetime_earned);
 
   return (
     <div className="space-y-6">
@@ -258,33 +261,42 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
         <div className="grid grid-cols-3 gap-3 mb-6">
           <div className="text-center p-3 bg-yellow-50 dark:bg-yellow-950 rounded-lg border">
             <div className="text-xs text-muted-foreground">🥇 Gold</div>
-            <div className="text-lg font-bold">{employee.werm_balances.gold.count}</div>
+            <div className="text-lg font-bold">{currentBalance.gold}</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.gold.total_value)}
+              🪱 {WERM_PRICES.gold * currentBalance.gold}
             </div>
           </div>
           <div className="text-center p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border">
             <div className="text-xs text-muted-foreground">🥈 Silver</div>
-            <div className="text-lg font-bold">{employee.werm_balances.silver.count}</div>
+            <div className="text-lg font-bold">{currentBalance.silver}</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.silver.total_value)}
+              🪱 {WERM_PRICES.silver * currentBalance.silver}
             </div>
           </div>
           <div className="text-center p-3 bg-orange-50 dark:bg-orange-950 rounded-lg border">
             <div className="text-xs text-muted-foreground">🥉 Bronze</div>
-            <div className="text-lg font-bold">{employee.werm_balances.bronze.count}</div>
+            <div className="text-lg font-bold">{currentBalance.bronze}</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.bronze.total_value)}
+              🪱 {WERM_PRICES.bronze * currentBalance.bronze}
             </div>
           </div>
         </div>
 
+        {/* Current Earnings */}
+        <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
+          <div className="text-2xl font-bold">{employee.werm_balances.total_werms}</div>
+          <div className="text-sm text-muted-foreground">Current Werms Balance</div>
+          <div className="text-lg font-medium">
+            {currentBalance.total_werms} Werms
+          </div>
+        </div>
+        
         {/* Lifetime Earnings */}
         <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
           <div className="text-2xl font-bold">{employee.lifetime_earned.total_werms}</div>
-          <div className="text-sm text-muted-foreground">Total Worms Earned</div>
+          <div className="text-sm text-muted-foreground">Lifetime Worms Earned</div>
           <div className="text-lg font-medium">
-            {formatCurrency(employee.lifetime_earned.total_value_aud)}
+            {lifetimeBalance.total_werms} Werms
           </div>
         </div>
 

@@ -46,6 +46,7 @@ export interface Employee {
   slack_username: string;
   department: Department;
   role: string;
+  status: string;
   hire_date: string;
   manager_id: string | null;
   permissions: EmployeePermission[];

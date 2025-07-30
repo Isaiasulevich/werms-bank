@@ -30,6 +30,7 @@ import {
 import { useEmployees } from '../hooks';
 import { Employee } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { WERM_PRICES } from '@/lib/wermTypes';
 
 interface DeleteEmployeeDialogProps {
   open: boolean;
@@ -111,7 +112,7 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
                 {employee.werm_balances.total_werms} worms
               </div>
               <div className="text-sm text-muted-foreground">
-                {formatCurrency(employee.werm_balances.total_value_aud)}
+                {formatCurrency(employee.werm_balances.total_werms)}
               </div>
             </div>
           </CardContent>
@@ -157,7 +158,7 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
                 </CardTitle>
                 <CardDescription>
                   This employee has {employee.werm_balances.total_werms} worms worth{' '}
-                  {formatCurrency(employee.werm_balances.total_value_aud)}. These will be 
+                  {formatCurrency(employee.werm_balances.total_werms)}. These will be 
                   permanently lost when the employee is deleted.
                 </CardDescription>
               </CardHeader>
@@ -165,23 +166,23 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div>
                     <div className="font-medium">🥇 Gold</div>
-                    <div>{employee.werm_balances.gold.count} worms</div>
+                    <div>{employee.werm_balances.gold} worms</div>
                     <div className="text-muted-foreground">
-                      {formatCurrency(employee.werm_balances.gold.total_value)}
+                      {formatCurrency(WERM_PRICES.gold)}
                     </div>
                   </div>
                   <div>
                     <div className="font-medium">🥈 Silver</div>
-                    <div>{employee.werm_balances.silver.count} worms</div>
+                    <div>{employee.werm_balances.silver} worms</div>
                     <div className="text-muted-foreground">
-                      {formatCurrency(employee.werm_balances.silver.total_value)}
+                      {formatCurrency(WERM_PRICES.silver)}
                     </div>
                   </div>
                   <div>
                     <div className="font-medium">🥉 Bronze</div>
-                    <div>{employee.werm_balances.bronze.count} worms</div>
+                    <div>{employee.werm_balances.bronze} worms</div>
                     <div className="text-muted-foreground">
-                      {formatCurrency(employee.werm_balances.bronze.total_value)}
+                      {formatCurrency(WERM_PRICES.bronze)}
                     </div>
                   </div>
                 </div>

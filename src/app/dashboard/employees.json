@@ -40,9 +40,9 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": 1,
+      "gold": 2,
       "silver": 2,
-      "bronze": 3
+      "bronze": 5
     },
     "lifetime_earned": {
       "gold": 4,
