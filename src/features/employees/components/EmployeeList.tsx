@@ -53,27 +53,27 @@ interface EmployeeListProps {
 function getDepartmentIcon(department: Department) {
   switch (department) {
     case 'Operations':
-      return '⚡';
+      return 'OPS';
     case 'Engineering':
-      return '👨‍💻';
+      return 'ENG';
     case 'Product':
-      return '📱';
+      return 'PRD';
     case 'Marketing':
-      return '📢';
+      return 'MKT';
     case 'Design':
-      return '🎨';
+      return 'DES';
     case 'Sales':
-      return '💼';
+      return 'SAL';
     case 'Support':
-      return '🛟';
+      return 'SUP';
     case 'HR':
-      return '👥';
+      return 'HR';
     case 'Finance':
-      return '💰';
+      return 'FIN';
     case 'Legal':
-      return '⚖️';
+      return 'LEG';
     default:
-      return '👤';
+      return 'GEN';
   }
 }
 
@@ -329,7 +329,7 @@ export function EmployeeList({
                           {formatCurrency(employee.werm_balances.total_value_usd)}
                         </div>
                         <div className="text-xs text-muted-foreground">
-                          🥇{employee.werm_balances.gold.count} 🥈{employee.werm_balances.silver.count} 🥉{employee.werm_balances.bronze.count}
+                          Gold: {employee.werm_balances.gold.count} | Silver: {employee.werm_balances.silver.count} | Bronze: {employee.werm_balances.bronze.count}
                         </div>
                       </div>
                     </TableCell>

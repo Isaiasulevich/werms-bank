@@ -82,7 +82,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui"
-import { TransactionDrawer } from "@/components/transactions"
+import { TransactionDrawer } from "@/features/transactions"
 
 export const schema = z.object({
   id: z.number(),

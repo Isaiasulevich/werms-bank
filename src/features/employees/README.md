@@ -2,7 +2,7 @@
 
 A comprehensive employee management system for the Werms Bank application that handles employee profiles, werm balances, organizational hierarchy, permissions, and transaction history. This feature serves as the central hub for all employee-related operations and data management.
 
-## 🎯 Overview
+## Overview
 
 The Employee Management feature provides complete CRUD operations and advanced management capabilities for:
 - **Employee Profiles**: Comprehensive employee information and contact details
@@ -14,16 +14,16 @@ The Employee Management feature provides complete CRUD operations and advanced m
 
 ### Key Features
 
-- **👥 Complete Profile Management**: Full employee lifecycle from hire to termination
-- **🏢 Department Organization**: Structured department and role management
-- **🔐 Permission-Based Access**: Granular permission system for security
-- **💰 Balance Tracking**: Real-time werm balances (gold, silver, bronze)
-- **📈 Lifetime Earnings**: Historical earning tracking and analytics
-- **🚨 Emergency Contacts**: Critical contact information management
-- **🔍 Advanced Search**: Powerful filtering and search capabilities
-- **📊 Bulk Operations**: Efficient batch operations for administrators
+- **Complete Profile Management**: Full employee lifecycle from hire to termination
+- **Department Organization**: Structured department and role management
+- **Permission-Based Access**: Granular permission system for security
+- **Balance Tracking**: Real-time werm balances (gold, silver, bronze)
+- **Lifetime Earnings**: Historical earning tracking and analytics
+- **Emergency Contacts**: Critical contact information management
+- **Advanced Search**: Powerful filtering and search capabilities
+- **Bulk Operations**: Efficient batch operations for administrators
 
-## 🏗️ Architecture
+## Architecture
 
 ### Components
 
@@ -63,7 +63,7 @@ EmployeesPage (Main Orchestrator)
 └── DeleteEmployeeDialog (Confirmation)
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Setup
 
@@ -148,7 +148,7 @@ interface WormBalance {
 }
 ```
 
-## 🏢 Organizational Structure
+## Organizational Structure
 
 ### Departments
 
@@ -178,7 +178,7 @@ type EmployeePermission =
   | 'create_policies'          // Policy creation access
 ```
 
-## 🔧 Hooks & Data Management
+## Hooks & Data Management
 
 ### Core Hooks
 
@@ -253,7 +253,7 @@ The search functionality covers:
 - **Role**: Job title search
 - **Department**: Department name search
 
-## 📊 Analytics & Statistics
+## Analytics & Statistics
 
 ### Employee Statistics
 
@@ -268,7 +268,7 @@ interface EmployeeStats {
 }
 ```
 
-## 💼 Transaction Management
+## Transaction Management
 
 ### Transaction History
 
@@ -319,7 +319,7 @@ interface EmployeeFormErrors {
 }
 ```
 
-## 🎨 UI/UX Features
+## UI/UX Features
 
 - **Responsive Design**: Optimized for all screen sizes
 - **Advanced Filtering**: Multiple filter combinations
@@ -330,7 +330,7 @@ interface EmployeeFormErrors {
 - **Progressive Disclosure**: Detailed views when needed
 - **Error States**: Comprehensive error handling and feedback
 
-## 🚀 Performance Optimizations
+## Performance Optimizations
 
 - **Virtual Scrolling**: Efficient rendering of large employee lists
 - **Memoized Components**: Prevent unnecessary re-renders
@@ -378,4 +378,4 @@ The Employee Management feature integrates with:
 
 ---
 
-*Managing people, empowering success! 👥✨*
+*Managing people, empowering success!*

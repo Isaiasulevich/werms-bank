@@ -2,7 +2,7 @@
 
 A comprehensive policy management system that defines and manages automated werm distribution rules, conditions, and approval workflows. This feature serves as the central governance system for all werm-related activities and organizational policies within the Werms Bank application.
 
-## 🎯 Overview
+## Overview
 
 The Policy Management feature provides complete control over organizational policies including:
 - **Automated Distribution Rules**: Define conditions that trigger automatic werm rewards
@@ -14,12 +14,12 @@ The Policy Management feature provides complete control over organizational poli
 
 ### Key Features
 
-- **📋 Policy Templates**: Pre-defined templates for common policy types
-- **⚙️ Automated Triggers**: Smart condition evaluation and automatic execution
+- **Policy Templates**: Pre-defined templates for common policy types
+- **Automated Triggers**: Smart condition evaluation and automatic execution
 - **✅ Approval Workflows**: Multi-level approval for sensitive operations
-- **📊 Performance Analytics**: Track policy effectiveness and usage statistics
+- **Performance Analytics**: Track policy effectiveness and usage statistics
 - **🔄 Version Control**: Complete audit trail of policy modifications
-- **🎯 Condition Logic**: Complex condition combinations with AND/OR logic
+- **Condition Logic**: Complex condition combinations with AND/OR logic
 - **⏰ Scheduling**: Time-based and event-based policy triggers
 - **🔐 Permission Controls**: Role-based policy creation and modification rights
 
@@ -70,7 +70,7 @@ PoliciesPage (Main Orchestrator)
 └── DeletePolicyDialog (Confirmation)
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Setup
 
@@ -110,7 +110,7 @@ function CustomPolicyManager() {
 }
 ```
 
-## 📋 Policy Data Structure
+## Policy Data Structure
 
 ### Core Policy Interface
 
@@ -155,7 +155,7 @@ type PolicyStatus =
   | 'draft'      // In development, not enforced
 ```
 
-## ⚙️ Condition System
+## Condition System
 
 ### Policy Conditions
 
@@ -209,7 +209,7 @@ type ConditionType =
 }
 ```
 
-## 🔧 Hooks & Data Management
+## Hooks & Data Management
 
 ### Core Hooks
 
@@ -318,7 +318,7 @@ const wormRewardSchema = z.object({
 )
 ```
 
-## 📊 Policy Analytics
+## Policy Analytics
 
 ### Performance Tracking
 
@@ -336,7 +336,7 @@ The system tracks comprehensive policy metrics:
 - **Distribution Reports**: Detailed distribution breakdowns
 - **Audit Reports**: Complete change and activation history
 
-## 🎨 UI/UX Features
+## UI/UX Features
 
 - **Intuitive Policy Builder**: Step-by-step policy creation wizard
 - **Visual Condition Logic**: Graphical representation of complex conditions
@@ -347,7 +347,7 @@ The system tracks comprehensive policy metrics:
 - **Status Indicators**: Clear visual policy status representation
 - **Impact Preview**: Estimate policy impact before activation
 
-## 🚀 Performance Optimizations
+## Performance Optimizations
 
 - **Efficient Evaluation**: Optimized condition evaluation algorithms
 - **Caching Strategy**: Intelligent caching of policy data and evaluations

@@ -63,11 +63,7 @@ const data = {
       url: "#",
       icon: IconSettings,
     },
-    {
-      title: "Search & Help",
-      url: "#",
-      icon: IconSearch,
-    },
+ 
   ],
 }
 

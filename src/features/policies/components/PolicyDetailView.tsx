@@ -53,45 +53,45 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
         return { 
           name: 'Attendance', 
           icon: '⏰', 
-          color: 'text-blue-600', 
-          bgColor: 'bg-blue-50',
-          borderColor: 'border-blue-200',
+          color: 'text-chart-2', 
+          bgColor: 'bg-chart-2/5',
+          borderColor: 'border-chart-2/20',
           description: 'Triggers based on employee attendance patterns'
         };
       case 'performance':
         return { 
           name: 'Performance', 
-          icon: '📈', 
-          color: 'text-green-600',
-          bgColor: 'bg-green-50',
-          borderColor: 'border-green-200',
+          icon: 'PERF', 
+          color: 'text-chart-3',
+          bgColor: 'bg-chart-3/5',
+          borderColor: 'border-chart-3/20',
           description: 'Triggers based on performance metrics and achievements'
         };
       case 'milestone':
         return { 
           name: 'Milestone', 
-          icon: '🎯', 
-          color: 'text-purple-600',
-          bgColor: 'bg-purple-50',
-          borderColor: 'border-purple-200',
+          icon: 'MILE', 
+          color: 'text-chart-1',
+          bgColor: 'bg-chart-1/5',
+          borderColor: 'border-chart-1/20',
           description: 'Triggers based on project milestones and goal completion'
         };
       case 'custom':
         return { 
           name: 'Custom', 
-          icon: '⚙️', 
-          color: 'text-orange-600',
-          bgColor: 'bg-orange-50',
-          borderColor: 'border-orange-200',
+          icon: 'CUST', 
+          color: 'text-chart-4',
+          bgColor: 'bg-chart-4/5',
+          borderColor: 'border-chart-4/20',
           description: 'Custom or automated trigger conditions'
         };
       default:
         return { 
           name: type, 
           icon: '📄', 
-          color: 'text-gray-600',
-          bgColor: 'bg-gray-50',
-          borderColor: 'border-gray-200',
+          color: 'text-muted-foreground',
+          bgColor: 'bg-muted/50',
+          borderColor: 'border-muted',
           description: 'Standard policy condition'
         };
     }
@@ -103,9 +103,9 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
   function formatWormReward() {
     const { gold = 0, silver = 0, platinum = 0 } = condition.wormReward || {};
     const parts = [];
-    if (gold > 0) parts.push(`${gold} 🥇 Gold`);
-    if (silver > 0) parts.push(`${silver} 🥈 Silver`);
-    if (platinum > 0) parts.push(`${platinum} 🏆 Platinum`);
+    if (gold > 0) parts.push(`${gold} Gold`);
+    if (silver > 0) parts.push(`${silver} Silver`);
+    if (platinum > 0) parts.push(`${platinum} Platinum`);
     return parts.length > 0 ? parts.join(', ') : 'No reward set';
   }
 
@@ -133,11 +133,11 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
           </div>
           <div className="flex items-center gap-2">
             {condition.isActive ? (
-              <Badge variant="default" className="bg-green-100 text-green-800">
+              <Badge variant="default" className="bg-chart-3/10 text-chart-3">
                 Active
               </Badge>
             ) : (
-              <Badge variant="secondary" className="bg-gray-100 text-gray-600">
+              <Badge variant="secondary" className="bg-muted/50 text-muted-foreground">
                 Inactive
               </Badge>
             )}
@@ -164,51 +164,51 @@ function ConditionCard({ condition, index }: { condition: PolicyCondition; index
           <div className="flex flex-col gap-4">
             {/* Description */}
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-1">Description</h4>
-              <p className="text-sm text-gray-700">{condition.description}</p>
+              <h4 className="text-sm font-medium text-foreground mb-1">Description</h4>
+              <p className="text-sm text-muted-foreground">{condition.description}</p>
             </div>
 
             {/* Trigger */}
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-1">Trigger Condition</h4>
-              <p className="text-sm text-gray-700 font-mono bg-gray-50 px-2 py-1 rounded">
+              <h4 className="text-sm font-medium text-foreground mb-1">Trigger Condition</h4>
+              <p className="text-sm text-muted-foreground font-mono bg-muted px-2 py-1 rounded">
                 {condition.trigger}
               </p>
             </div>
 
             {/* Rewards */}
             <div>
-              <h4 className="text-sm font-medium text-gray-900 mb-2">Worm Rewards</h4>
+              <h4 className="text-sm font-medium text-foreground mb-2">Worm Rewards</h4>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { type: 'Gold', value: condition.wormReward?.gold || 0, icon: '🥇', color: 'text-yellow-600' },
-                  { type: 'Silver', value: condition.wormReward?.silver || 0, icon: '🥈', color: 'text-gray-500' },
-                  { type: 'Platinum', value: condition.wormReward?.platinum || 0, icon: '🏆', color: 'text-worm-platinum' }
+                  { type: 'Gold', value: condition.wormReward?.gold || 0, icon: 'G', color: 'text-worm-gold' },
+                  { type: 'Silver', value: condition.wormReward?.silver || 0, icon: 'S', color: 'text-worm-silver' },
+                  { type: 'Platinum', value: condition.wormReward?.platinum || 0, icon: 'P', color: 'text-worm-platinum' }
                 ].map((reward) => (
-                  <div key={reward.type} className="text-center p-2 bg-gray-50 rounded">
+                  <div key={reward.type} className="text-center p-2 bg-muted/50 rounded">
                     <div className="text-lg mb-1">{reward.icon}</div>
                     <div className={`text-sm font-medium ${reward.color}`}>{reward.value}</div>
-                    <div className="text-xs text-gray-500">{reward.type}</div>
+                    <div className="text-xs text-muted-foreground">{reward.type}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Settings */}
-            <div className="flex items-center gap-6 text-xs text-gray-600">
+            <div className="flex items-center gap-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
                 {condition.requiresApproval ? (
-                  <CheckCircle className="h-3 w-3 text-orange-500" />
+                  <CheckCircle className="h-3 w-3 text-chart-4" />
                 ) : (
-                  <XCircle className="h-3 w-3 text-gray-400" />
+                  <XCircle className="h-3 w-3 text-muted-foreground" />
                 )}
                 <span>Requires Approval</span>
               </div>
               <div className="flex items-center gap-1">
                 {condition.isActive ? (
-                  <CheckCircle className="h-3 w-3 text-green-500" />
+                  <CheckCircle className="h-3 w-3 text-chart-3" />
                 ) : (
-                  <XCircle className="h-3 w-3 text-red-500" />
+                  <XCircle className="h-3 w-3 text-destructive" />
                 )}
                 <span>Active</span>
               </div>
@@ -229,15 +229,15 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
   function getCategoryInfo(category: string) {
     switch (category) {
       case 'distribution':
-        return { name: 'Distribution', icon: '🏦', color: 'text-blue-600', description: 'Manages worm allocation and distribution' };
+        return { name: 'Distribution', icon: '🏦', color: 'text-chart-2', description: 'Manages worm allocation and distribution' };
       case 'minting':
-        return { name: 'Minting', icon: '⚡', color: 'text-yellow-600', description: 'Controls worm creation and minting' };
+        return { name: 'Minting', icon: '⚡', color: 'text-chart-4', description: 'Controls worm creation and minting' };
       case 'recognition':
-        return { name: 'Recognition', icon: '🏆', color: 'text-green-600', description: 'Employee rewards and recognition' };
+        return { name: 'Recognition', icon: 'REC', color: 'text-chart-3', description: 'Employee rewards and recognition' };
       case 'compliance':
-        return { name: 'Compliance', icon: '📋', color: 'text-purple-600', description: 'Ensures policy compliance and adherence' };
+        return { name: 'Compliance', icon: 'COM', color: 'text-chart-1', description: 'Ensures policy compliance and adherence' };
       default:
-        return { name: category, icon: '📄', color: 'text-gray-600', description: 'General policy category' };
+        return { name: category, icon: '📄', color: 'text-muted-foreground', description: 'General policy category' };
     }
   }
 
@@ -247,13 +247,13 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
   function getStatusInfo(status: string) {
     switch (status) {
       case 'active':
-        return { name: 'Active', color: 'text-green-600', bgColor: 'bg-green-100', icon: CheckCircle };
+        return { name: 'Active', color: 'text-chart-3', bgColor: 'bg-chart-3/10', icon: CheckCircle };
       case 'inactive':
-        return { name: 'Inactive', color: 'text-gray-600', bgColor: 'bg-gray-100', icon: XCircle };
+        return { name: 'Inactive', color: 'text-muted-foreground', bgColor: 'bg-muted/50', icon: XCircle };
       case 'draft':
-        return { name: 'Draft', color: 'text-orange-600', bgColor: 'bg-orange-100', icon: AlertCircle };
+        return { name: 'Draft', color: 'text-chart-4', bgColor: 'bg-chart-4/10', icon: AlertCircle };
       default:
-        return { name: status, color: 'text-gray-600', bgColor: 'bg-gray-100', icon: AlertCircle };
+        return { name: status, color: 'text-muted-foreground', bgColor: 'bg-muted/50', icon: AlertCircle };
     }
   }
 
@@ -327,19 +327,19 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <Card className="text-center">
                   <CardContent className="pt-4">
-                    <div className="text-2xl font-bold text-blue-600">{policy.conditions.length}</div>
+                    <div className="text-2xl font-bold text-chart-2">{policy.conditions.length}</div>
                     <div className="text-xs text-muted-foreground">Total Conditions</div>
                   </CardContent>
                 </Card>
                 <Card className="text-center">
                   <CardContent className="pt-4">
-                    <div className="text-2xl font-bold text-green-600">{activeConditions}</div>
+                    <div className="text-2xl font-bold text-chart-3">{activeConditions}</div>
                     <div className="text-xs text-muted-foreground">Active Conditions</div>
                   </CardContent>
                 </Card>
                 <Card className="text-center">
                   <CardContent className="pt-4">
-                    <div className="text-2xl font-bold text-orange-600">
+                    <div className="text-2xl font-bold text-chart-4">
                       {totalRewards.gold + totalRewards.silver + totalRewards.platinum}
                     </div>
                     <div className="text-xs text-muted-foreground">Total Rewards</div>
@@ -347,7 +347,7 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                 </Card>
                 <Card className="text-center">
                   <CardContent className="pt-4">
-                    <div className="text-2xl font-bold text-purple-600">
+                    <div className="text-2xl font-bold text-chart-1">
                       {Math.floor((Date.now() - new Date(policy.createdAt).getTime()) / (1000 * 60 * 60 * 24))}
                     </div>
                     <div className="text-xs text-muted-foreground">Days Active</div>
@@ -364,7 +364,7 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700 leading-relaxed">{policy.description}</p>
+                  <p className="text-muted-foreground leading-relaxed">{policy.description}</p>
                 </CardContent>
               </Card>
 
@@ -378,20 +378,20 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-3 gap-6">
-                    <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                      <div className="text-3xl mb-2">🥇</div>
-                      <div className="text-2xl font-bold text-yellow-600">{totalRewards.gold}</div>
-                      <div className="text-sm text-yellow-700">Gold Worms</div>
+                    <div className="text-center p-4 bg-worm-gold/10 rounded-lg">
+                      <div className="text-3xl mb-2 font-bold border rounded-lg w-12 h-12 flex items-center justify-center text-worm-gold">G</div>
+                      <div className="text-2xl font-bold text-worm-gold">{totalRewards.gold}</div>
+                      <div className="text-sm text-worm-gold-foreground">Gold Worms</div>
                     </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <div className="text-3xl mb-2">🥈</div>
-                      <div className="text-2xl font-bold text-gray-600">{totalRewards.silver}</div>
-                      <div className="text-sm text-gray-700">Silver Worms</div>
+                    <div className="text-center p-4 bg-worm-silver/10 rounded-lg">
+                      <div className="text-3xl mb-2 font-bold border rounded-lg w-12 h-12 flex items-center justify-center text-worm-silver">S</div>
+                      <div className="text-2xl font-bold text-worm-silver">{totalRewards.silver}</div>
+                      <div className="text-sm text-worm-silver-foreground">Silver Worms</div>
                     </div>
-                    <div className="text-center p-4 bg-amber-50 rounded-lg">
-                      <div className="text-3xl mb-2">🥉</div>
-                                      <div className="text-2xl font-bold text-worm-platinum">{totalRewards.platinum}</div>
-                <div className="text-sm text-worm-platinum">Platinum Worms</div>
+                    <div className="text-center p-4 bg-worm-platinum/10 rounded-lg">
+                      <div className="text-3xl mb-2 font-bold border rounded-lg w-12 h-12 flex items-center justify-center text-worm-platinum">P</div>
+                      <div className="text-2xl font-bold text-worm-platinum">{totalRewards.platinum}</div>
+                      <div className="text-sm text-worm-platinum-foreground">Platinum Worms</div>
                     </div>
                   </div>
                 </CardContent>

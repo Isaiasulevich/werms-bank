@@ -77,7 +77,7 @@ function ConditionForm({
       case 'attendance':
         return { name: 'Attendance', icon: '⏰', description: 'Based on arrival time or attendance patterns' };
       case 'performance':
-        return { name: 'Performance', icon: '📈', description: 'Based on work quality or achievement metrics' };
+        return { name: 'Performance', icon: 'PERF', description: 'Based on work quality or achievement metrics' };
       case 'milestone':
         return { name: 'Milestone', icon: '🎯', description: 'Based on project or goal completion' };
       case 'custom':
@@ -125,7 +125,7 @@ function ConditionForm({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="attendance">⏰ Attendance - Time & presence tracking</SelectItem>
-              <SelectItem value="performance">📈 Performance - Quality & metrics</SelectItem>
+                              <SelectItem value="performance">Performance - Quality & metrics</SelectItem>
               <SelectItem value="milestone">🎯 Milestone - Goals & projects</SelectItem>
               <SelectItem value="custom">⚙️ Custom - Automated or manual</SelectItem>
             </SelectContent>
@@ -160,7 +160,7 @@ function ConditionForm({
           <Label>Worm Rewards *</Label>
           <div className="grid grid-cols-3 gap-3">
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`gold-${condition.id}`} className="text-xs text-worm-gold">🥇 Gold</Label>
+                                    <Label htmlFor={`gold-${condition.id}`} className="text-xs text-worm-gold">Gold</Label>
               <Input
                 id={`gold-${condition.id}`}
                 type="number"
@@ -176,7 +176,7 @@ function ConditionForm({
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`silver-${condition.id}`} className="text-xs text-worm-silver">🥈 Silver</Label>
+                                    <Label htmlFor={`silver-${condition.id}`} className="text-xs text-worm-silver">Silver</Label>
               <Input
                 id={`silver-${condition.id}`}
                 type="number"
@@ -192,7 +192,7 @@ function ConditionForm({
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`platinum-${condition.id}`} className="text-xs text-worm-platinum">🏆 Platinum</Label>
+                                    <Label htmlFor={`platinum-${condition.id}`} className="text-xs text-worm-platinum">Platinum</Label>
               <Input
                 id={`platinum-${condition.id}`}
                 type="number"
@@ -418,10 +418,10 @@ export function EditPolicyDialog({ open, onOpenChange, policy }: EditPolicyDialo
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="recognition">🏆 Recognition - Employee rewards</SelectItem>
+                      <SelectItem value="recognition">Recognition - Employee rewards</SelectItem>
                       <SelectItem value="distribution">🏦 Distribution - Worm allocation</SelectItem>
                       <SelectItem value="minting">⚡ Minting - Worm creation</SelectItem>
-                      <SelectItem value="compliance">📋 Compliance - Rule enforcement</SelectItem>
+                      <SelectItem value="compliance">Compliance - Rule enforcement</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

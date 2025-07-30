@@ -2,7 +2,7 @@
 
 A powerful werm distribution system that allows administrators to distribute different types of werms (gold, silver, platinum) to employees based on predefined policies. This feature enables bulk distributions, individual allocations, and comprehensive tracking of all werm transactions.
 
-## 🎯 Overview
+## Overview
 
 The Give Werms feature provides a centralized interface for:
 - **Bulk Distribution**: Distribute werms to multiple employees simultaneously
@@ -14,14 +14,14 @@ The Give Werms feature provides a centralized interface for:
 
 ### Key Features
 
-- **🪙 Multi-Currency Support**: Gold, silver, and platinum werm types
-- **📊 Batch Operations**: Distribute to multiple employees at once
-- **🔍 Distribution Preview**: See exactly what will be distributed before confirming
-- **📝 Audit Trail**: Complete tracking of who distributed what, when, and why
-- **⚡ Policy Integration**: Seamless integration with company policy system
-- **🎯 Flexible Amounts**: Custom amounts per employee or policy defaults
+- **Multi-Currency Support**: Gold, silver, and platinum werm types
+- **Batch Operations**: Distribute to multiple employees at once
+- **Distribution Preview**: See exactly what will be distributed before confirming
+- **Audit Trail**: Complete tracking of who distributed what, when, and why
+- **Policy Integration**: Seamless integration with company policy system
+- **Flexible Amounts**: Custom amounts per employee or policy defaults
 
-## 🏗️ Architecture
+## Architecture
 
 ### Components
 
@@ -48,7 +48,7 @@ GiveWermsCard (Entry Point)
     └── Confirmation Actions
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Setup
 
@@ -100,15 +100,15 @@ function CustomDistributionTrigger() {
 }
 ```
 
-## 💰 Werm Types
+## Werm Types
 
 | Type | Description | Typical Use Case |
 |------|-------------|------------------|
-| **🥇 Gold** | Highest value werms | Exceptional performance, major achievements |
-| **🥈 Silver** | Standard reward werms | Regular recognition, meeting goals |
-| **🏆 Platinum** | Premium special werms | Extraordinary contributions, leadership |
+| **Gold** | Highest value werms | Exceptional performance, major achievements |
+| **Silver** | Standard reward werms | Regular recognition, meeting goals |
+| **Platinum** | Premium special werms | Extraordinary contributions, leadership |
 
-## 📋 Data Structure
+## Data Structure
 
 ### WermDistribution
 
@@ -159,7 +159,7 @@ interface DistributionFormData {
 }
 ```
 
-## 🔧 Validation
+## Validation
 
 The feature includes comprehensive validation using Zod schemas:
 
@@ -174,7 +174,7 @@ The feature includes comprehensive validation using Zod schemas:
 - **Policy**: Valid policy selection mandatory
 - **UUIDs**: All IDs validated as proper UUIDs
 
-## 🎨 UI/UX Features
+## UI/UX Features
 
 - **Intuitive Flow**: Step-by-step distribution process
 - **Visual Feedback**: Clear indicators for werm types and amounts
@@ -192,7 +192,7 @@ Complete TypeScript coverage ensures:
 - **Generic Support**: Flexible typing for extensions
 - **Enum Safety**: Werm types strictly enforced
 
-## 🚀 Performance Considerations
+## Performance Considerations
 
 - **Memoized Components**: Prevent unnecessary re-renders
 - **Batch Processing**: Efficient bulk operations
@@ -236,4 +236,4 @@ The Give Werms feature integrates with:
 
 ---
 
-*Distribute werms responsibly! 🪱💰*
+*Distribute werms responsibly!*

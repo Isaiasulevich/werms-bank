@@ -94,9 +94,9 @@ export function PolicyList({
       case 'minting':
         return { name: 'Minting', icon: '⚡' };
       case 'recognition':
-        return { name: 'Recognition', icon: '🏆' };
+        return { name: 'Recognition', icon: 'REC' };
       case 'compliance':
-        return { name: 'Compliance', icon: '📋' };
+        return { name: 'Compliance', icon: 'COM' };
       default:
         return { name: category, icon: '📄' };
     }
@@ -113,7 +113,7 @@ export function PolicyList({
     return (
       <div className="flex items-center justify-center p-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
           <p className="mt-2 text-sm text-muted-foreground">Loading policies...</p>
         </div>
       </div>
@@ -155,10 +155,10 @@ export function PolicyList({
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Active Policies</CardTitle>
-              <CheckCircle className="h-4 w-4 text-green-600" />
+              <CheckCircle className="h-4 w-4 text-chart-3" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{stats.activePolicies}</div>
+              <div className="text-2xl font-bold text-chart-3">{stats.activePolicies}</div>
               <p className="text-xs text-muted-foreground">
                 Currently enforced
               </p>
@@ -168,10 +168,10 @@ export function PolicyList({
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Triggered Today</CardTitle>
-              <Clock className="h-4 w-4 text-blue-600" />
+              <Clock className="h-4 w-4 text-chart-2" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-blue-600">{stats.triggeredToday}</div>
+              <div className="text-2xl font-bold text-chart-2">{stats.triggeredToday}</div>
               <p className="text-xs text-muted-foreground">
                 Policy executions
               </p>
@@ -181,10 +181,10 @@ export function PolicyList({
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Worms Distributed</CardTitle>
-              <AlertCircle className="h-4 w-4 text-orange-600" />
+              <AlertCircle className="h-4 w-4 text-chart-4" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-orange-600">{stats.totalWormDistributed}</div>
+              <div className="text-2xl font-bold text-chart-4">{stats.totalWormDistributed}</div>
               <p className="text-xs text-muted-foreground">
                 Total today
               </p>

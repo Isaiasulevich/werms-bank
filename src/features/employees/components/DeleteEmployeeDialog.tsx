@@ -164,21 +164,21 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
               <CardContent>
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div>
-                    <div className="font-medium">🥇 Gold</div>
+                    <div className="font-medium">Gold</div>
                     <div>{employee.werm_balances.gold.count} worms</div>
                     <div className="text-muted-foreground">
                       {formatCurrency(employee.werm_balances.gold.total_value)}
                     </div>
                   </div>
                   <div>
-                    <div className="font-medium">🥈 Silver</div>
+                    <div className="font-medium">Silver</div>
                     <div>{employee.werm_balances.silver.count} worms</div>
                     <div className="text-muted-foreground">
                       {formatCurrency(employee.werm_balances.silver.total_value)}
                     </div>
                   </div>
                   <div>
-                    <div className="font-medium">🥉 Bronze</div>
+                    <div className="font-medium">Bronze</div>
                     <div>{employee.werm_balances.bronze.count} worms</div>
                     <div className="text-muted-foreground">
                       {formatCurrency(employee.werm_balances.bronze.total_value)}

@@ -2,7 +2,7 @@
 
 A powerful, keyboard-driven command palette system inspired by tools like Notion, VS Code, and Linear. Provides quick access to actions and navigation throughout the Werms Bank application.
 
-## 🎯 Overview
+## Overview
 
 The Command Palette is a universal search and action interface that allows users to:
 - Navigate quickly between pages
@@ -15,10 +15,10 @@ The Command Palette is a universal search and action interface that allows users
 - **⌨️ Keyboard-First**: Primary interaction via `Cmd/Ctrl+K`
 - **🔍 Smart Search**: Fuzzy search with keyword matching
 - **📂 Categorized**: Commands organized by feature area
-- **🎨 Visual Icons**: Lucide React icons for better UX
+- **Visual Icons**: Lucide React icons for better UX
 - **⚡ Fast Access**: Instant command execution
 - **🔌 Extensible**: Easy to add new commands per feature
-- **🎯 Context-Aware**: Commands register/unregister based on active page
+- **Context-Aware**: Commands register/unregister based on active page
 
 ## 🏗️ Architecture
 
@@ -50,7 +50,7 @@ CommandPaletteProvider (Global Context)
     │           └── Shortcut (if available)
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Setup
 
@@ -106,7 +106,7 @@ export function PoliciesPage() {
 }
 ```
 
-## 📋 Available Command Categories
+## Available Command Categories
 
 | Category | Description | Example Commands |
 |----------|-------------|------------------|
@@ -117,7 +117,7 @@ export function PoliciesPage() {
 | **Settings** | App configuration | *Future use* |
 | **Actions** | Quick actions | *Future use* |
 
-## 🎨 Command Structure
+## Command Structure
 
 Each command follows this interface:
 
@@ -158,7 +158,7 @@ interface CommandAction {
 | `Enter` | Execute selected command |
 | `Type to search` | Filter commands |
 
-## 🔧 Hooks Reference
+## Hooks Reference
 
 ### Core Hooks
 
@@ -235,7 +235,7 @@ The command palette includes intelligent search that matches:
 | "werms" | Give Werms, View Balance |
 | "policy create" | Add New Policy (keywords match) |
 
-## 🎨 UI/UX Features
+## UI/UX Features
 
 - **Grouped Display**: Commands organized by category with clear headings
 - **Visual Icons**: Each command has a relevant Lucide React icon
@@ -263,7 +263,7 @@ When testing components that use the command palette:
 4. **Keyboard Events**: Test shortcut functionality
 5. **Search Functionality**: Verify filtering works correctly
 
-## 🚀 Performance Optimizations
+## Performance Optimizations
 
 - **Memoized Callbacks**: All command actions use `useCallback`
 - **Memoized Providers**: Command providers are memoized to prevent recreation
