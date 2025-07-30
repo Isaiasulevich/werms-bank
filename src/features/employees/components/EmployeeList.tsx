@@ -326,7 +326,6 @@ export function EmployeeList({
               ) : (
                 employees.map((employee) => {
                   const wormBalance = computeWormBalances(employee.werm_balances);
-
                   return (
                     <TableRow key={employee.id} className="hover:bg-muted/50">
                       <TableCell>
