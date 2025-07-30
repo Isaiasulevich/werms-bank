@@ -57,7 +57,6 @@ export function SectionCards() {
         <CardHeader>
           <CardDescription>Bank Reserve</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl flex items-center gap-2">
-            <IconStack className="size-6" />
             2,847 Werms
           </CardTitle>
           <div className="text-sm text-muted-foreground mb-2">

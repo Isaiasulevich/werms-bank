@@ -7,13 +7,18 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { PolicyList } from './PolicyList';
 import { AddPolicyDialog } from './AddPolicyDialog';
 import { EditPolicyDialog } from './EditPolicyDialog';
 import { DeletePolicyDialog } from './DeletePolicyDialog';
 import { PolicyDetailView } from './PolicyDetailView';
 import { Policy } from '../types';
+import { 
+  useCommandPaletteContext, 
+  usePolicyCommands, 
+  useRegisterCommands 
+} from '@/features/command-palette';
 
 /**
  * Dialog states for managing different modal interactions
@@ -39,7 +44,7 @@ export function PoliciesPage() {
   /**
    * Open the add policy dialog
    */
-  function handleCreatePolicy() {
+  const handleCreatePolicy = useCallback(() => {
     setDialogs({
       showAddDialog: true,
       showEditDialog: false,
@@ -47,12 +52,12 @@ export function PoliciesPage() {
       showDetailView: false,
       selectedPolicy: null,
     });
-  }
+  }, []);
 
   /**
    * Open the edit policy dialog
    */
-  function handleEditPolicy(policy: Policy) {
+  const handleEditPolicy = useCallback((policy: Policy) => {
     setDialogs({
       showAddDialog: false,
       showEditDialog: true,
@@ -60,12 +65,12 @@ export function PoliciesPage() {
       showDetailView: false,
       selectedPolicy: policy,
     });
-  }
+  }, []);
 
   /**
    * Open the policy detail view
    */
-  function handleViewPolicy(policy: Policy) {
+  const handleViewPolicy = useCallback((policy: Policy) => {
     setDialogs({
       showAddDialog: false,
       showEditDialog: false,
@@ -73,12 +78,12 @@ export function PoliciesPage() {
       showDetailView: true,
       selectedPolicy: policy,
     });
-  }
+  }, []);
 
   /**
    * Open the delete confirmation dialog
    */
-  function handleDeletePolicy(policy: Policy) {
+  const handleDeletePolicy = useCallback((policy: Policy) => {
     setDialogs({
       showAddDialog: false,
       showEditDialog: false,
@@ -86,12 +91,12 @@ export function PoliciesPage() {
       showDetailView: false,
       selectedPolicy: policy,
     });
-  }
+  }, []);
 
   /**
    * Close all dialogs and reset state
    */
-  function closeAllDialogs() {
+  const closeAllDialogs = useCallback(() => {
     setDialogs({
       showAddDialog: false,
       showEditDialog: false,
@@ -99,12 +104,12 @@ export function PoliciesPage() {
       showDetailView: false,
       selectedPolicy: null,
     });
-  }
+  }, []);
 
   /**
    * Handle edit action from detail view
    */
-  function handleEditFromDetail(policy: Policy) {
+  const handleEditFromDetail = useCallback((policy: Policy) => {
     setDialogs({
       showAddDialog: false,
       showEditDialog: true,
@@ -112,12 +117,12 @@ export function PoliciesPage() {
       showDetailView: false,
       selectedPolicy: policy,
     });
-  }
+  }, []);
 
   /**
    * Handle delete action from detail view
    */
-  function handleDeleteFromDetail(policy: Policy) {
+  const handleDeleteFromDetail = useCallback((policy: Policy) => {
     setDialogs({
       showAddDialog: false,
       showEditDialog: false,
@@ -125,7 +130,24 @@ export function PoliciesPage() {
       showDetailView: false,
       selectedPolicy: policy,
     });
-  }
+  }, []);
+
+  // Command palette integration
+  const { registerProvider, unregisterProvider } = useCommandPaletteContext();
+  
+  // Policy-specific commands
+  const policyCommands = usePolicyCommands({
+    onAddPolicy: handleCreatePolicy,
+    // Add more commands as needed
+  });
+
+  // Register commands when component mounts
+  useRegisterCommands(
+    'policies-page',
+    policyCommands,
+    registerProvider,
+    unregisterProvider
+  );
 
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
