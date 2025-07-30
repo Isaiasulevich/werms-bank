@@ -4,11 +4,19 @@ import { ComputedWermBalance } from "@/features/employees/types";
 
 export type WermType = 'gold' | 'silver' | 'bronze';
 
+export const WERM_TYPES: WermType[] = ['gold', 'silver', 'bronze'];
+
 // Werm value = how many werms one unit is worth
 export const WERM_PRICES: Record<WermType, number> = {
   gold: 32.0,
   silver: 8.0,
   bronze: 1.0,
+};
+
+export const WERM_EMOJIS: Record<WermType, string> = {
+    gold: '🥇',
+    silver: '🥈',
+    bronze: '🥉',
 };
 
 /**

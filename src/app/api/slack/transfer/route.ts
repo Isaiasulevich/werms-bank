@@ -1,7 +1,8 @@
 // src/app/api/slack/transfer/route.ts
 import { NextResponse } from 'next/server';
 import { WermType } from '@/lib/wermTypes';
-import { transferWerms } from '@/lib/features';
+import { formatWermTransferMessage, parseWermInput, transferWerms } from '@/lib/features';
+
 
 export async function POST(req: Request) {
   try {
@@ -40,29 +41,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ text: 'Could not resolve your Slack email. Please link your account.' });
     }
 
-    const [receiverUsernameRaw, amountRaw, ...noteParts] = text.split(' ');
-    const receiverUsername = receiverUsernameRaw?.trim();
-    const amount = parseInt(amountRaw);
-    const note = noteParts.join(' ').trim();
+    const parsedInput = parseWermInput(text);
+    const receiverUsername = parsedInput?.username;
+    const amounts = parsedInput?.amounts;
+    const reason = parsedInput?.reason;
 
-    if (!receiverUsername || isNaN(amount) || amount <= 0) {
+    if (!receiverUsername || !amounts || Object.keys(amounts).length === 0 ||
+      Object.values(amounts).some((v) => typeof v !== 'number' || isNaN(v) || v <= 0)
+    ) {
       return NextResponse.json({
-        text: 'Invalid command format. Use `/transfer [username] [amount] [optional note]`.',
+        text: 'Invalid command format. Use `/transfer [@username] [amount]` for simple ' +
+        'transfers, and `/transfer [@username] [amount] [type] [optional reason]` for a variety in types.',
       });
     }
 
-    // Bronze only for now
-    const wermsToTransfer: Partial<Record<WermType, number>> = {
-      bronze: amount,
-    };
-
     try {
-      console.log(transferWerms(senderEmail, receiverUsername, wermsToTransfer, note));
+      transferWerms(senderEmail, receiverUsername, amounts, reason);
 
       return NextResponse.json({
         response_type: 'in_channel',
-        text: `✅ Transferred ${amount} 🥉 werms from to *${receiverUsername}*.` +
-              (note ? `\n> ${note}` : ''),
+        text: formatWermTransferMessage(amounts, receiverUsername, reason),
       });
     } catch (error: any) {
       console.error("🚫 Transfer failed:", error.message);

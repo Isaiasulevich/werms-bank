@@ -136,3 +136,13 @@ export interface EmployeeFormErrors {
     relationship?: string;
   };
 } 
+
+export interface SlackWermTransferInput {
+  username: string;
+  amounts: {
+    gold?: number;
+    silver?: number;
+    bronze?: number;
+  };
+  reason?: string;
+}
