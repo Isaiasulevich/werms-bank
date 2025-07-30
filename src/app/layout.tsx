@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { QueryProvider } from "@/shared/components/QueryProvider";
+import { QueryProvider } from "@/shared/providers/QueryProvider";
 import { ThemeProvider } from "@/components/ui";
+import { CommandPaletteProvider } from "@/features/command-palette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            {children}
+            <CommandPaletteProvider>
+              {children}
+            </CommandPaletteProvider>
           </QueryProvider>
         </ThemeProvider>
       </body>

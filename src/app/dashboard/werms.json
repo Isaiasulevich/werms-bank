@@ -3,7 +3,7 @@
     {
       "id": "gold",
       "name": "Gold Werm",
-      "symbol": "🥇",
+      "symbol": "G",
       "value_multiplier": 10,
       "base_value_aud": 10.00,
       "color": "#FFD700",
@@ -15,7 +15,7 @@
     {
       "id": "silver", 
       "name": "Silver Werm",
-      "symbol": "🥈",
+      "symbol": "S",
       "value_multiplier": 1,
       "base_value_aud": 1.00,
       "color": "#C0C0C0",
@@ -27,7 +27,7 @@
     {
       "id": "platinum",
       "name": "Platinum Werm", 
-      "symbol": "🏆",
+      "symbol": "P",
       "value_multiplier": 20,
       "base_value_aud": 20.00,
       "color": "#29ffe5",

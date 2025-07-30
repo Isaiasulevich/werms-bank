@@ -40,6 +40,7 @@ import {
 import { useEmployeeList, useEmployees } from '../hooks';
 import { Employee, EmployeeFilters, EmployeeSort, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 interface EmployeeListProps {
   onAddEmployee?: () => void;
@@ -90,27 +91,27 @@ function getStataudisplay(status: EmployeeStatus) {
 function getDepartmentIcon(department: Department) {
   switch (department) {
     case 'Operations':
-      return '⚡';
+      return 'OPS';
     case 'Engineering':
-      return '👨‍💻';
+      return 'ENG';
     case 'Product':
-      return '📱';
+      return 'PRD';
     case 'Marketing':
-      return '📢';
+      return 'MKT';
     case 'Design':
-      return '🎨';
+      return 'DES';
     case 'Sales':
-      return '💼';
+      return 'SAL';
     case 'Support':
-      return '🛟';
+      return 'SUP';
     case 'HR':
-      return '👥';
+      return 'HR';
     case 'Finance':
-      return '💰';
+      return 'FIN';
     case 'Legal':
-      return '⚖️';
+      return 'LEG';
     default:
-      return '👤';
+      return 'GEN';
   }
 }
 
@@ -344,12 +345,8 @@ export function EmployeeList({
                             >
                               {employee.name}
                             </button>
-                            <div className="text-sm text-muted-foreground">
-                              {employee.email}
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              {employee.employee_id}
-                            </div>
+                            <div className="text-sm text-muted-foreground">{employee.email}</div>
+                            <div className="text-xs text-muted-foreground">{employee.employee_id}</div>
                           </div>
                         </div>
                       </TableCell>
@@ -378,12 +375,8 @@ export function EmployeeList({
 
                       <TableCell>
                         <div>
-                          <div className="font-medium">
-                            {wormBalance.total_werms} werms
-                          </div>
-                          <div className="text-sm text-muted-foreground">
-                            {wormBalance.total_coins} coins
-                          </div>
+                          <div className="font-medium">{wormBalance.total_werms} werms</div>
+                          <div className="text-sm text-muted-foreground">{wormBalance.total_coins} coins</div>
                           <div className="text-xs text-muted-foreground">
                             🥇{wormBalance.gold} 🥈{wormBalance.silver} 🥉{wormBalance.bronze}
                           </div>
@@ -399,12 +392,7 @@ export function EmployeeList({
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                              disabled={isLoading}
-                            >
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" disabled={isLoading}>
                               <MoreHorizontal className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>

@@ -22,6 +22,7 @@ import {
   Separator,
 } from "@/components/ui"
 import { cn } from "@/lib/utils"
+import { CoinIndicator } from "@/components/custom/CoinIndicator"
 
 // Mock data - replace with actual data from your stores
 const mockPolicies = [
@@ -39,13 +40,7 @@ const mockPolicies = [
     wermType: "silver" as const,
     defaultAmount: 25,
   },
-  {
-    id: "3",
-    title: "Project Completion",
-    description: "Major project milestone completion",
-    wermType: "platinum" as const,
-    defaultAmount: 100,
-  },
+
 ]
 
 const mockEmployees = [
@@ -91,12 +86,6 @@ export function GiveWermsDialog({ open, onOpenChange }: GiveWermsDialogProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const selectedPolicy = mockPolicies.find(p => p.id === selectedPolicyId)
-
-  const wermTypeColors = {
-    gold: "bg-yellow-500 text-black",
-    silver: "bg-gray-500 text-white", 
-    platinum: "bg-brand-alt-light-blue-500 text-black",
-  }
 
   const distributionPreview = useMemo(() => {
     if (!selectedPolicy) return []
@@ -195,12 +184,10 @@ export function GiveWermsDialog({ open, onOpenChange }: GiveWermsDialogProps) {
                   {mockPolicies.map(policy => (
                     <SelectItem key={policy.id} value={policy.id}>
                       <div className="flex items-center gap-2">
-                        <Badge className={cn("text-xs", wermTypeColors[policy.wermType])}>
-                          {policy.wermType}
-                        </Badge>
+                        <CoinIndicator value={policy.defaultAmount} type={policy.wermType} size="sm" />
                         <span>{policy.title}</span>
                         <span className="text-xs text-muted-foreground">
-                          ({policy.defaultAmount} werms)
+                          ({policy.defaultAmount} {policy.wermType} werms)
                         </span>
                       </div>
                     </SelectItem>
@@ -256,9 +243,7 @@ export function GiveWermsDialog({ open, onOpenChange }: GiveWermsDialogProps) {
                                 className="w-20 h-8"
                                 min="1"
                               />
-                              <Badge className={cn("text-xs", wermTypeColors[selectedPolicy.wermType])}>
-                                {selectedPolicy.wermType}
-                              </Badge>
+                              <CoinIndicator value={customAmount || selectedPolicy.defaultAmount} type={selectedPolicy.wermType} size="sm" />
                             </div>
                           )}
                         </div>
@@ -306,11 +291,9 @@ export function GiveWermsDialog({ open, onOpenChange }: GiveWermsDialogProps) {
                             {employee?.name}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-2">
                           <span className="text-sm font-medium">{amount}</span>
-                          <Badge className={cn("text-xs", wermTypeColors[wermType])}>
-                            {wermType}
-                          </Badge>
+                          <CoinIndicator value={amount} type={wermType} size="sm" />
                         </div>
                       </div>
                     </div>

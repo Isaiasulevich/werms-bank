@@ -17,14 +17,15 @@ export function GiveWermsCard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   return (
-    <>
-      <BackgroundGradient className="rounded-[24px] max-w-sm p-4 " containerClassName="@container/card">
-        <Card className="flex flex-col border-0 items-center shadow-none bg-transparent">
-        
-          
-          <CardHeader className="p-0 flex flex-col items-center pb-4">
-        <Image src="/images/werm-coin.png" alt="Werms" width={100} height={100} />
-            <CardTitle className="text-2xl font-semibold text-center flex text-primary-background items-center gap-2">
+    <div className="flex flex-col items-center justify-center w-full">
+      <BackgroundGradient 
+        className="rounded-[24px] max-w-sm w-full" 
+        containerClassName="@container/card w-full flex justify-center"
+      >
+        <Card className="flex flex-col items-center justify-center border-0 shadow-none bg-transparent">
+          <CardHeader className="flex flex-col items-center pb-4">
+            <Image src="/images/werm-coin.png" alt="Werms" width={100} height={100} />
+            <CardTitle className="text-2xl font-semibold text-center text-primary-background">
               Give Werms
             </CardTitle>
             <CardDescription className="text-sm text-center text-background-foreground/70">
@@ -32,13 +33,12 @@ export function GiveWermsCard() {
             </CardDescription>
           </CardHeader>
           
-          <CardContent className="p-0 flex flex-col items-center w-full">
+          <CardContent className="flex flex-col items-center w-full">
             <Button 
               onClick={() => setIsDialogOpen(true)}
               className="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
               size="lg"
             >
-          
               Start Distribution
             </Button>
           </CardContent>
@@ -49,6 +49,6 @@ export function GiveWermsCard() {
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
       />
-    </>
+    </div>
   )
 } 
