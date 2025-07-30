@@ -120,8 +120,10 @@ function generateMockWormData(employee: Employee): WormDataPoint[] {
       cumulative: 0,
     });
   }
+
+  const currentBalance = computeWormBalances(employee.werm_balances);
   
-  let cumulative = employee.lifetime_earned.total_werms - data.reduce((sum, d) => sum + d.earned, 0);
+  let cumulative = currentBalance.total_werms - data.reduce((sum, d) => sum + d.earned, 0);
   data.forEach(d => {
     cumulative += d.earned;
     d.cumulative = cumulative;
@@ -284,7 +286,6 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
 
         {/* Current Earnings */}
         <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
-          <div className="text-2xl font-bold">{employee.werm_balances.total_werms}</div>
           <div className="text-sm text-muted-foreground">Current Werms Balance</div>
           <div className="text-lg font-medium">
             {currentBalance.total_werms} Werms
@@ -293,7 +294,6 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
         
         {/* Lifetime Earnings */}
         <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
-          <div className="text-2xl font-bold">{employee.lifetime_earned.total_werms}</div>
           <div className="text-sm text-muted-foreground">Lifetime Worms Earned</div>
           <div className="text-lg font-medium">
             {lifetimeBalance.total_werms} Werms

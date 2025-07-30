@@ -3,23 +3,6 @@ import path from 'path';
 import employeeData from '../app/dashboard/employees.json';
 import { WermType, WERM_PRICES } from './wermTypes';
 
-/*
-werm_balances: {
-  gold: { count: number, total_value: number },
-  silver: { count: number, total_value: number },
-  bronze: { count: number, total_value: number },
-  total_werms: number,
-  total_value_aud: number
-},
-lifetime_earned: {
-  gold: number,
-  silver: number,
-  bronze: number,
-  total_werms: number,
-  total_value_aud: number
-}
-*/
-
 // TODO: TEST THIS FURTHER
 function logWermCountByEmail(employees: any[], employeeEmail: string): void {
   const employee = employees.find(emp => emp.email === employeeEmail);
@@ -33,22 +16,13 @@ function logWermCountByEmail(employees: any[], employeeEmail: string): void {
   console.log(`Total Werms: ${employee.werm_balances.total_werms}`);
 } 
 
-/**
- * Mutates the given `werm_balances` object by incrementing the count and total_value
- * for the given type. Does NOT modify `total_werms` or `total_value_aud`.
- */
 export function addToWermBalances(
-  werm_balances: Record<WermType, { count: number; total_value: number }>,
+  werm_balances: Record<WermType, number>,
   type: WermType,
   amount: number
 ) {
-  const current = werm_balances[type] ?? { count: 0, total_value: 0 };
-  const unitValue = WERM_PRICES[type];
-
-  werm_balances[type] = {
-    count: current.count + amount,
-    total_value: parseFloat((current.total_value + amount * unitValue).toFixed(2)),
-  };
+  const current = werm_balances[type] ?? 0;
+  werm_balances[type] = current + amount;
 }
 
 
@@ -85,6 +59,8 @@ function transferWerms(
   const filePath = path.join(__dirname, '../app/dashboard/employees.json');
   fs.writeFileSync(filePath, JSON.stringify(employees, null, 2));
 
+  // TODO: Add this in the transfer logs
+
 
   // TODO: REMOVE DEBUGGING STATEMENTS
   // console.log(`Werms transferred successfully.`);
@@ -92,7 +68,6 @@ function transferWerms(
   // if (note) {
   //   console.log("Note = ", note);
   // }
-  
 }
 
 // Simple test case for the function

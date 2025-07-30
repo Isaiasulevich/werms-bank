@@ -1,5 +1,6 @@
 // src/lib/wermTypes.ts
 import type { WormBalances } from "@/features/employees";
+import { ComputedWermBalance } from "@/features/employees/types";
 
 export type WermType = 'gold' | 'silver' | 'bronze';
 
@@ -13,19 +14,14 @@ export const WERM_PRICES: Record<WermType, number> = {
 /**
  * Compute total coins and total werms from simple counts.
  */
-export function computeWormBalances(counts: Record<WermType, number>): WormBalances {
-  const total_coins = counts.gold + counts.silver + counts.bronze;
-
-  const total_werms =
-    counts.gold * WERM_PRICES.gold +
-    counts.silver * WERM_PRICES.silver +
-    counts.bronze * WERM_PRICES.bronze;
-
-  return {
-    gold: counts.gold,
-    silver: counts.silver,
-    bronze: counts.bronze,
-    total_coins,
-    total_werms,
-  };
+export function computeWormBalances(balances: WormBalances): ComputedWermBalance {
+    const total_coins = balances.gold + balances.silver + balances.bronze;
+    const total_werms =
+      balances.gold * WERM_PRICES.gold + balances.silver * WERM_PRICES.silver + balances.bronze * WERM_PRICES.bronze;
+  
+    return {
+      ...balances,
+      total_werms,
+      total_coins,
+    };
 }

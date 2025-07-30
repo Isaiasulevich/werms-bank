@@ -1,24 +1,17 @@
-// lib/employee.ts
-
-export type Employee = {
-    name: string;
-    email: string;
-    employee_id: string;
-    werm_balances: {
-        total_werms: number;
-    };
-};
+import { computeWormBalances } from "./wermTypes";
+import type { Employee } from "@/features/employees";
 
 export function getWermCountByEmail(employees: Employee[], email: string) {
-    const employee = employees.find(emp => emp.email === email);
+  const employee = employees.find(emp => emp.email === email);
+  if (!employee) return null;
 
-    if (!employee) {
-        return null;
-    }
+  // Compute and mutate the existing fields
+  const enriched_werm = computeWormBalances(employee.werm_balances);
+  const enriched_lifetime = computeWormBalances(employee.lifetime_earned);
 
-    return {
-        name: employee.name,
-        employee_id: employee.employee_id,
-        total_werms: employee.werm_balances.total_werms,
-    };
-}  
+  return {
+    ...employee,
+    werm_balances: enriched_werm,
+    lifetime_earned: enriched_lifetime,
+  };
+}

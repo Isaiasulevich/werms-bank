@@ -228,21 +228,29 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
     }
 
     // Apply sorting
-    filtered.sort((a, b) => {
-      let aValue = a[sort.field as keyof Employee];
-      let bValue = b[sort.field as keyof Employee];
+    import { computeWormBalances } from '@/lib/wermTypes'; // ensure this is imported
 
-      // Handle nested properties
+    // Apply sorting
+    filtered.sort((a, b) => {
+      let aValue: any;
+      let bValue: any;
+
+      // Handle computed sort fields
       if (sort.field === 'werm_balances.total_werms') {
-        aValue = a.werm_balances.total_werms;
-        bValue = b.werm_balances.total_werms;
-      } else if (sort.field === 'werm_balances.total_value_aud') {
-        aValue = a.werm_balances.total_value_aud;
-        bValue = b.werm_balances.total_value_aud;
+        aValue = computeWormBalances(a.werm_balances).total_werms;
+        bValue = computeWormBalances(b.werm_balances).total_werms;
+      } else if (sort.field === 'werm_balances.total_coins') {
+        aValue = computeWormBalances(a.werm_balances).total_coins;
+        bValue = computeWormBalances(b.werm_balances).total_coins;
+      } else {
+        // Fallback to direct property access
+        aValue = a[sort.field as keyof Employee];
+        bValue = b[sort.field as keyof Employee];
       }
 
+      // Sorting logic
       if (typeof aValue === 'string' && typeof bValue === 'string') {
-        return sort.direction === 'asc' 
+        return sort.direction === 'asc'
           ? aValue.localeCompare(bValue)
           : bValue.localeCompare(aValue);
       }
@@ -253,6 +261,7 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
 
       return 0;
     });
+
 
     return filtered;
   }, [employees, filters, sort]);
