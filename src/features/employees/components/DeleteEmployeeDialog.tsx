@@ -29,7 +29,7 @@ import {
 } from '@/components/ui';
 import { useEmployees } from '../hooks';
 import { Employee } from '../types';
-import { ComputedWermBalance } from '../types';
+import { computeWormBalances } from '@/lib/wermTypes';
 import { WERM_PRICES } from '@/lib/wermTypes';
 import { CoinIndicator } from '@/components/custom/CoinIndicator';
 

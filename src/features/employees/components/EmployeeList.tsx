@@ -7,7 +7,7 @@
 
 'use client';
 
-import { computeWormBalances } from '@/lib/wermTypes';
+import { computeWormBalances, WERM_PRICES, WERM_TYPES } from '@/lib/wermTypes';
 import { useState, useMemo } from 'react';
 import { Search, Plus, Filter, MoreHorizontal, Edit, Trash2, Eye } from 'lucide-react';
 import {
@@ -366,23 +366,30 @@ export function EmployeeList({
                           </div>
                         </div>
                       </TableCell>
-
                       <TableCell>
-                        <Badge variant={getStatusBadgeVariant(employee.status)}>
-                          {getStataudisplay(employee.status)}
-                        </Badge>
-                      </TableCell>
-
-                      <TableCell>
-                        <div>
-                          <div className="font-medium">{wormBalance.total_werms} werms</div>
-                          <div className="text-sm text-muted-foreground">{wormBalance.total_coins} coins</div>
-                          <div className="text-xs text-muted-foreground">
-                            🥇{wormBalance.gold} 🥈{wormBalance.silver} 🥉{wormBalance.bronze}
+                      <div>
+                          <div className="font-medium">
+                            {wormBalance.total_coins} coins
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {wormBalance.total_werms} werms
+                          </div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.gold} type="gold" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.gold}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.silver} type="silver" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.silver}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.bronze} type="bronze" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.bronze}</span>
+                            </div>
                           </div>
                         </div>
                       </TableCell>
-
                       <TableCell>
                         <div className="text-sm">
                           {new Date(employee.hire_date).toLocaleDateString()}
