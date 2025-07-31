@@ -1,4 +1,4 @@
-import { IconTrendingDown, IconTrendingUp, IconCoins, IconUsers, IconClock, IconStack } from "@tabler/icons-react"
+import { IconTrendingDown, IconTrendingUp, IconCoins, IconUsers, IconClock } from "@tabler/icons-react"
 import { Area, AreaChart, ResponsiveContainer } from "recharts"
 
 import {

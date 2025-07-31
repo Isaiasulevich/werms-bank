@@ -195,8 +195,8 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
 
     // Apply sorting
     filtered.sort((a, b) => {
-      let aValue: any;
-      let bValue: any;
+          let aValue: string | number | undefined;
+    let bValue: string | number | undefined;
 
       // Handle computed sort fields
       if (sort.field === 'werm_balances.total_werms') {

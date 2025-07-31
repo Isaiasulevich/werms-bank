@@ -14,8 +14,7 @@ export { EmployeeDetailView } from './components/EmployeeDetailView';
 // Hooks
 export { 
   useEmployees, 
-  useEmployeeStats, 
-  useEmployeeFilters 
+  useEmployeeStats
 } from './hooks';
 
 // Types
@@ -32,7 +31,6 @@ export type {
   EmployeeFormErrors,
   EmployeePermission,
   Department,
-  WormBalance,
   WormBalances,
   LifetimeEarned
 } from './types';

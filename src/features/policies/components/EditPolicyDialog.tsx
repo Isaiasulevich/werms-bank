@@ -447,7 +447,7 @@ export function EditPolicyDialog({ open, onOpenChange, policy }: EditPolicyDialo
                   onChange={(e) => updateFormData({ expirationDate: e.target.value || undefined })}
                 />
                 <div className="text-xs text-muted-foreground">
-                  Leave blank for policies that don't expire
+                  Leave blank for policies that don&apos;t expire
                 </div>
               </div>
             </div>

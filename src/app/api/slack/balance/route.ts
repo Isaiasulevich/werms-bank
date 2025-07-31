@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import 'dotenv/config';
 import { computeWormBalances } from '@/lib/wermTypes';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -81,8 +80,8 @@ export async function POST(req: Request) {
 
     return response;
 
-  } catch (err: any) {
-    console.error('🔥 Unexpected error:', err?.message || err);
+  } catch (err: unknown) {
+    console.error('🔥 Unexpected error:', err instanceof Error ? err.message : err);
     console.log("⏱ TOTAL TIME (with error):", Date.now() - T0, "ms");
     return NextResponse.json({
       response_type: 'ephemeral',
