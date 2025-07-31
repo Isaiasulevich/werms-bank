@@ -1,9 +1,14 @@
-import fs from 'fs';
-import path from 'path';
 import { WermType, WERM_PRICES, WERM_TYPES } from './wermTypes';
 import { Employee } from '@/features/employees';
 import { SlackWermTransferInput } from '@/features/employees/types';
 import { WERM_EMOJIS } from './wermTypes';
+import { createClient } from '@supabase/supabase-js';
+import 'dotenv/config';
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 // TODO: TEST THIS FURTHER
 function logWermCountByEmail(employees: any[], employeeEmail: string): void {
@@ -27,42 +32,71 @@ export function addToWermBalances(
   werm_balances[type] = current + amount;
 }
 
-export function transferWerms(
+
+//todo: ADD COMMENT FOR THE BEHAVIOUR OF THIS FUNCTIONALITY
+//
+export async function transferWerms(
   senderEmail: string,
   receiverUsername: string,
   wermsToTransfer: Partial<Record<WermType, number>>,
   note?: string
-): void {
-  const filePath = path.join(process.cwd(), 'src/data/employees.json');
-  const raw = fs.readFileSync(filePath, 'utf-8');
+): Promise<void> {
+  // Fetch sender and receiver
+  const { data: employees, error } = await supabase
+    .from('employees')
+    .select('id, name, email, slack_username, werm_balances, lifetime_earned')
+    .or(`email.eq.${senderEmail},slack_username.eq.${receiverUsername}`);
 
-  // We load it fresh every time
-  const employeeData: Employee[] = JSON.parse(raw);
-
-  const sender = employeeData.find(emp => emp.email === senderEmail);
-  const receiver = employeeData.find(emp => emp.slack_username === receiverUsername);
-
-  if (!sender || !receiver) {
-    throw new Error('Invalid sender or receiver email provided')
+  if (error || !employees || employees.length !== 2) {
+    throw new Error('Could not load sender or receiver from Supabase');
   }
 
+  const sender = employees.find(e => e.email === senderEmail);
+  const receiver = employees.find(e => e.slack_username === receiverUsername);
+  if (!sender || !receiver) {
+    throw new Error('Invalid sender or receiver.');
+  }
+
+  // Mutate balances in memory
   for (const [key, amount] of Object.entries(wermsToTransfer)) {
     const type = key as WermType;
-    const count = amount || 0;
+    const amt = amount ?? 0;
 
-    if ((sender.werm_balances[type] ?? 0) < count) {
+    if ((sender.werm_balances[type] ?? 0) < amt) {
       throw new Error(`Not enough ${type} werms to complete the transfer.`);
     }
 
-    sender.werm_balances[type] -= count;
-    receiver.werm_balances[type] = (receiver.werm_balances[type] ?? 0) + count;
-    receiver.lifetime_earned[type] = (receiver.lifetime_earned[type] ?? 0) + count;
+    sender.werm_balances[type] -= amt;
+    receiver.werm_balances[type] = (receiver.werm_balances[type] ?? 0) + amt;
+    receiver.lifetime_earned[type] = (receiver.lifetime_earned[type] ?? 0) + amt;
   }
 
-  fs.writeFileSync(filePath, JSON.stringify(employeeData, null, 2));
+  // Persist updates
+  const { error: updateErr } = await supabase
+    .from('employees')
+    .upsert([
+      {
+        id: sender.id,
+        name: sender.name,
+        email: sender.email,
+        slack_username: sender.slack_username,
+        werm_balances: sender.werm_balances,
+        lifetime_earned: sender.lifetime_earned
+      },
+      {
+        id: receiver.id,
+        name: receiver.name,
+        email: receiver.email,
+        slack_username: receiver.slack_username,
+        werm_balances: receiver.werm_balances,
+        lifetime_earned: receiver.lifetime_earned
+      },
+    ]);
 
-  const dashboardPath = path.join(process.cwd(), 'src/app/dashboard/employees.json');
-  fs.writeFileSync(dashboardPath, JSON.stringify(employeeData, null, 2));
+  if (updateErr) {
+    console.error(updateErr)
+    throw new Error('Failed to update balances in Supabase');
+  }
 }
 
 // TODO: DOCUMENT

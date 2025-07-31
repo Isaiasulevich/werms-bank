@@ -1,90 +1,92 @@
 import { NextResponse } from 'next/server';
+import 'dotenv/config';
+import { computeWormBalances } from '@/lib/wermTypes';
 
-const ngrokUrl = "https://d4f12a7c7755.ngrok-free.app";
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
+/*
+- Handles Slack /balance command via user_name
+- Looks up Supabase by slack_username
+- Computes balance breakdown with computeWormBalances()
+- Returns ephemeral response within Slack's 3s timeout window
+*/
 export async function POST(req: Request) {
+  const T0 = Date.now();
   try {
-    console.log("⚡️ Received Slack POST");
-
-    // Validate content-type
+    const t1 = Date.now();
     const contentType = req.headers.get('content-type');
     if (!contentType?.includes('application/x-www-form-urlencoded')) {
-      console.warn("❗ Unexpected content-type:", contentType);
       return NextResponse.json({ error: 'Unsupported content type' }, { status: 400 });
     }
 
+    const t2 = Date.now();
     const body = await req.text();
-    console.log("📦 Raw body:", body);
+    const t3 = Date.now();
+    console.log("⏱ Content-Type check:", t2 - t1, "ms");
+    console.log("⏱ Body parse:", t3 - t2, "ms");
 
+    const t4 = Date.now();
     const params = new URLSearchParams(body);
-    const userId = params.get('user_id');
+    const slackUsername = '@' + (params.get('user_name') || '').trim();
+    const t5 = Date.now();
+    console.log("⏱ Params parse:", t5 - t4, "ms");
 
-    if (!userId) {
-      console.error("❌ No user_id found in request");
-      return NextResponse.json({ error: 'Missing user_id' }, { status: 400 });
-    }
-    
-    // Get Slack user info
-    const slackRes = await fetch(`https://slack.com/api/users.info?user=${userId}`, {
-      headers: {
-        Authorization: `Bearer `,
-      },
-    });
-
-    const slackData = await slackRes.json();
-    console.log("🤖 Slack API response:", slackData);
-
-    if (!slackData.ok) {
-      return NextResponse.json({ error: slackData.error || 'Slack API request failed' }, { status: 500 });
-    }
-
-    const email = slackData.user?.profile?.email;
-    if (!email) {
-      console.warn("⚠️ No email in Slack user profile");
+    if (!slackUsername || slackUsername === '@') {
       return NextResponse.json({
         response_type: 'ephemeral',
-        text: 'Could not resolve your Slack email. Please link your account.',
+        text: 'Missing Slack username.',
       });
     }
 
-    // Call internal API to get enriched employee record
-    const res = await fetch(`${ngrokUrl}/api/employees/werm?email=${email}`, {
-      headers: { 'ngrok-skip-browser-warning': 'true' },
-    });
+    const t6 = Date.now();
+    const supabaseRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/employees?slack_username=eq.${encodeURIComponent(slackUsername)}&select=werm_balances`,
+      {
+        headers: {
+          apikey: SUPABASE_SERVICE_ROLE_KEY,
+          Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+          Accept: 'application/json',
+        },
+      }
+    );
+    const t7 = Date.now();
+    console.log("⏱ Supabase fetch:", t7 - t6, "ms");
 
-    const data = await res.json();
-    console.log("🧑‍💻 Employee data:", data);
+    const data = await supabaseRes.json();
+    const t8 = Date.now();
+    console.log("⏱ Supabase JSON parse:", t8 - t7, "ms");
 
-    if (data.error) {
+    if (!Array.isArray(data) || data.length === 0) {
       return NextResponse.json({
         response_type: 'ephemeral',
-        text: data.error,
+        text: `Could not find a record for Slack user ${slackUsername}`,
       });
     }
 
-    const totalWerms = data.werm_balances?.total_werms ?? null;
-    const totalCoins = data.werm_balances?.total_coins ?? null;
+    const t9 = Date.now();
+    const enriched = computeWormBalances(data[0].werm_balances);
+    const t10 = Date.now();
+    console.log("⏱ computeWormBalances:", t10 - t9, "ms");
 
-    const currGold = data.werm_balances?.gold;
-    const currSilver = data.werm_balances?.silver;
-    const currBronze = data.werm_balances?.bronze;
-
-    if (totalWerms === null || totalCoins === null) {
-      return NextResponse.json({
-        response_type: 'ephemeral',
-        text: 'Could not compute your worm balance.',
-      });
-    }
-
-    return NextResponse.json({
+    const t11 = Date.now();
+    const response = NextResponse.json({
       response_type: 'ephemeral',
-      text: `You currently have *${totalWerms} werms*. (${currGold} 🥇, ${currSilver} 🥈, ${currBronze} 🥉)`,
+      text: `You currently have *${enriched.total_werms} werms* (${enriched.gold} 🥇, ${enriched.silver} 🥈, ${enriched.bronze} 🥉).`,
     });
+    const t12 = Date.now();
+    console.log("⏱ Response build:", t12 - t11, "ms");
+
+    console.log("⏱ TOTAL TIME:", Date.now() - T0, "ms");
+
+    return response;
 
   } catch (err: any) {
-    console.error("🔥 Unexpected error:", err?.message || err);
-    console.error("📛 Full stack:", err);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('🔥 Unexpected error:', err?.message || err);
+    console.log("⏱ TOTAL TIME (with error):", Date.now() - T0, "ms");
+    return NextResponse.json({
+      response_type: 'ephemeral',
+      text: 'Internal server error. Please try again later.',
+    });
   }
 }
-
