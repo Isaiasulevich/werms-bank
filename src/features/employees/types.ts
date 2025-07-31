@@ -5,26 +5,19 @@
  * employee creation, editing, worm balances, and permissions.
  */
 
-export interface WormBalance {
-  count: number;
-  total_value: number;
-}
-
-export interface WormBalances {
-  gold: WormBalance;
-  silver: WormBalance;
-  bronze: WormBalance;
-  total_werms: number;
-  total_value_usd: number;
-}
-
-export interface LifetimeEarned {
+export interface WermBalanceSummary {
   gold: number;
   silver: number;
   bronze: number;
-  total_werms: number;
-  total_value_usd: number;
 }
+
+export interface ComputedWermBalance extends WermBalanceSummary {
+  total_werms: number;
+  total_coins: number;
+}
+
+export type WormBalances = WermBalanceSummary;
+export type LifetimeEarned = WermBalanceSummary;
 
 export type EmployeePermission = 
   | 'admin'
@@ -56,6 +49,7 @@ export interface Employee {
   slack_username: string;
   department: Department;
   role: string;
+  status?: string;
   hire_date: string;
   manager_id: string | null;
   permissions: EmployeePermission[];
@@ -110,7 +104,7 @@ export interface WormTransaction {
   type: 'earn' | 'spend' | 'transfer' | 'adjustment';
   worm_type: 'gold' | 'silver' | 'bronze';
   amount: number;
-  value_usd: number;
+  value_aud: number;
   description: string;
   approved_by?: string;
   created_at: string;
@@ -142,3 +136,13 @@ export interface EmployeeFormErrors {
     relationship?: string;
   };
 } 
+
+export interface SlackWermTransferInput {
+  username: string;
+  amounts: {
+    gold?: number;
+    silver?: number;
+    bronze?: number;
+  };
+  reason?: string;
+}

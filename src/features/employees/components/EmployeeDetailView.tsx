@@ -41,6 +41,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts'
 import { useEmployees } from '../hooks';
 import { Employee, EmployeePermission, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { computeWormBalances, WERM_PRICES } from '@/lib/wermTypes';
 import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 // Schema for transaction data
@@ -50,7 +51,7 @@ const transactionSchema = z.object({
   type: z.enum(['earn', 'spend', 'transfer', 'adjustment']),
   worm_type: z.enum(['gold', 'silver', 'bronze']),
   amount: z.number(),
-  value_usd: z.number(),
+  value_aud: z.number(),
   description: z.string(),
   approved_by: z.string(),
   policy_id: z.string(),
@@ -120,8 +121,10 @@ function generateMockWormData(employee: Employee): WormDataPoint[] {
       cumulative: 0,
     });
   }
+
+  const currentBalance = computeWormBalances(employee.werm_balances);
   
-  let cumulative = employee.lifetime_earned.total_werms - data.reduce((sum, d) => sum + d.earned, 0);
+  let cumulative = currentBalance.total_werms - data.reduce((sum, d) => sum + d.earned, 0);
   data.forEach(d => {
     cumulative += d.earned;
     d.cumulative = cumulative;
@@ -155,7 +158,7 @@ function generateMockTransactions(employee: Employee): Transaction[] {
       type: types[Math.floor(Math.random() * types.length)],
       worm_type: wormType,
       amount,
-      value_usd: amount * multiplier,
+      value_aud: amount * multiplier,
       description: categories[Math.floor(Math.random() * categories.length)],
       approved_by: 'Isa',
       policy_id: 'pol-001',
@@ -250,6 +253,8 @@ function EmployeeHeader({
  */
 function OverviewTab({ employee, wormData }: { employee: Employee; wormData: WormDataPoint[] }) {
   const maxEarnings = Math.max(...wormData.map(d => d.earned));
+  const currentBalance = computeWormBalances(employee.werm_balances);
+  const lifetimeBalance = computeWormBalances(employee.lifetime_earned);
 
   return (
     <div className="space-y-6">
@@ -258,34 +263,41 @@ function OverviewTab({ employee, wormData }: { employee: Employee; wormData: Wor
         <h3 className="font-medium text-sm text-muted-foreground mb-4">Current Balance</h3>
         <div className="grid grid-cols-3 gap-6 mb-6">
           <div className="text-center flex flex-col items-center gap-2">
-            <CoinIndicator value={employee.werm_balances.gold.count} type="gold" />
+            <CoinIndicator value={currentBalance.gold} type="gold" />
             <div className="text-xs text-muted-foreground">Gold</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.gold.total_value)}
+              🪱 {WERM_PRICES.gold * currentBalance.gold}
             </div>
           </div>
           <div className="text-center flex flex-col items-center gap-2">
-            <CoinIndicator value={employee.werm_balances.silver.count} type="silver" />
+            <CoinIndicator value={currentBalance.silver} type="silver" />
             <div className="text-xs text-muted-foreground">Silver</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.silver.total_value)}
+              🪱 {WERM_PRICES.silver * currentBalance.silver}
             </div>
           </div>
           <div className="text-center flex flex-col items-center gap-2">
-            <CoinIndicator value={employee.werm_balances.bronze.count} type="bronze" />
+            <CoinIndicator value={currentBalance.bronze} type="bronze" />
             <div className="text-xs text-muted-foreground">Bronze</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.bronze.total_value)}
+              🪱 {WERM_PRICES.bronze * currentBalance.bronze}
             </div>
           </div>
         </div>
 
+        {/* Current Earnings */}
+        <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
+          <div className="text-sm text-muted-foreground">Current Werms Balance</div>
+          <div className="text-lg font-medium">
+            {currentBalance.total_werms} Werms
+          </div>
+        </div>
+        
         {/* Lifetime Earnings */}
         <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
-          <div className="text-2xl font-bold">{employee.lifetime_earned.total_werms}</div>
-          <div className="text-sm text-muted-foreground">Total Worms Earned</div>
+          <div className="text-sm text-muted-foreground">Lifetime Worms Earned</div>
           <div className="text-lg font-medium">
-            {formatCurrency(employee.lifetime_earned.total_value_usd)}
+            {lifetimeBalance.total_werms} Werms
           </div>
         </div>
 
@@ -407,7 +419,7 @@ function TransactionsTab({ transactions }: { transactions: Transaction[] }) {
                       {transaction.type === 'earn' ? '+' : '-'}{transaction.amount}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      ({formatCurrency(transaction.value_usd)})
+                      ({formatCurrency(transaction.value_aud)})
                     </span>
                   </div>
                 </TableCell>

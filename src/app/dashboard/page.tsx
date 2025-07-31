@@ -11,7 +11,7 @@ import { PoliciesPage } from "@/features/policies"
 import { useSearchParams } from "next/navigation"
 import { AuthGuard } from "@/lib/supabase"
 
-import data from "./data.json"
+import data from "./employees.json"
 
 /**
  * Dashboard Content Component

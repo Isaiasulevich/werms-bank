@@ -29,7 +29,8 @@ import {
 } from '@/components/ui';
 import { useEmployees } from '../hooks';
 import { Employee } from '../types';
-import { formatCurrency } from '@/shared/utils/format';
+import { computeWormBalances } from '@/lib/wermTypes';
+import { WERM_PRICES } from '@/lib/wermTypes';
 import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 interface DeleteEmployeeDialogProps {
@@ -78,6 +79,8 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
 
   if (!employee) return null;
 
+  const currentBalance = computeWormBalances(employee.werm_balances);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
@@ -109,10 +112,7 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
             </div>
             <div className="text-right">
               <div className="text-sm font-medium">
-                {employee.werm_balances.total_werms} worms
-              </div>
-              <div className="text-sm text-muted-foreground">
-                {formatCurrency(employee.werm_balances.total_value_usd)}
+                {currentBalance.total_werms} worms
               </div>
             </div>
           </CardContent>
@@ -149,7 +149,7 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
           )}
 
           {/* Worm Balance Warning */}
-          {employee.werm_balances.total_werms > 0 && (
+          {currentBalance.total_werms > 0 && (
             <Card className="border-orange-500 bg-orange-500/5">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-orange-600 text-base">
@@ -157,36 +157,27 @@ export function DeleteEmployeeDialog({ open, onOpenChange, employee }: DeleteEmp
                   Worm Balance Will Be Lost
                 </CardTitle>
                 <CardDescription>
-                  This employee has {employee.werm_balances.total_werms} worms worth{' '}
-                  {formatCurrency(employee.werm_balances.total_value_usd)}. These will be 
+                  This employee has {currentBalance.total_coins} coins worth{' '}
+                  {currentBalance.total_werms} werms. These will be 
                   permanently lost when the employee is deleted.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-3 gap-6 text-sm">
                   <div className="text-center flex flex-col items-center gap-2">
-                    <CoinIndicator value={employee.werm_balances.gold.count} type="gold" />
+                    <CoinIndicator value={currentBalance.gold} type="gold" />
                     <div className="font-medium">Gold</div>
-                    <div>{employee.werm_balances.gold.count} worms</div>
-                    <div className="text-muted-foreground">
-                      {formatCurrency(employee.werm_balances.gold.total_value)}
-                    </div>
+                    <div>{currentBalance.gold * WERM_PRICES.gold} worms</div>
                   </div>
                   <div className="text-center flex flex-col items-center gap-2">
-                    <CoinIndicator value={employee.werm_balances.silver.count} type="silver" />
+                    <CoinIndicator value={currentBalance.silver} type="silver" />
                     <div className="font-medium">Silver</div>
-                    <div>{employee.werm_balances.silver.count} worms</div>
-                    <div className="text-muted-foreground">
-                      {formatCurrency(employee.werm_balances.silver.total_value)}
-                    </div>
+                    <div>{currentBalance.silver * WERM_PRICES.silver} worms</div>
                   </div>
                   <div className="text-center flex flex-col items-center gap-2">
-                    <CoinIndicator value={employee.werm_balances.bronze.count} type="bronze" />
+                    <CoinIndicator value={currentBalance.bronze} type="bronze" />
                     <div className="font-medium">Bronze</div>
-                    <div>{employee.werm_balances.bronze.count} worms</div>
-                    <div className="text-muted-foreground">
-                      {formatCurrency(employee.werm_balances.bronze.total_value)}
-                    </div>
+                    <div>{currentBalance.bronze * WERM_PRICES.bronze} worms</div>
                   </div>
                 </div>
               </CardContent>

@@ -7,6 +7,7 @@
 
 'use client';
 
+import { computeWormBalances, WERM_PRICES, WERM_TYPES } from '@/lib/wermTypes';
 import { useState, useMemo } from 'react';
 import { Search, Plus, Filter, MoreHorizontal, Edit, Trash2, Eye } from 'lucide-react';
 import {
@@ -46,6 +47,42 @@ interface EmployeeListProps {
   onEditEmployee?: (employee: Employee) => void;
   onDeleteEmployee?: (employee: Employee) => void;
   onViewEmployee?: (employee: Employee) => void;
+}
+
+/**
+ * Get status badge variant
+ */
+function getStatusBadgeVariant(status: EmployeeStatus) {
+  switch (status) {
+    case 'active':
+      return 'default';
+    case 'inactive':
+      return 'secondary';
+    case 'terminated':
+      return 'destructive';
+    case 'on_leave':
+      return 'outline';
+    default:
+      return 'secondary';
+  }
+}
+
+/**
+ * Get status display text
+ */
+function getStataudisplay(status: EmployeeStatus) {
+  switch (status) {
+    case 'active':
+      return '✅ Active';
+    case 'inactive':
+      return '⏸️ Inactive';
+    case 'terminated':
+      return '❌ Terminated';
+    case 'on_leave':
+      return '🏖️ On Leave';
+    default:
+      return status;
+  }
 }
 
 /**
@@ -247,6 +284,14 @@ export function EmployeeList({
                     </span>
                   )}
                 </TableHead>
+                <TableHead>
+                  Status
+                  {sort.field === 'status' && (
+                    <span className="ml-1">
+                      {sort.direction === 'asc' ? '↑' : '↓'}
+                    </span>
+                  )}
+                </TableHead>
                 <TableHead 
                   className="cursor-pointer hover:bg-muted/50"
                   onClick={() => handleSort('werm_balances')}
@@ -280,118 +325,115 @@ export function EmployeeList({
                   </TableCell>
                 </TableRow>
               ) : (
-                employees.map((employee) => (
-                  <TableRow key={employee.id} className="hover:bg-muted/50">
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-8 w-8">
-                          <img
-                            src={employee.avatar_url}
-                            alt={employee.name}
-                            className="h-8 w-8 rounded-full object-cover"
-                          />
-                        </Avatar>
+                employees.map((employee) => {
+                  const wormBalance = computeWormBalances(employee.werm_balances);
+                  return (
+                    <TableRow key={employee.id} className="hover:bg-muted/50">
+                      <TableCell>
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-8 w-8">
+                            <img
+                              src={employee.avatar_url}
+                              alt={employee.name}
+                              className="h-8 w-8 rounded-full object-cover"
+                            />
+                          </Avatar>
+                          <div>
+                            <button
+                              onClick={() => onViewEmployee?.(employee)}
+                              className="font-medium hover:text-primary cursor-pointer text-left"
+                            >
+                              {employee.name}
+                            </button>
+                            <div className="text-sm text-muted-foreground">{employee.email}</div>
+                            <div className="text-xs text-muted-foreground">{employee.employee_id}</div>
+                          </div>
+                        </div>
+                      </TableCell>
+
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <span>{getDepartmentIcon(employee.department)}</span>
+                          <span>{employee.department}</span>
+                        </div>
+                      </TableCell>
+
+                      <TableCell>
                         <div>
-                          <button
-                            onClick={() => onViewEmployee?.(employee)}
-                            className="font-medium hover:text-primary cursor-pointer text-left"
-                          >
-                            {employee.name}
-                          </button>
+                          <div className="font-medium">{employee.role}</div>
                           <div className="text-sm text-muted-foreground">
-                            {employee.email}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {employee.employee_id}
+                            Manager: {getManagerName(employee.manager_id)}
                           </div>
                         </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <span>{getDepartmentIcon(employee.department)}</span>
-                        <span>{employee.department}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
+                      </TableCell>
+                      <TableCell>
                       <div>
-                        <div className="font-medium">{employee.role}</div>
-                        <div className="text-sm text-muted-foreground">
-                          Manager: {getManagerName(employee.manager_id)}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div>
-                        <div className="font-medium">
-                          {employee.werm_balances.total_werms} worms
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {formatCurrency(employee.werm_balances.total_value_usd)}
-                        </div>
-                        <div className="flex items-center gap-2 mt-1">
-                          <div className="flex items-center gap-1">
-                            <CoinIndicator value={employee.werm_balances.gold.count} type="gold" size="xxs" />
-                            <span className="text-xs text-muted-foreground">{employee.werm_balances.gold.count}</span>
+                          <div className="font-medium">
+                            {wormBalance.total_coins} coins
                           </div>
-                          <div className="flex items-center gap-1">
-                            <CoinIndicator value={employee.werm_balances.silver.count} type="silver" size="xxs" />
-                            <span className="text-xs text-muted-foreground">{employee.werm_balances.silver.count}</span>
+                          <div className="text-sm text-muted-foreground">
+                            {wormBalance.total_werms} werms
                           </div>
-                          <div className="flex items-center gap-1">
-                            <CoinIndicator value={employee.werm_balances.bronze.count} type="bronze" size="xxs" />
-                            <span className="text-xs text-muted-foreground">{employee.werm_balances.bronze.count}</span>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.gold} type="gold" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.gold}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.silver} type="silver" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.silver}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.bronze} type="bronze" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.bronze}</span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-sm">
-                        {new Date(employee.hire_date).toLocaleDateString()}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 w-8 p-0"
-                            disabled={isLoading}
-                          >
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          {onViewEmployee && (
-                            <DropdownMenuItem onClick={() => onViewEmployee(employee)}>
-                              <Eye className="h-4 w-4 mr-2" />
-                              View Details
-                            </DropdownMenuItem>
-                          )}
-                          {onEditEmployee && (
-                            <DropdownMenuItem onClick={() => onEditEmployee(employee)}>
-                              <Edit className="h-4 w-4 mr-2" />
-                              Edit Employee
-                            </DropdownMenuItem>
-                          )}
-                          {onDeleteEmployee && (
-                            <>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem
-                                onClick={() => onDeleteEmployee(employee)}
-                                className="text-destructive"
-                              >
-                                <Trash2 className="h-4 w-4 mr-2" />
-                                Delete Employee
+                      </TableCell>
+                      <TableCell>
+                        <div className="text-sm">
+                          {new Date(employee.hire_date).toLocaleDateString()}
+                        </div>
+                      </TableCell>
+
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" disabled={isLoading}>
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            {onViewEmployee && (
+                              <DropdownMenuItem onClick={() => onViewEmployee(employee)}>
+                                <Eye className="h-4 w-4 mr-2" />
+                                View Details
                               </DropdownMenuItem>
-                            </>
-                          )}
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))
+                            )}
+                            {onEditEmployee && (
+                              <DropdownMenuItem onClick={() => onEditEmployee(employee)}>
+                                <Edit className="h-4 w-4 mr-2" />
+                                Edit Employee
+                              </DropdownMenuItem>
+                            )}
+                            {onDeleteEmployee && (
+                              <>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem
+                                  onClick={() => onDeleteEmployee(employee)}
+                                  className="text-destructive"
+                                >
+                                  <Trash2 className="h-4 w-4 mr-2" />
+                                  Delete Employee
+                                </DropdownMenuItem>
+                              </>
+                            )}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
               )}
             </TableBody>
           </Table>
