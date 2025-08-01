@@ -10,7 +10,7 @@ import { z } from 'zod';
 // Worm balance schema
 export const wormBalanceSchema = z.object({
   count: z.number().min(0),
-  total_value: z.number().min(0),
+  total_werms: z.number().min(0),
 });
 
 // Worm balances schema
@@ -18,8 +18,8 @@ export const wormBalancesSchema = z.object({
   gold: wormBalanceSchema,
   silver: wormBalanceSchema,
   bronze: wormBalanceSchema,
+  total_coins: z.number().min(0),
   total_werms: z.number().min(0),
-  total_value_aud: z.number().min(0),
 });
 
 // Lifetime earned schema
@@ -27,8 +27,8 @@ export const lifetimeEarnedSchema = z.object({
   gold: z.number().min(0),
   silver: z.number().min(0),
   bronze: z.number().min(0),
+  total_coins: z.number().min(0),
   total_werms: z.number().min(0),
-  total_value_aud: z.number().min(0),
 });
 
 // Emergency contact schema

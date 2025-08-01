@@ -57,7 +57,7 @@ export async function resetPassword(email: string) {
 export async function updateProfile(updates: { 
   email?: string
   password?: string 
-  data?: Record<string, any>
+  data?: Record<string, unknown>
 }) {
   const { data, error } = await supabase.auth.updateUser(updates)
   return { data, error }

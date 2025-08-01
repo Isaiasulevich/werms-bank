@@ -60,11 +60,10 @@ function ConditionForm({
    * Get worm reward display text
    */
   function getRewardDisplay() {
-    const { gold = 0, silver = 0, platinum = 0 } = condition.wormReward || {};
+    const { gold = 0, silver = 0 } = condition.wormReward || {};
     const parts = [];
     if (gold > 0) parts.push(`${gold} Gold`);
     if (silver > 0) parts.push(`${silver} Silver`);
-    if (platinum > 0) parts.push(`${platinum} Platinum`);
     return parts.length > 0 ? parts.join(', ') : 'No reward set';
   }
 
@@ -74,13 +73,13 @@ function ConditionForm({
   function getConditionTypeInfo(type: ConditionType) {
     switch (type) {
       case 'attendance':
-        return { name: 'Attendance', icon: '⏰', description: 'Based on arrival time or attendance patterns' };
+        return { name: 'Attendance', icon: 'TIME', description: 'Based on arrival time or attendance patterns' };
       case 'performance':
-        return { name: 'Performance', icon: '📈', description: 'Based on work quality or achievement metrics' };
+        return { name: 'Performance', icon: 'PERF', description: 'Based on work quality or achievement metrics' };
       case 'milestone':
-        return { name: 'Milestone', icon: '🎯', description: 'Based on project or goal completion' };
+        return { name: 'Milestone', icon: 'MILE', description: 'Based on project or goal completion' };
       case 'custom':
-        return { name: 'Custom', icon: '⚙️', description: 'Custom condition or automated trigger' };
+        return { name: 'Custom', icon: 'CUST', description: 'Custom condition or automated trigger' };
       default:
         return { name: 'Select Type', icon: '❓', description: 'Choose a condition type' };
     }
@@ -123,10 +122,10 @@ function ConditionForm({
               <SelectValue placeholder="Select condition type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="attendance">⏰ Attendance - Time & presence tracking</SelectItem>
-              <SelectItem value="performance">📈 Performance - Quality & metrics</SelectItem>
-              <SelectItem value="milestone">🎯 Milestone - Goals & projects</SelectItem>
-              <SelectItem value="custom">⚙️ Custom - Automated or manual</SelectItem>
+              <SelectItem value="attendance">Attendance - Time & presence tracking</SelectItem>
+                                    <SelectItem value="performance">Performance - Quality & metrics</SelectItem>
+              <SelectItem value="milestone">Milestone - Goals & projects</SelectItem>
+              <SelectItem value="custom">Custom - Automated or manual</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -159,7 +158,7 @@ function ConditionForm({
           <Label>Worm Rewards *</Label>
           <div className="grid grid-cols-3 gap-3">
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`gold-${condition.id}`} className="text-xs text-worm-gold">🥇 Gold</Label>
+                                    <Label htmlFor={`gold-${condition.id}`} className="text-xs text-worm-gold">Gold</Label>
               <Input
                 id={`gold-${condition.id}`}
                 type="number"
@@ -175,7 +174,7 @@ function ConditionForm({
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Label htmlFor={`silver-${condition.id}`} className="text-xs text-worm-silver">🥈 Silver</Label>
+                                    <Label htmlFor={`silver-${condition.id}`} className="text-xs text-worm-silver">Silver</Label>
               <Input
                 id={`silver-${condition.id}`}
                 type="number"
@@ -190,22 +189,7 @@ function ConditionForm({
                 })}
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <Label htmlFor={`platinum-${condition.id}`} className="text-xs text-worm-platinum">🏆 Platinum</Label>
-              <Input
-                id={`platinum-${condition.id}`}
-                type="number"
-                min="0"
-                placeholder="0"
-                value={condition.wormReward?.platinum || ''}
-                onChange={(e) => onUpdate({
-                  wormReward: {
-                    ...condition.wormReward,
-                    platinum: e.target.value ? parseInt(e.target.value) : 0
-                  }
-                })}
-              />
-            </div>
+
           </div>
           <div className="text-xs text-muted-foreground">
             Reward: {getRewardDisplay()}
@@ -278,7 +262,7 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
       type: 'attendance',
       description: '',
       trigger: '',
-              wormReward: { platinum: 1 },
+              wormReward: { gold: 1 },
       requiresApproval: false,
       isActive: true,
     };
@@ -324,7 +308,7 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
       case 'conditions':
         return formData.conditions.length > 0 && formData.conditions.every(c => 
           c.description?.trim() && c.trigger?.trim() && 
-          ((c.wormReward?.gold || 0) + (c.wormReward?.silver || 0) + (c.wormReward?.platinum || 0) > 0)
+          ((c.wormReward?.gold || 0) + (c.wormReward?.silver || 0) > 0)
         );
       case 'review':
         return true;
@@ -394,10 +378,10 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="recognition">🏆 Recognition - Employee rewards</SelectItem>
-                      <SelectItem value="distribution">🏦 Distribution - Worm allocation</SelectItem>
-                      <SelectItem value="minting">⚡ Minting - Worm creation</SelectItem>
-                      <SelectItem value="compliance">📋 Compliance - Rule enforcement</SelectItem>
+                      <SelectItem value="recognition">Recognition - Employee rewards</SelectItem>
+                      <SelectItem value="distribution">Distribution - Worm allocation</SelectItem>
+                      <SelectItem value="minting">Minting - Worm creation</SelectItem>
+                      <SelectItem value="compliance">Compliance - Rule enforcement</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

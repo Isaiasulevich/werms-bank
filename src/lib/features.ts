@@ -1,150 +1,160 @@
-import fs from 'fs';
-import path from 'path';
-import employeeData from '../app/dashboard/employees.json';
-import { WermType, WermBalances, WERM_PRICES } from './wermTypes';
+import { WermType, WERM_PRICES, WERM_TYPES } from './wermTypes';
+import { Employee } from '@/features/employees';
+import { SlackWermTransferInput } from '@/features/employees/types';
+import { WERM_EMOJIS } from './wermTypes';
+import { createClient } from '@supabase/supabase-js';
 
-/*
-werm_balances: {
-  gold: { count: number, total_value: number },
-  silver: { count: number, total_value: number },
-  bronze: { count: number, total_value: number },
-  total_werms: number,
-  total_value_aud: number
-},
-lifetime_earned: {
-  gold: number,
-  silver: number,
-  bronze: number,
-  total_werms: number,
-  total_value_aud: number
-}
-*/
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 // TODO: TEST THIS FURTHER
-function logWermCountByEmail(employees: any[], employeeEmail: string): void {
+function logWermCountByEmail(employees: Employee[], employeeEmail: string): void {
   const employee = employees.find(emp => emp.email === employeeEmail);
   
   if (!employee) {
     console.log(`No employee found with email: ${employeeEmail}`);
     return;
   }
-  
-  console.log(`Employee: ${employee.name} (${employee.employee_id})`);
-  console.log(`Total Werms: ${employee.werm_balances.total_werms}`);
 } 
 
-/**
- * Mutates the given `werm_balances` object by incrementing the count and total_value
- * for the given type. Does NOT modify `total_werms` or `total_value_aud`.
- */
 export function addToWermBalances(
-  werm_balances: Record<WermType, { count: number; total_value: number }>,
+  werm_balances: Record<WermType, number>,
   type: WermType,
   amount: number
 ) {
-  const current = werm_balances[type] ?? { count: 0, total_value: 0 };
-  const unitValue = WERM_PRICES[type];
+  const current = werm_balances[type] ?? 0;
+  werm_balances[type] = current + amount;
+}
 
-  werm_balances[type] = {
-    count: current.count + amount,
-    total_value: parseFloat((current.total_value + amount * unitValue).toFixed(2)),
+
+//todo: ADD COMMENT FOR THE BEHAVIOUR OF THIS FUNCTIONALITY
+//
+export async function transferWerms(
+  senderEmail: string,
+  receiverUsername: string,
+  wermsToTransfer: Partial<Record<WermType, number>>,
+  note?: string
+): Promise<void> {
+  // Fetch sender and receiver
+  const { data: employees, error } = await supabase
+    .from('employees')
+    .select('id, name, email, slack_username, werm_balances, lifetime_earned')
+    .or(`email.eq.${senderEmail},slack_username.eq.${receiverUsername}`);
+
+  if (error || !employees || employees.length !== 2) {
+    throw new Error('Could not load sender or receiver from Supabase');
+  }
+
+  const sender = employees.find(e => e.email === senderEmail);
+  const receiver = employees.find(e => e.slack_username === receiverUsername);
+  if (!sender || !receiver) {
+    throw new Error('Invalid sender or receiver.');
+  }
+
+  // Mutate balances in memory
+  for (const [key, amount] of Object.entries(wermsToTransfer)) {
+    const type = key as WermType;
+    const amt = amount ?? 0;
+
+    if ((sender.werm_balances[type] ?? 0) < amt) {
+      throw new Error(`Not enough ${type} werms to complete the transfer.`);
+    }
+
+    sender.werm_balances[type] -= amt;
+    receiver.werm_balances[type] = (receiver.werm_balances[type] ?? 0) + amt;
+    receiver.lifetime_earned[type] = (receiver.lifetime_earned[type] ?? 0) + amt;
+  }
+
+  // Persist updates
+  const { error: updateErr } = await supabase
+    .from('employees')
+    .upsert([
+      {
+        id: sender.id,
+        name: sender.name,
+        email: sender.email,
+        slack_username: sender.slack_username,
+        werm_balances: sender.werm_balances,
+        lifetime_earned: sender.lifetime_earned
+      },
+      {
+        id: receiver.id,
+        name: receiver.name,
+        email: receiver.email,
+        slack_username: receiver.slack_username,
+        werm_balances: receiver.werm_balances,
+        lifetime_earned: receiver.lifetime_earned
+      },
+    ]);
+
+  if (updateErr) {
+    console.error(updateErr)
+    throw new Error('Failed to update balances in Supabase');
+  }
+}
+
+// TODO: DOCUMENT
+export function parseWermInput(input: string): SlackWermTransferInput | null {
+  const tokens = input.trim().split(/\s+/);
+  if (!tokens[0]?.startsWith("@")) return null;
+
+  const username = tokens[0];
+  const amounts: Partial<Record<WermType, number>> = {};
+
+  let index = 1;
+
+  const firstAmount = parseInt(tokens[index], 10);
+  const nextToken = tokens[index + 1];
+
+  if (
+    !isNaN(firstAmount) && 
+    (!nextToken || !WERM_TYPES.includes(nextToken as WermType))
+  ) {
+    amounts.bronze = firstAmount;
+
+    index += 1;
+  } else {
+    while (index < tokens.length) {
+      const amount = parseInt(tokens[index], 10);
+      const type = tokens[index + 1] as WermType;
+  
+      if (!isNaN(amount) && WERM_TYPES.includes(type)) {
+        amounts[type] = (amounts[type] ?? 0) + amount;
+        index += 2;
+      } else {
+        break;
+      }
+    }
+  }
+
+  const reason = tokens.slice(index).join(" ").trim();
+  return {
+    username,
+    amounts,
+    reason: reason.length > 0 ? reason : undefined,
   };
 }
 
-
-// TODO: Document function
-function transferWerms(
-  employees: any[],
-  senderEmail: string,
-  receiverEmail: string,
-  wermsToTransfer: Partial<Record<WermType, number>>,
+// TODO: DOCUMENTATION
+export function formatWermTransferMessage(
+  amounts: Partial<Record<WermType, number>>,
+  receiverUsername: string,
   note?: string
-): void {
-  const sender = employees.find(emp => emp.email === senderEmail);
-  const receiver = employees.find(emp => emp.email === receiverEmail);
+): string {
+  const parts: string[] = [];
 
-  if (!sender || !receiver) {
-    console.log('Invalid email/s provided');
-    return;
-  }
-
-  for (const [key, amount] of Object.entries(wermsToTransfer)) {
-    const type = key as WermType;
-    const count = amount || 0;
-
-    if (!sender.werm_balances[type] || sender.werm_balances[type].count < count) {
-      console.log(`Not enough ${type} werms`);
-      return;
+  for (const type of Object.keys(amounts) as WermType[]) {
+    const count = amounts[type];
+    if (count && count > 0) {
+      parts.push(`${count} ${WERM_EMOJIS[type]} coin${count > 1 ? 's' : ''}`);
     }
-
-    /* WE ASSUME THAT THE DB ALREADY INITIALISES ZERO VALUES */
-    // if (!receiver.werm_balances[type]) {
-    //   receiver.werm_balances[type] = { count: 0, total_value: 0 };
-    // }
-    sender.werm_balances[type].count -= count;
-
-    receiver.werm_balances[type].count += count;
-    receiver.lifetime_earned[type] += count;
   }
 
-  recalculateTotals(sender.werm_balances);
-  recalculateTotals(receiver.werm_balances);
+  const transferSummary = parts.join(', ');
+  const baseMessage = `✅ Transferred ${transferSummary} to *${receiverUsername}*.`;
 
-  const filePath = path.join(__dirname, '../app/dashboard/employees.json');
-  fs.writeFileSync(filePath, JSON.stringify(employees, null, 2));
-
-  console.log(`Werms transferred successfully.`);
-
-  if (note) {
-    console.log("Note = ", note);
-  }
-  
+  return note ? `${baseMessage}\n> ${note}` : baseMessage;
 }
-
-// Simple test case for the function
-transferWerms(employeeData, 'kislay@nakatomi.com', 'andy@nakatomi.com', 
-  {gold: 1, bronze: 3}, "Test Transfer"
-);
-
-
-// TODO: SUGGESTION TO IMPLEMENT:
-// "werm_balances": {
-//       "gold": {
-//         "count": 6,
-//         "total_value": 60
-//       },
-//       "silver": {
-//         "count": 1,
-//         "total_value": 3
-//       },
-//       "bronze": {
-//         "count": 11,
-//         "total_value": 11
-//       },
-//       "total_werms": 18,
-//       "total_value_aud": 74
-//     },
-//     "lifetime_earned": {
-//       "gold": 3,
-//       "silver": 15,
-//       "bronze": 45,
-//       "total_werms": 63,
-//       "total_value_aud": 150
-//     },
-
-/* We may simplify the database to just keep track of the count of each type */
-// Something like this would be practical to work with:
-
-// "werm_balances": {
-//   "gold": 6,
-//   "silver": 1
-//   "bronze": 11
-// },
-// "lifetime_earned": {
-//   "gold": 3,
-//   "silver": 15,
-//   "bronze": 45
-// },
-
-// We may leave the 'total' calculations to the backend, and this info 
-// can be fetched via API calls.

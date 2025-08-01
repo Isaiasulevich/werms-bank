@@ -3,8 +3,8 @@
     "id": "EMP-2024-0001",
     "employee_id": "EMP-2024-0001",
     "name": "Isa",
-    "email": "isa@nakatomi.com",
-    "slack_username": "@isa",
+    "email": "isaias@nakatomi.com",
+    "slack_username": "@isaias",
     "department": "Operations",
     "role": "Operations Lead",
     "hire_date": "2024-01-15",
@@ -15,27 +15,14 @@
       "view_all_balances"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 0,
-        "total_value": 0
-      },
-      "silver": {
-        "count": 15,
-        "total_value": 45
-      },
-      "bronze": {
-        "count": 64,
-        "total_value": 64
-      },
-      "total_werms": 79,
-      "total_value_aud": 109
+      "gold": 5,
+      "silver": 15,
+      "bronze": 14
     },
     "lifetime_earned": {
-      "gold": 25,
-      "silver": 89,
-      "bronze": 234,
-      "total_werms": 348,
-      "total_value_aud": 797
+      "gold": 8,
+      "silver": 22,
+      "bronze": 30
     },
     "avatar_url": "/avatars/isa.jpg"
   },
@@ -44,7 +31,7 @@
     "employee_id": "EMP-2024-0002",
     "name": "Sarah",
     "email": "sarah@nakatomi.com",
-    "slack_username": "@sarah",
+    "slack_username": "@sarah236",
     "department": "Engineering",
     "role": "Senior Software Engineer",
     "hire_date": "2024-03-10",
@@ -53,27 +40,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 7,
-        "total_value": 70
-      },
-      "silver": {
-        "count": 18,
-        "total_value": 54
-      },
-      "bronze": {
-        "count": 65,
-        "total_value": 65
-      },
-      "total_werms": 90,
-      "total_value_aud": 189
+      "gold": 2,
+      "silver": 2,
+      "bronze": 7
     },
     "lifetime_earned": {
-      "gold": 20,
-      "silver": 76,
-      "bronze": 198,
-      "total_werms": 294,
-      "total_value_aud": 628
+      "gold": 4,
+      "silver": 5,
+      "bronze": 8
     },
     "avatar_url": "/avatars/sarah.jpg"
   },
@@ -91,27 +65,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 5,
-        "total_value": 50
-      },
-      "silver": {
-        "count": 14,
-        "total_value": 42
-      },
-      "bronze": {
-        "count": 55,
-        "total_value": 55
-      },
-      "total_werms": 74,
-      "total_value_aud": 147
+      "gold": 7,
+      "silver": 2,
+      "bronze": 5
     },
     "lifetime_earned": {
-      "gold": 15,
-      "silver": 67,
-      "bronze": 145,
-      "total_werms": 227,
-      "total_value_aud": 502
+      "gold": 12,
+      "silver": 2,
+      "bronze": 10
     },
     "avatar_url": "/avatars/tom.jpg"
   },
@@ -130,27 +91,14 @@
       "view_team_balances"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 6,
-        "total_value": 60
-      },
-      "silver": {
-        "count": 12,
-        "total_value": 36
-      },
-      "bronze": {
-        "count": 54,
-        "total_value": 54
-      },
-      "total_werms": 72,
-      "total_value_aud": 150
+      "gold": 1,
+      "silver": 1,
+      "bronze": 9
     },
     "lifetime_earned": {
-      "gold": 18,
-      "silver": 58,
-      "bronze": 167,
-      "total_werms": 243,
-      "total_value_aud": 507
+      "gold": 4,
+      "silver": 7,
+      "bronze": 10
     },
     "avatar_url": "/avatars/ollie.jpg"
   },
@@ -168,27 +116,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 4,
-        "total_value": 40
-      },
-      "silver": {
-        "count": 15,
-        "total_value": 45
-      },
-      "bronze": {
-        "count": 50,
-        "total_value": 50
-      },
-      "total_werms": 69,
-      "total_value_aud": 135
+      "gold": 10,
+      "silver": 12,
+      "bronze": 33
     },
     "lifetime_earned": {
-      "gold": 12,
-      "silver": 45,
-      "bronze": 98,
-      "total_werms": 155,
-      "total_value_aud": 375
+      "gold": 14,
+      "silver": 30,
+      "bronze": 600
     },
     "avatar_url": "/avatars/jasmine.jpg"
   },
@@ -206,27 +141,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 3,
-        "total_value": 30
-      },
-      "silver": {
-        "count": 13,
-        "total_value": 39
-      },
-      "bronze": {
-        "count": 50,
-        "total_value": 50
-      },
-      "total_werms": 66,
-      "total_value_aud": 119
+      "gold": 1,
+      "silver": 2,
+      "bronze": 3
     },
     "lifetime_earned": {
-      "gold": 9,
-      "silver": 38,
-      "bronze": 89,
-      "total_werms": 136,
-      "total_value_aud": 293
+      "gold": 4,
+      "silver": 5,
+      "bronze": 6
     },
     "avatar_url": "/avatars/ruby.jpg"
   },
@@ -246,27 +168,14 @@
       "approve_small_distributions"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 5,
-        "total_value": 50
-      },
-      "silver": {
-        "count": 12,
-        "total_value": 36
-      },
-      "bronze": {
-        "count": 48,
-        "total_value": 48
-      },
-      "total_werms": 65,
-      "total_value_aud": 134
+      "gold": 1,
+      "silver": 2,
+      "bronze": 3
     },
     "lifetime_earned": {
-      "gold": 22,
-      "silver": 67,
-      "bronze": 201,
-      "total_werms": 290,
-      "total_value_aud": 721
+      "gold": 4,
+      "silver": 5,
+      "bronze": 6
     },
     "avatar_url": "/avatars/prince.jpg"
   },
@@ -286,27 +195,14 @@
       "approve_small_distributions"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 4,
-        "total_value": 40
-      },
-      "silver": {
-        "count": 11,
-        "total_value": 33
-      },
-      "bronze": {
-        "count": 48,
-        "total_value": 48
-      },
-      "total_werms": 63,
-      "total_value_aud": 121
+      "gold": 1,
+      "silver": 2,
+      "bronze": 3
     },
     "lifetime_earned": {
-      "gold": 19,
-      "silver": 78,
-      "bronze": 234,
-      "total_werms": 331,
-      "total_value_aud": 814
+      "gold": 4,
+      "silver": 5,
+      "bronze": 6
     },
     "avatar_url": "/avatars/matt.jpg"
   },
@@ -324,27 +220,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 3,
-        "total_value": 30
-      },
-      "silver": {
-        "count": 10,
-        "total_value": 30
-      },
-      "bronze": {
-        "count": 50,
-        "total_value": 50
-      },
-      "total_werms": 63,
-      "total_value_aud": 110
+      "gold": 3,
+      "silver": 5,
+      "bronze": 5
     },
     "lifetime_earned": {
-      "gold": 8,
-      "silver": 25,
-      "bronze": 67,
-      "total_werms": 100,
-      "total_value_aud": 222
+      "gold": 6,
+      "silver": 8,
+      "bronze": 16
     },
     "avatar_url": "/avatars/ben.jpg"
   },
@@ -362,27 +245,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 3,
-        "total_value": 30
-      },
-      "silver": {
-        "count": 12,
-        "total_value": 36
-      },
-      "bronze": {
-        "count": 48,
-        "total_value": 48
-      },
-      "total_werms": 63,
-      "total_value_aud": 114
+      "gold": 1,
+      "silver": 2,
+      "bronze": 6
     },
     "lifetime_earned": {
-      "gold": 8,
-      "silver": 34,
-      "bronze": 92,
-      "total_werms": 130,
-      "total_value_aud": 241
+      "gold": 5,
+      "silver": 7,
+      "bronze": 15
     },
     "avatar_url": "/avatars/andy.jpg"
   },
@@ -400,27 +270,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 1,
-        "total_value": 10
-      },
-      "silver": {
-        "count": 6,
-        "total_value": 18
-      },
-      "bronze": {
-        "count": 28,
-        "total_value": 28
-      },
-      "total_werms": 35,
-      "total_value_aud": 56
+      "gold": 1,
+      "silver": 2,
+      "bronze": 3
     },
     "lifetime_earned": {
-      "gold": 5,
-      "silver": 18,
-      "bronze": 67,
-      "total_werms": 90,
-      "total_value_aud": 171
+      "gold": 4,
+      "silver": 5,
+      "bronze": 6
     },
     "avatar_url": "/avatars/nick.jpg"
   },
@@ -439,27 +296,14 @@
       "view_team_balances"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 1,
-        "total_value": 10
-      },
-      "silver": {
-        "count": 5,
-        "total_value": 15
-      },
-      "bronze": {
-        "count": 23,
-        "total_value": 23
-      },
-      "total_werms": 29,
-      "total_value_aud": 48
+      "gold": 1,
+      "silver": 2,
+      "bronze": 3
     },
     "lifetime_earned": {
-      "gold": 8,
-      "silver": 32,
-      "bronze": 89,
-      "total_werms": 129,
-      "total_value_aud": 256
+      "gold": 4,
+      "silver": 5,
+      "bronze": 6
     },
     "avatar_url": "/avatars/mike.jpg"
   },
@@ -477,27 +321,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 0,
-        "total_value": 0
-      },
-      "silver": {
-        "count": 1,
-        "total_value": 3
-      },
-      "bronze": {
-        "count": 5,
-        "total_value": 5
-      },
-      "total_werms": 6,
-      "total_value_aud": 8
+      "gold": 1,
+      "silver": 2,
+      "bronze": 5
     },
     "lifetime_earned": {
-      "gold": 1,
-      "silver": 8,
-      "bronze": 23,
-      "total_werms": 32,
-      "total_value_aud": 67
+      "gold": 4,
+      "silver": 5,
+      "bronze": 8
     },
     "avatar_url": "/avatars/kailash.jpg"
   },
@@ -517,27 +348,14 @@
       "approve_small_distributions"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 7,
-        "total_value": 70
-      },
-      "silver": {
-        "count": 1,
-        "total_value": 3
-      },
-      "bronze": {
-        "count": 8,
-        "total_value": 8
-      },
-      "total_werms": 16,
-      "total_value_aud": 81
+      "gold": 7,
+      "silver": 45,
+      "bronze": 16
     },
     "lifetime_earned": {
       "gold": 4,
-      "silver": 15,
-      "bronze": 45,
-      "total_werms": 63,
-      "total_value_aud": 150
+      "silver": 11,
+      "bronze": 20
     },
     "avatar_url": "/avatars/kislay.jpg"
   },
@@ -555,27 +373,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": {
-        "count": 0,
-        "total_value": 0
-      },
-      "silver": {
-        "count": 1,
-        "total_value": 3
-      },
-      "bronze": {
-        "count": 5,
-        "total_value": 5
-      },
-      "total_werms": 6,
-      "total_value_aud": 8
+      "gold": 1,
+      "silver": 2,
+      "bronze": 3
     },
     "lifetime_earned": {
-      "gold": 2,
-      "silver": 12,
-      "bronze": 34,
-      "total_werms": 48,
-      "total_value_aud": 98
+      "gold": 4,
+      "silver": 5,
+      "bronze": 6
     },
     "avatar_url": "/avatars/zac.jpg"
   }

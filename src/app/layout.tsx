@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { QueryProvider } from "@/shared/components/QueryProvider";
+import { QueryProvider } from "@/shared/providers/QueryProvider";
 import { ThemeProvider } from "@/components/ui";
+import { CommandPaletteProvider } from "@/features/command-palette";
+import { AuthProvider } from "@/lib/supabase/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,9 +37,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>
-            {children}
-          </QueryProvider>
+          <AuthProvider>
+            <QueryProvider>
+              <CommandPaletteProvider>
+                {children}
+              </CommandPaletteProvider>
+            </QueryProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

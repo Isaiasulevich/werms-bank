@@ -1,128 +1,61 @@
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { cn } from "@/lib/utils"
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  Input,
-  Label,
-} from "@/components/ui"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from "@/components/ui"
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+export function LoginForm() {
+  const supabase = createClientComponentClient()
   const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
-    // TODO: Add authentication logic here
-    console.log("Login attempt:", { email, password })
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // For now, any email/password combination will "log in"
-    if (email && password) {
-      // Redirect to dashboard
-      router.push("/dashboard")
-    }
-    
-    setIsLoading(false)
-  }
+  const handleSlackLogin = async () => {
+    console.log("[Slack Login] Attempting to log in with Slack")
 
-  const handleGoogleLogin = async () => {
-    setIsLoading(true)
-    // TODO: Add Google authentication logic
-    console.log("Google login attempt")
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500))
-    
-    // Redirect to dashboard
-    router.push("/dashboard")
+    try {
+      console.log("[Slack Login] Calling supabase.auth.signInWithOAuth with:")
+      console.log({
+        provider: "slack",
+        redirectTo: `${location.origin}/auth/callback`,
+      })
+
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "slack",
+        options: {
+          redirectTo: `${location.origin}/auth/callback`,
+        },
+      })
+
+      if (error) {
+        console.error("[Slack Login] Supabase error object:", error)
+        alert(`Slack login failed: ${error.message}`)
+      } else {
+        console.log("[Slack Login] Got redirect response from Supabase OAuth call:", data)
+        // No redirect here because Supabase will automatically handle redirect.
+      }
+    } catch (err) {
+      console.error("[Slack Login] Unexpected exception:", err)
+      alert("Unexpected error during Slack login")
+    }
   }
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className="flex flex-col gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardTitle>Login with Slack</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-3">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="grid gap-3">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
-                <Input 
-                  id="password" 
-                  type="password" 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required 
-                />
-              </div>
-              <div className="flex flex-col gap-3">
-                <Button 
-                  type="submit" 
-                  className="w-full"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Signing in..." : "Login"}
-                </Button>
-                <Button 
-                  type="button"
-                  variant="outline" 
-                  className="w-full"
-                  onClick={handleGoogleLogin}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Signing in..." : "Login with Google"}
-                </Button>
-              </div>
+          <div className="flex flex-col gap-6">
+            <div className="grid gap-3">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" value="you@example.com" disabled />
             </div>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
-                Sign up
-              </a>
-            </div>
-          </form>
+            <Button onClick={handleSlackLogin} className="w-full">
+              Login with Slack
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
   )
-} 
+}

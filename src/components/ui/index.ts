@@ -29,6 +29,9 @@ export * from './chart'
 // Checkbox
 export * from './checkbox'
 
+// Command
+export * from './command'
+
 // Dialog
 export * from './dialog'
 

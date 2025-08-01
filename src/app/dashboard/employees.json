@@ -3,8 +3,8 @@
     "id": "EMP-2024-0001",
     "employee_id": "EMP-2024-0001",
     "name": "Isa",
-    "email": "isa@nakatomi.com",
-    "slack_username": "@isa",
+    "email": "isaias@nakatomi.com",
+    "slack_username": "@isaias",
     "department": "Operations",
     "role": "Operations Lead",
     "hire_date": "2024-01-15",
@@ -15,14 +15,14 @@
       "view_all_balances"
     ],
     "werm_balances": {
-      "gold": 1,
-      "silver": 2,
-      "bronze": 3
+      "gold": 5,
+      "silver": 15,
+      "bronze": 14
     },
     "lifetime_earned": {
-      "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "gold": 8,
+      "silver": 22,
+      "bronze": 30
     },
     "avatar_url": "/avatars/isa.jpg"
   },
@@ -31,7 +31,7 @@
     "employee_id": "EMP-2024-0002",
     "name": "Sarah",
     "email": "sarah@nakatomi.com",
-    "slack_username": "@sarah",
+    "slack_username": "@sarah236",
     "department": "Engineering",
     "role": "Senior Software Engineer",
     "hire_date": "2024-03-10",
@@ -40,14 +40,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": 1,
+      "gold": 2,
       "silver": 2,
-      "bronze": 3
+      "bronze": 7
     },
     "lifetime_earned": {
       "gold": 4,
       "silver": 5,
-      "bronze": 6
+      "bronze": 8
     },
     "avatar_url": "/avatars/sarah.jpg"
   },
@@ -65,14 +65,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": 1,
+      "gold": 7,
       "silver": 2,
-      "bronze": 3
+      "bronze": 5
     },
     "lifetime_earned": {
-      "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "gold": 12,
+      "silver": 2,
+      "bronze": 10
     },
     "avatar_url": "/avatars/tom.jpg"
   },
@@ -92,13 +92,13 @@
     ],
     "werm_balances": {
       "gold": 1,
-      "silver": 2,
-      "bronze": 3
+      "silver": 1,
+      "bronze": 9
     },
     "lifetime_earned": {
       "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "silver": 7,
+      "bronze": 10
     },
     "avatar_url": "/avatars/ollie.jpg"
   },
@@ -116,14 +116,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": 1,
-      "silver": 2,
-      "bronze": 3
+      "gold": 10,
+      "silver": 12,
+      "bronze": 33
     },
     "lifetime_earned": {
-      "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "gold": 14,
+      "silver": 30,
+      "bronze": 600
     },
     "avatar_url": "/avatars/jasmine.jpg"
   },
@@ -220,14 +220,14 @@
       "view_own_balance"
     ],
     "werm_balances": {
-      "gold": 1,
-      "silver": 2,
-      "bronze": 3
+      "gold": 3,
+      "silver": 5,
+      "bronze": 5
     },
     "lifetime_earned": {
-      "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "gold": 6,
+      "silver": 8,
+      "bronze": 16
     },
     "avatar_url": "/avatars/ben.jpg"
   },
@@ -247,12 +247,12 @@
     "werm_balances": {
       "gold": 1,
       "silver": 2,
-      "bronze": 3
+      "bronze": 6
     },
     "lifetime_earned": {
-      "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "gold": 5,
+      "silver": 7,
+      "bronze": 15
     },
     "avatar_url": "/avatars/andy.jpg"
   },
@@ -323,12 +323,12 @@
     "werm_balances": {
       "gold": 1,
       "silver": 2,
-      "bronze": 3
+      "bronze": 5
     },
     "lifetime_earned": {
       "gold": 4,
       "silver": 5,
-      "bronze": 6
+      "bronze": 8
     },
     "avatar_url": "/avatars/kailash.jpg"
   },
@@ -348,14 +348,14 @@
       "approve_small_distributions"
     ],
     "werm_balances": {
-      "gold": 1,
-      "silver": 2,
-      "bronze": 3
+      "gold": 7,
+      "silver": 45,
+      "bronze": 16
     },
     "lifetime_earned": {
       "gold": 4,
-      "silver": 5,
-      "bronze": 6
+      "silver": 11,
+      "bronze": 20
     },
     "avatar_url": "/avatars/kislay.jpg"
   },

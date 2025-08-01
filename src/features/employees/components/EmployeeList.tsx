@@ -7,7 +7,7 @@
 
 'use client';
 
-import { computeWormBalances } from '@/lib/wermTypes';
+import { computeWormBalances, WERM_PRICES, WERM_TYPES } from '@/lib/wermTypes';
 import { useState, useMemo } from 'react';
 import { Search, Plus, Filter, MoreHorizontal, Edit, Trash2, Eye } from 'lucide-react';
 import {
@@ -40,6 +40,7 @@ import {
 import { useEmployeeList, useEmployees } from '../hooks';
 import { Employee, EmployeeFilters, EmployeeSort, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 interface EmployeeListProps {
   onAddEmployee?: () => void;
@@ -49,68 +50,32 @@ interface EmployeeListProps {
 }
 
 /**
- * Get status badge variant
- */
-function getStatusBadgeVariant(status: EmployeeStatus) {
-  switch (status) {
-    case 'active':
-      return 'default';
-    case 'inactive':
-      return 'secondary';
-    case 'terminated':
-      return 'destructive';
-    case 'on_leave':
-      return 'outline';
-    default:
-      return 'secondary';
-  }
-}
-
-/**
- * Get status display text
- */
-function getStataudisplay(status: EmployeeStatus) {
-  switch (status) {
-    case 'active':
-      return '✅ Active';
-    case 'inactive':
-      return '⏸️ Inactive';
-    case 'terminated':
-      return '❌ Terminated';
-    case 'on_leave':
-      return '🏖️ On Leave';
-    default:
-      return status;
-  }
-}
-
-/**
  * Get department icon
  */
 function getDepartmentIcon(department: Department) {
   switch (department) {
     case 'Operations':
-      return '⚡';
+      return 'OPS';
     case 'Engineering':
-      return '👨‍💻';
+      return 'ENG';
     case 'Product':
-      return '📱';
+      return 'PRD';
     case 'Marketing':
-      return '📢';
+      return 'MKT';
     case 'Design':
-      return '🎨';
+      return 'DES';
     case 'Sales':
-      return '💼';
+      return 'SAL';
     case 'Support':
-      return '🛟';
+      return 'SUP';
     case 'HR':
-      return '👥';
+      return 'HR';
     case 'Finance':
-      return '💰';
+      return 'FIN';
     case 'Legal':
-      return '⚖️';
+      return 'LEG';
     default:
-      return '👤';
+      return 'GEN';
   }
 }
 
@@ -283,6 +248,14 @@ export function EmployeeList({
                     </span>
                   )}
                 </TableHead>
+                <TableHead>
+                  Status
+                  {sort.field === 'status' && (
+                    <span className="ml-1">
+                      {sort.direction === 'asc' ? '↑' : '↓'}
+                    </span>
+                  )}
+                </TableHead>
                 <TableHead 
                   className="cursor-pointer hover:bg-muted/50"
                   onClick={() => handleSort('werm_balances')}
@@ -318,7 +291,6 @@ export function EmployeeList({
               ) : (
                 employees.map((employee) => {
                   const wormBalance = computeWormBalances(employee.werm_balances);
-
                   return (
                     <TableRow key={employee.id} className="hover:bg-muted/50">
                       <TableCell>
@@ -337,12 +309,8 @@ export function EmployeeList({
                             >
                               {employee.name}
                             </button>
-                            <div className="text-sm text-muted-foreground">
-                              {employee.email}
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              {employee.employee_id}
-                            </div>
+                            <div className="text-sm text-muted-foreground">{employee.email}</div>
+                            <div className="text-xs text-muted-foreground">{employee.employee_id}</div>
                           </div>
                         </div>
                       </TableCell>
@@ -362,27 +330,30 @@ export function EmployeeList({
                           </div>
                         </div>
                       </TableCell>
-
                       <TableCell>
-                        <Badge variant={getStatusBadgeVariant(employee.status)}>
-                          {getStataudisplay(employee.status)}
-                        </Badge>
-                      </TableCell>
-
-                      <TableCell>
-                        <div>
+                      <div>
                           <div className="font-medium">
-                            {wormBalance.total_werms} worms
+                            {wormBalance.total_coins} coins
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            {formatCurrency(wormBalance.total_werms)}
+                            {wormBalance.total_werms} werms
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            🥇{employee.werm_balances.gold} 🥈{employee.werm_balances.silver} 🥉{employee.werm_balances.bronze}
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.gold} type="gold" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.gold}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.silver} type="silver" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.silver}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <CoinIndicator value={WERM_PRICES.bronze} type="bronze" size="xxs" />
+                              <span className="text-xs text-muted-foreground">{wormBalance.bronze}</span>
+                            </div>
                           </div>
                         </div>
                       </TableCell>
-
                       <TableCell>
                         <div className="text-sm">
                           {new Date(employee.hire_date).toLocaleDateString()}
@@ -392,12 +363,7 @@ export function EmployeeList({
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                              disabled={isLoading}
-                            >
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0" disabled={isLoading}>
                               <MoreHorizontal className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>

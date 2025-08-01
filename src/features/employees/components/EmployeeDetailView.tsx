@@ -41,6 +41,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts'
 import { useEmployees } from '../hooks';
 import { Employee, EmployeePermission, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
+import { computeWormBalances, WERM_PRICES } from '@/lib/wermTypes';
+import { CoinIndicator } from '@/components/custom/CoinIndicator';
 
 // Schema for transaction data
 const transactionSchema = z.object({
@@ -73,30 +75,30 @@ interface EmployeeDetailViewProps {
  * Permission configuration
  */
 const PERMISSION_CONFIG: Record<EmployeePermission, { icon: string; label: string; description: string }> = {
-  admin: { icon: '👑', label: 'Admin', description: 'Full administrative access' },
-  approve_distributions: { icon: '✅', label: 'Approve Distributions', description: 'Can approve all worm distributions' },
-  approve_small_distributions: { icon: '✔️', label: 'Approve Small Distributions', description: 'Can approve small worm distributions' },
-  view_all_balances: { icon: '👁️', label: 'View All Balances', description: 'Can view all employee balances' },
-  view_team_balances: { icon: '👥', label: 'View Team Balances', description: 'Can view team member balances' },
-  view_own_balance: { icon: '👤', label: 'View Own Balance', description: 'Can view own worm balance' },
-  manage_employees: { icon: '👥', label: 'Manage Employees', description: 'Can manage employee accounts' },
-  create_policies: { icon: '📋', label: 'Create Policies', description: 'Can create and modify policies' },
+  admin: { icon: 'ADM', label: 'Admin', description: 'Full administrative access' },
+  approve_distributions: { icon: 'APR', label: 'Approve Distributions', description: 'Can approve all worm distributions' },
+  approve_small_distributions: { icon: 'APS', label: 'Approve Small Distributions', description: 'Can approve small worm distributions' },
+  view_all_balances: { icon: 'VAB', label: 'View All Balances', description: 'Can view all employee balances' },
+  view_team_balances: { icon: 'VTB', label: 'View Team Balances', description: 'Can view team member balances' },
+  view_own_balance: { icon: 'VOB', label: 'View Own Balance', description: 'Can view own worm balance' },
+  manage_employees: { icon: 'MNG', label: 'Manage Employees', description: 'Can manage employee accounts' },
+  create_policies: { icon: 'POL', label: 'Create Policies', description: 'Can create and modify policies' },
 };
 
 /**
  * Department configuration
  */
 const DEPARTMENT_CONFIG: Record<string, string> = {
-  Operations: '⚡',
-  Engineering: '👨‍💻',
-  Product: '📱',
-  Marketing: '📢',
-  Design: '🎨',
-  Sales: '💼',
-  Support: '🛟',
-  HR: '👥',
-  Finance: '💰',
-  Legal: '⚖️',
+  Operations: 'OPS',
+  Engineering: 'ENG',
+  Product: 'PRD',
+  Marketing: 'MKT',
+  Design: 'DES',
+  Sales: 'SAL',
+  Support: 'SUP',
+  HR: 'HR',
+  Finance: 'FIN',
+  Legal: 'LEG',
 };
 
 /**
@@ -119,8 +121,10 @@ function generateMockWormData(employee: Employee): WormDataPoint[] {
       cumulative: 0,
     });
   }
+
+  const currentBalance = computeWormBalances(employee.werm_balances);
   
-  let cumulative = employee.lifetime_earned.total_werms - data.reduce((sum, d) => sum + d.earned, 0);
+  let cumulative = currentBalance.total_werms - data.reduce((sum, d) => sum + d.earned, 0);
   data.forEach(d => {
     cumulative += d.earned;
     d.cumulative = cumulative;
@@ -249,42 +253,51 @@ function EmployeeHeader({
  */
 function OverviewTab({ employee, wormData }: { employee: Employee; wormData: WormDataPoint[] }) {
   const maxEarnings = Math.max(...wormData.map(d => d.earned));
+  const currentBalance = computeWormBalances(employee.werm_balances);
+  const lifetimeBalance = computeWormBalances(employee.lifetime_earned);
 
   return (
     <div className="space-y-6">
       {/* Worm Balances */}
       <div>
         <h3 className="font-medium text-sm text-muted-foreground mb-4">Current Balance</h3>
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="text-center p-3 bg-yellow-50 dark:bg-yellow-950 rounded-lg border">
-            <div className="text-xs text-muted-foreground">🥇 Gold</div>
-            <div className="text-lg font-bold">{employee.werm_balances.gold.count}</div>
+        <div className="grid grid-cols-3 gap-6 mb-6">
+          <div className="text-center flex flex-col items-center gap-2">
+            <CoinIndicator value={currentBalance.gold} type="gold" />
+            <div className="text-xs text-muted-foreground">Gold</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.gold.total_value)}
+              🪱 {WERM_PRICES.gold * currentBalance.gold}
             </div>
           </div>
-          <div className="text-center p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border">
-            <div className="text-xs text-muted-foreground">🥈 Silver</div>
-            <div className="text-lg font-bold">{employee.werm_balances.silver.count}</div>
+          <div className="text-center flex flex-col items-center gap-2">
+            <CoinIndicator value={currentBalance.silver} type="silver" />
+            <div className="text-xs text-muted-foreground">Silver</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.silver.total_value)}
+              🪱 {WERM_PRICES.silver * currentBalance.silver}
             </div>
           </div>
-          <div className="text-center p-3 bg-orange-50 dark:bg-orange-950 rounded-lg border">
-            <div className="text-xs text-muted-foreground">🥉 Bronze</div>
-            <div className="text-lg font-bold">{employee.werm_balances.bronze.count}</div>
+          <div className="text-center flex flex-col items-center gap-2">
+            <CoinIndicator value={currentBalance.bronze} type="bronze" />
+            <div className="text-xs text-muted-foreground">Bronze</div>
             <div className="text-xs text-muted-foreground">
-              {formatCurrency(employee.werm_balances.bronze.total_value)}
+              🪱 {WERM_PRICES.bronze * currentBalance.bronze}
             </div>
           </div>
         </div>
 
+        {/* Current Earnings */}
+        <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
+          <div className="text-sm text-muted-foreground">Current Werms Balance</div>
+          <div className="text-lg font-medium">
+            {currentBalance.total_werms} Werms
+          </div>
+        </div>
+        
         {/* Lifetime Earnings */}
         <div className="text-center p-4 bg-muted/50 rounded-lg mb-6">
-          <div className="text-2xl font-bold">{employee.lifetime_earned.total_werms}</div>
-          <div className="text-sm text-muted-foreground">Total Worms Earned</div>
+          <div className="text-sm text-muted-foreground">Lifetime Worms Earned</div>
           <div className="text-lg font-medium">
-            {formatCurrency(employee.lifetime_earned.total_value_aud)}
+            {lifetimeBalance.total_werms} Werms
           </div>
         </div>
 
@@ -396,15 +409,12 @@ function TransactionsTab({ transactions }: { transactions: Transaction[] }) {
                 </TableCell>
                 <TableCell>
                   <Badge variant={transaction.type === 'earn' ? 'default' : 'outline'}>
-                    {transaction.type === 'earn' ? '📈' : '📉'} {transaction.type}
+                                            {transaction.type === 'earn' ? '+' : '-'} {transaction.type}
                   </Badge>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-1">
-                    <span>
-                      {transaction.worm_type === 'gold' ? '🥇' : 
-                       transaction.worm_type === 'silver' ? '🥈' : '🥉'}
-                    </span>
+                  <div className="flex items-center gap-2">
+                    <CoinIndicator value={transaction.amount} type={transaction.worm_type} size="xs" animate={false} />
                     <span className="font-medium">
                       {transaction.type === 'earn' ? '+' : '-'}{transaction.amount}
                     </span>
@@ -493,11 +503,11 @@ function DetailsTab({
                 <SelectItem value="Engineering">👨‍💻 Engineering</SelectItem>
                 <SelectItem value="Product">📱 Product</SelectItem>
                 <SelectItem value="Marketing">📢 Marketing</SelectItem>
-                <SelectItem value="Design">🎨 Design</SelectItem>
-                <SelectItem value="Sales">💼 Sales</SelectItem>
+                <SelectItem value="Design">Design</SelectItem>
+                <SelectItem value="Sales">Sales</SelectItem>
                 <SelectItem value="Support">🛟 Support</SelectItem>
-                <SelectItem value="HR">👥 HR</SelectItem>
-                <SelectItem value="Finance">💰 Finance</SelectItem>
+                <SelectItem value="HR">HR</SelectItem>
+                <SelectItem value="Finance">Finance</SelectItem>
                 <SelectItem value="Legal">⚖️ Legal</SelectItem>
               </SelectContent>
             </Select>

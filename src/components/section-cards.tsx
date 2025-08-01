@@ -1,4 +1,4 @@
-import { IconTrendingDown, IconTrendingUp, IconCoins, IconUsers, IconClock, IconStack } from "@tabler/icons-react"
+import { IconTrendingDown, IconTrendingUp, IconCoins, IconUsers, IconClock } from "@tabler/icons-react"
 import { Area, AreaChart, ResponsiveContainer } from "recharts"
 
 import {
@@ -57,7 +57,7 @@ export function SectionCards() {
         <CardHeader>
           <CardDescription>Bank Reserve</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl flex items-center gap-2">
-            <IconStack className="size-6" />
+          <IconCoins className="size-6" />
             2,847 Werms
           </CardTitle>
           <div className="text-sm text-muted-foreground mb-2">

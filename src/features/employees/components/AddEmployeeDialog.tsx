@@ -263,16 +263,16 @@ export function AddEmployeeDialog({ open, onOpenChange }: AddEmployeeDialogProps
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Operations">⚡ Operations</SelectItem>
-                      <SelectItem value="Engineering">👨‍💻 Engineering</SelectItem>
-                      <SelectItem value="Product">📱 Product</SelectItem>
-                      <SelectItem value="Marketing">📢 Marketing</SelectItem>
-                      <SelectItem value="Design">🎨 Design</SelectItem>
-                      <SelectItem value="Sales">💼 Sales</SelectItem>
-                      <SelectItem value="Support">🛟 Support</SelectItem>
-                      <SelectItem value="HR">👥 HR</SelectItem>
-                      <SelectItem value="Finance">💰 Finance</SelectItem>
-                      <SelectItem value="Legal">⚖️ Legal</SelectItem>
+                      <SelectItem value="Operations">Operations</SelectItem>
+                      <SelectItem value="Engineering">Engineering</SelectItem>
+                      <SelectItem value="Product">Product</SelectItem>
+                      <SelectItem value="Marketing">Marketing</SelectItem>
+                                      <SelectItem value="Design">Design</SelectItem>
+                <SelectItem value="Sales">Sales</SelectItem>
+                <SelectItem value="Support">Support</SelectItem>
+                <SelectItem value="HR">HR</SelectItem>
+                <SelectItem value="Finance">Finance</SelectItem>
+                      <SelectItem value="Legal">Legal</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

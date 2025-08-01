@@ -32,7 +32,7 @@ import {
   IconLayoutColumns,
   IconLoader,
   IconPlus,
-  IconTrendingUp,
+
 } from "@tabler/icons-react"
 import {
   ColumnDef,
@@ -49,11 +49,11 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table"
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { useIsMobile } from "@/hooks/use-mobile"
+
 import {
   Badge,
   Button,
@@ -82,7 +82,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui"
-import { TransactionDrawer } from "@/components/transactions"
+import { TransactionDrawer } from "@/features/transactions"
 
 export const schema = z.object({
   id: z.number(),

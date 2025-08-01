@@ -9,8 +9,11 @@ export interface WermBalanceSummary {
   gold: number;
   silver: number;
   bronze: number;
-  readonly total_coins: number;
-  readonly total_werms: number;
+}
+
+export interface ComputedWermBalance extends WermBalanceSummary {
+  total_werms: number;
+  total_coins: number;
 }
 
 export type WormBalances = WermBalanceSummary;
@@ -46,6 +49,7 @@ export interface Employee {
   slack_username: string;
   department: Department;
   role: string;
+  status?: string;
   hire_date: string;
   manager_id: string | null;
   permissions: EmployeePermission[];
@@ -132,3 +136,13 @@ export interface EmployeeFormErrors {
     relationship?: string;
   };
 } 
+
+export interface SlackWermTransferInput {
+  username: string;
+  amounts: {
+    gold?: number;
+    silver?: number;
+    bronze?: number;
+  };
+  reason?: string;
+}

@@ -35,18 +35,18 @@ export interface Transaction {
 export interface AuthUser {
   id: string
   email?: string
-  user_metadata?: Record<string, any>
-  app_metadata?: Record<string, any>
+  user_metadata?: Record<string, unknown>
+  app_metadata?: Record<string, unknown>
 }
 
 // API Response types
 export interface SupabaseResponse<T> {
   data: T | null
-  error: any | null
+  error: unknown | null
 }
 
 export interface SupabaseListResponse<T> {
   data: T[] | null
-  error: any | null
+  error: unknown | null
   count?: number | null
 } 

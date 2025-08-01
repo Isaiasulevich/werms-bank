@@ -82,7 +82,7 @@ export async function createTransaction(
 // Real-time subscriptions
 export function subscribeToAccountTransactions(
   accountId: string,
-  callback: (payload: any) => void
+  callback: (payload: unknown) => void
 ) {
   return supabase
     .channel(`transactions:${accountId}`)
@@ -101,7 +101,7 @@ export function subscribeToAccountTransactions(
 
 export function subscribeToAccountBalance(
   accountId: string,
-  callback: (payload: any) => void
+  callback: (payload: unknown) => void
 ) {
   return supabase
     .channel(`accounts:${accountId}`)
