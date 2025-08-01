@@ -3,7 +3,7 @@ import { Employee } from '@/features/employees';
 import { SlackWermTransferInput } from '@/features/employees/types';
 import { WERM_EMOJIS } from './wermTypes';
 import { createClient } from '@supabase/supabase-js';
-import 'dotenv/config';
+
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -11,16 +11,13 @@ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 // TODO: TEST THIS FURTHER
-function logWermCountByEmail(employees: any[], employeeEmail: string): void {
+function logWermCountByEmail(employees: Employee[], employeeEmail: string): void {
   const employee = employees.find(emp => emp.email === employeeEmail);
   
   if (!employee) {
     console.log(`No employee found with email: ${employeeEmail}`);
     return;
   }
-  
-  console.log(`Employee: ${employee.name} (${employee.employee_id})`);
-  console.log(`Total Werms: ${employee.werm_balances.total_werms}`);
 } 
 
 export function addToWermBalances(

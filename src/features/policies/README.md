@@ -168,7 +168,7 @@ interface PolicyCondition {
   wormReward: {                 // Reward structure
     gold?: number
     silver?: number
-    platinum?: number
+    bronze?: number
   }
   requiresApproval: boolean     // Manual approval required
   isActive: boolean             // Condition enabled/disabled
@@ -311,9 +311,9 @@ const policyConditionSchema = z.object({
 const wormRewardSchema = z.object({
   gold: z.number().min(0).optional(),
   silver: z.number().min(0).optional(),
-  platinum: z.number().min(0).optional()
+  bronze: z.number().min(0).optional()
 }).refine(
-  (data) => (data.gold ?? 0) + (data.silver ?? 0) + (data.platinum ?? 0) > 0,
+  (data) => (data.gold ?? 0) + (data.silver ?? 0) + (data.bronze ?? 0) > 0,
   { message: "At least one worm type must have a value greater than 0" }
 )
 ```

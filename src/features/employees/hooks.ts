@@ -195,14 +195,14 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
 
     // Apply sorting
     filtered.sort((a, b) => {
-      let aValue: any;
-      let bValue: any;
+        let aValue: unknown;
+    let bValue: unknown;
 
       // Handle computed sort fields
-      if (sort.field === 'werm_balances.total_werms') {
+      if (sort.field === ('werm_balances.total_werms' as keyof Employee)) {
         aValue = computeWormBalances(a.werm_balances).total_werms;
         bValue = computeWormBalances(b.werm_balances).total_werms;
-      } else if (sort.field === 'werm_balances.total_coins') {
+      } else if (sort.field === ('werm_balances.total_coins' as keyof Employee)) {
         aValue = computeWormBalances(a.werm_balances).total_coins;
         bValue = computeWormBalances(b.werm_balances).total_coins;
       } else {
@@ -239,7 +239,7 @@ export function useEmployeeList(filters: EmployeeFilters = {}, sort: EmployeeSor
  * Hook for getting employee statistics
  */
 export function useEmployeeStats() {
-  const [stats, setStats] = useState<EmployeeStats>(mockStats);
+  const [stats, setStats] = useState<EmployeeStats>();
   const [isLoading, setIsLoading] = useState(false);
 
   return {

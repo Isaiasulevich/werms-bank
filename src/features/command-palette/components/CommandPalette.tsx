@@ -139,7 +139,7 @@ export function CommandPalette({
       />
       <CommandList>
         <CommandEmpty>
-          No commands found for "{currentQuery}"
+          No commands found for &quot;{currentQuery}&quot;
         </CommandEmpty>
         
         {Object.entries(groupedCommands).map(([category, categoryCommands]) => {

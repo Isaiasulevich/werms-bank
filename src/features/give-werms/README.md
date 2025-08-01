@@ -106,7 +106,7 @@ function CustomDistributionTrigger() {
 |------|-------------|------------------|
 | **Gold** | Highest value werms | Exceptional performance, major achievements |
 | **Silver** | Standard reward werms | Regular recognition, meeting goals |
-| **Platinum** | Premium special werms | Extraordinary contributions, leadership |
+| **Bronze** | Premium special werms | Extraordinary contributions, leadership |
 
 ## Data Structure
 

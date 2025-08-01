@@ -316,7 +316,6 @@ export function GiveWermsDialog({ open, onOpenChange }: GiveWermsDialogProps) {
                 onClick={handleDistribute}
                 disabled={!selectedPolicy || selectedEmployees.size === 0 || isLoading}
                 className="flex-1"
-                loading={isLoading}
               >
                 <IconCheck className="mr-2 size-4" />
                 Distribute

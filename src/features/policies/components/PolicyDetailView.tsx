@@ -424,7 +424,7 @@ export function PolicyDetailView({ open, onOpenChange, policy, onEdit, onDelete 
                     <AlertCircle className="h-12 w-12 text-muted-foreground mb-4" />
                     <h3 className="text-lg font-medium mb-2">No Conditions</h3>
                     <p className="text-muted-foreground text-center">
-                      This policy doesn't have any conditions defined.
+                      This policy doesn&apos;t have any conditions defined.
                     </p>
                   </CardContent>
                 </Card>

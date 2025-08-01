@@ -1,7 +1,7 @@
 // src/app/api/slack/transfer/route.ts
-import 'dotenv/config'
+
 import { NextResponse } from 'next/server';
-import { WermType } from '@/lib/wermTypes';
+
 import { formatWermTransferMessage, parseWermInput, transferWerms } from '@/lib/features';
 
 const SLACK_BOT_USER_OAUTH_TOKEN = process.env.SLACK_BOT_USER_OAUTH_TOKEN
@@ -40,16 +40,16 @@ export async function POST(req: Request) {
         response_type: 'in_channel',
         text: formatWermTransferMessage(parsed.amounts, parsed.username, parsed.reason),
       });
-    } catch (err: any) {
-      console.error("🚫 Transfer error:", err.message);
+    } catch (err: unknown) {
+      console.error("🚫 Transfer error:", err instanceof Error ? err.message : err);
       return NextResponse.json({
         response_type: 'ephemeral',
-        text: `🚫 Transfer failed: ${err.message}`,
+        text: `🚫 Transfer failed: ${err instanceof Error ? err.message : 'Unknown error'}`,
       });
     }
 
-  } catch (err: any) {
-    console.error("🔥 Unexpected error:", err.message);
+  } catch (err: unknown) {
+    console.error("🔥 Unexpected error:", err instanceof Error ? err.message : err);
     return NextResponse.json({ text: 'Something went wrong during the transfer.' });
   }
 }

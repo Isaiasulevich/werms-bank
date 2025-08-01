@@ -12,4 +12,4 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Database type exports (to be updated when you generate types from your schema)
-export type Database = any // Replace with generated types from Supabase CLI 
+export type Database = unknown // Replace with generated types from Supabase CLI 

@@ -4,12 +4,15 @@ import { getWermCountByEmail } from '@/lib/employee';
 import { Department, Employee } from '@/features/employees';
 import rawEmployeeData from '@/data/employees.json';
 
-function normalizeEmployeeData(data: any[]): Employee[] {
-  return data.map((emp) => ({
-    ...emp,
-    department: emp.department as Department,
-    status: emp.status ?? 'active', // fallback if needed
-  }));
+function normalizeEmployeeData(data: unknown[]): Employee[] {
+  return data.map((emp) => {
+    const employee = emp as Record<string, unknown>;
+    return {
+      ...employee,
+      department: employee.department as Department,
+      status: employee.status ?? 'active', // fallback if needed
+    } as Employee;
+  });
 }
 
 const employeeData: Employee[] = normalizeEmployeeData(rawEmployeeData);
