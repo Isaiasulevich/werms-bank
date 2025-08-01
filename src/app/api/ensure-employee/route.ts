@@ -17,7 +17,16 @@ export async function POST(req: Request) {
   const avatar_url = user.user_metadata?.avatar_url || ""
   const id = `EMP-${new Date().getFullYear()}-${Math.floor(Math.random() * 10000).toString().padStart(4, "0")}`
 
-  // TODO: Enrich with Slack API if needed
+  // TODO:
+  /*
+  try {
+    push to tansaction table
+  } // if this fails then do not run the next try
+
+  try {
+    update employees table
+  } // if this fails (after we get here) then delete the push that was made
+   */
 
   const { error } = await supabase
     .from("employees")
