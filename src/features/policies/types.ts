@@ -13,7 +13,7 @@ export interface PolicyCondition {
   wormReward: {
     gold?: number;
     silver?: number;
-    platinum?: number;
+    bronze?: number;
   };
   requiresApproval: boolean;
   isActive: boolean;

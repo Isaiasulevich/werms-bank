@@ -22,7 +22,7 @@ export function formatCurrencyAUD(amount: number): string {
 
 /**
  * Calculates the AUD value of werms based on estimated mixed werm composition
- * Assumes roughly 60% silver ($1 USD), 35% gold ($10 USD), 5% platinum ($20 USD)
+ * Assumes roughly 60% silver ($1 USD), 35% gold ($10 USD), 5% bronze ($20 USD)
  * Uses an approximate USD to AUD exchange rate of 1.55
  */
 export function calculateWermValueAUD(wermCount: number): string {

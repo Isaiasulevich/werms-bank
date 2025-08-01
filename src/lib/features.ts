@@ -18,9 +18,6 @@ function logWermCountByEmail(employees: Employee[], employeeEmail: string): void
     console.log(`No employee found with email: ${employeeEmail}`);
     return;
   }
-  
-  console.log(`Employee: ${employee.name} (${employee.employee_id})`);
-  console.log(`Total Werms: ${employee.werm_balances.total_werms}`);
 } 
 
 export function addToWermBalances(
