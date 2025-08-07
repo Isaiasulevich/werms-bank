@@ -1,4 +1,4 @@
-import { supabase } from './client'
+import { createClient } from './client'
 import type { DatabaseUser, Account, Transaction, SupabaseResponse, SupabaseListResponse } from './types'
 
 /**
@@ -8,6 +8,7 @@ import type { DatabaseUser, Account, Transaction, SupabaseResponse, SupabaseList
 
 // User queries
 export async function getUserProfile(userId: string): Promise<SupabaseResponse<DatabaseUser>> {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('users')
     .select('*')
@@ -21,6 +22,7 @@ export async function updateUserProfile(
   userId: string, 
   updates: Partial<DatabaseUser>
 ): Promise<SupabaseResponse<DatabaseUser>> {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('users')
     .update(updates)
@@ -33,6 +35,7 @@ export async function updateUserProfile(
 
 // Account queries
 export async function getUserAccounts(userId: string): Promise<SupabaseListResponse<Account>> {
+  const supabase = createClient()
   const { data, error, count } = await supabase
     .from('accounts')
     .select('*', { count: 'exact' })
@@ -42,6 +45,7 @@ export async function getUserAccounts(userId: string): Promise<SupabaseListRespo
 }
 
 export async function getAccount(accountId: string): Promise<SupabaseResponse<Account>> {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('accounts')
     .select('*')
@@ -57,6 +61,7 @@ export async function getAccountTransactions(
   limit = 50,
   offset = 0
 ): Promise<SupabaseListResponse<Transaction>> {
+  const supabase = createClient()
   const { data, error, count } = await supabase
     .from('transactions')
     .select('*', { count: 'exact' })
@@ -70,6 +75,7 @@ export async function getAccountTransactions(
 export async function createTransaction(
   transaction: Omit<Transaction, 'id' | 'created_at'>
 ): Promise<SupabaseResponse<Transaction>> {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('transactions')
     .insert(transaction)
@@ -84,6 +90,7 @@ export function subscribeToAccountTransactions(
   accountId: string,
   callback: (payload: unknown) => void
 ) {
+  const supabase = createClient()
   return supabase
     .channel(`transactions:${accountId}`)
     .on(
@@ -103,6 +110,7 @@ export function subscribeToAccountBalance(
   accountId: string,
   callback: (payload: unknown) => void
 ) {
+  const supabase = createClient()
   return supabase
     .channel(`accounts:${accountId}`)
     .on(

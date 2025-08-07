@@ -1,11 +1,11 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { createClient } from "@/lib/supabase/client"
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from "@/components/ui"
 
 export function LoginForm() {
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
   const router = useRouter()
 
   const handleSlackLogin = async () => {

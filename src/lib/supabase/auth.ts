@@ -1,4 +1,4 @@
-import { supabase } from './client'
+import { createClient } from './client'
 import type { AuthUser, SupabaseResponse } from './types'
 
 /**
@@ -7,6 +7,7 @@ import type { AuthUser, SupabaseResponse } from './types'
 
 // Sign up with email and password
 export async function signUp(email: string, password: string) {
+  const supabase = createClient()
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -17,6 +18,7 @@ export async function signUp(email: string, password: string) {
 
 // Sign in with email and password
 export async function signIn(email: string, password: string) {
+  const supabase = createClient()
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -27,12 +29,14 @@ export async function signIn(email: string, password: string) {
 
 // Sign out
 export async function signOut() {
+  const supabase = createClient()
   const { error } = await supabase.auth.signOut()
   return { error }
 }
 
 // Get current user
 export async function getCurrentUser(): Promise<SupabaseResponse<AuthUser>> {
+  const supabase = createClient()
   const { data: { user }, error } = await supabase.auth.getUser()
   
   return {
@@ -43,12 +47,14 @@ export async function getCurrentUser(): Promise<SupabaseResponse<AuthUser>> {
 
 // Get current session
 export async function getCurrentSession() {
+  const supabase = createClient()
   const { data: { session }, error } = await supabase.auth.getSession()
   return { data: session, error }
 }
 
 // Password reset
 export async function resetPassword(email: string) {
+  const supabase = createClient()
   const { data, error } = await supabase.auth.resetPasswordForEmail(email)
   return { data, error }
 }
@@ -59,6 +65,7 @@ export async function updateProfile(updates: {
   password?: string 
   data?: Record<string, unknown>
 }) {
+  const supabase = createClient()
   const { data, error } = await supabase.auth.updateUser(updates)
   return { data, error }
 } 
