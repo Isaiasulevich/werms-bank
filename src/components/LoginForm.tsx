@@ -14,12 +14,12 @@ export function LoginForm() {
     try {
       console.log("[Slack Login] Calling supabase.auth.signInWithOAuth with:")
       console.log({
-        provider: "slack",
+        provider: "slack_oidc",
         redirectTo: `${location.origin}/auth/callback`,
       })
 
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "slack",
+        provider: "slack_oidc",
         options: {
           redirectTo: `${location.origin}/auth/callback`,
         },
