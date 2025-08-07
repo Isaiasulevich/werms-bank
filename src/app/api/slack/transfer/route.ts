@@ -3,8 +3,8 @@
 import { NextResponse } from 'next/server';
 
 import { formatWermTransferMessage, parseWermInput, transferWerms } from '@/lib/features';
+import { slackService } from '@/lib/services/slack-service';
 
-const SLACK_BOT_USER_OAUTH_TOKEN = process.env.SLACK_BOT_USER_OAUTH_TOKEN
 
 export async function POST(req: Request) {
   try {
@@ -17,16 +17,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ text: 'Missing user_id or command arguments.' });
     }
 
-    const slackRes = await fetch(`https://slack.com/api/users.info?user=${userId}`, {
-      headers: { Authorization: `Bearer ${SLACK_BOT_USER_OAUTH_TOKEN}` },
-    });
-
-    const slackData = await slackRes.json();
-    const senderEmail = slackData.user?.profile?.email;
-
-    if (!slackData.ok || !senderEmail) {
+    let slackEmail: string;
+    try {
+      slackEmail = await slackService().getUserEmail(userId)
+    } catch (error) {
       return NextResponse.json({ text: 'Could not resolve your Slack email.' });
     }
+
 
     const parsed = parseWermInput(text);
     if (!parsed || !parsed.username || !parsed.amounts) {
@@ -34,22 +31,19 @@ export async function POST(req: Request) {
     }
 
     try {
-      await transferWerms(senderEmail, parsed.username, parsed.amounts, parsed.reason);
+      await transferWerms(slackEmail, parsed.username, parsed.amounts, parsed.reason);
+      const text = formatWermTransferMessage(parsed.amounts, parsed.username, parsed.reason)
 
-      return NextResponse.json({
-        response_type: 'in_channel',
-        text: formatWermTransferMessage(parsed.amounts, parsed.username, parsed.reason),
-      });
+      return NextResponse.json(slackService().returnResponse(text, 'in_channel'))
     } catch (err: unknown) {
       console.error("🚫 Transfer error:", err instanceof Error ? err.message : err);
-      return NextResponse.json({
-        response_type: 'ephemeral',
-        text: `🚫 Transfer failed: ${err instanceof Error ? err.message : 'Unknown error'}`,
-      });
+      const text = `🚫 Transfer failed: ${err instanceof Error ? err.message : 'Unknown error'}`
+
+      return NextResponse.json(slackService().returnResponse(text, 'ephemeral'))
     }
 
   } catch (err: unknown) {
     console.error("🔥 Unexpected error:", err instanceof Error ? err.message : err);
-    return NextResponse.json({ text: 'Something went wrong during the transfer.' });
+    return NextResponse.json(slackService().returnResponse('Something went wrong during the transfer.'))
   }
 }

@@ -6,7 +6,7 @@
  */
 
 'use client';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase/client';
 import { useState, useCallback, useMemo } from 'react';
 import { Employee, EmployeeFormData, EmployeeStats, EmployeeFilters, EmployeeSort } from './types';
 import { computeWormBalances } from '@/lib/wermTypes'; 
@@ -59,6 +59,7 @@ export function useEmployees() {
     setError(null);
 
     try {
+      const supabase = createClient();
       const existingIds = employees.map(emp => emp.employee_id);
       const newEmployee: Employee = {
         ...employeeData,
@@ -115,6 +116,7 @@ export function useEmployees() {
     setError(null);
 
     try {
+      const supabase = createClient();
       const hasDirectReports = employees.some(emp => emp.manager_id === id);
       if (hasDirectReports) {
         throw new Error('Cannot delete employee who manages other employees. Please reassign their direct reports first.');
