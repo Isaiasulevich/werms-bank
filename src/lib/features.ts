@@ -94,6 +94,48 @@ export async function transferWerms(
     console.error(updateErr)
     throw new Error('Failed to update balances in Supabase');
   }
+
+  // Log each coin transfer as a separate werm_transactions row
+  const entries: Array<{
+    sender_id: string | null
+    receiver_id: string | null
+    sender_email: string
+    receiver_username: string
+    worm_type: WermType
+    amount: number
+    value_aud: number
+    description?: string
+    policy_id?: string
+    source?: string
+    status?: string
+  }> = []
+
+  for (const [key, amount] of Object.entries(wermsToTransfer)) {
+    const type = key as WermType
+    const amt = amount ?? 0
+    if (amt <= 0) continue
+    entries.push({
+      sender_id: sender.id,
+      receiver_id: receiver.id,
+      sender_email: sender.email,
+      receiver_username: receiver.slack_username,
+      worm_type: type,
+      amount: amt,
+      value_aud: amt * WERM_PRICES[type],
+      description: note,
+      source: 'slack',
+      status: 'completed',
+    })
+  }
+
+  if (entries.length > 0) {
+    const { error: logErr } = await supabase
+      .from('werm_transactions')
+      .insert(entries)
+    if (logErr) {
+      console.error('Failed to insert transaction logs', logErr)
+    }
+  }
 }
 
 // TODO: DOCUMENT

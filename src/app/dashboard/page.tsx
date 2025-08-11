@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation"
 import { AuthGuard } from "@/lib/supabase"
 
 import data from "./employees.json"
+import { TransactionsTable } from "@/features/transactions"
 
 /**
  * Dashboard Content Component
@@ -68,7 +69,9 @@ function DashboardContent() {
       <div className="px-4 lg:px-6">
         <ChartAreaInteractive />
       </div>
-      {/* <DataTable data={data} /> */}
+      <div className="px-4 lg:px-6">
+        <TransactionsTable />
+      </div>
     </div>
   )
 }
