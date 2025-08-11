@@ -27,7 +27,7 @@ export function EmployeeTransactionsTable({ employeeId, slackUsername, limit = 5
       const header = t.werm_type === 'mixed'
         ? `Transfer to ${t.receiver_username}`
         : `${t.werm_type.toUpperCase()} ${t.amount} to ${t.receiver_username}`
-      const total = t.total_werms || (t.amount * (WERM_PRICES as any)[t.werm_type] || 0)
+      const total = t.total_werms || (t.amount * (WERM_PRICES as Record<string, number>)[t.werm_type] || 0)
       const target = t.werm_type === 'mixed'
         ? `${total} werms`
         : `${t.amount} ${t.werm_type}`
