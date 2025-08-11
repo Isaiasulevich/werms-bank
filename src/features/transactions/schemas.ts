@@ -4,6 +4,7 @@ export const WermTypeSchema = z.union([
   z.literal('gold'),
   z.literal('silver'),
   z.literal('bronze'),
+  z.literal('mixed'),
 ])
 
 export const TransactionLogSchema = z.object({
@@ -12,9 +13,11 @@ export const TransactionLogSchema = z.object({
   receiver_id: z.string().uuid().nullable(),
   sender_email: z.string().email(),
   receiver_username: z.string(),
-  worm_type: WermTypeSchema,
-  amount: z.number().int().positive(),
-  value_aud: z.number().nonnegative(),
+  werm_type: WermTypeSchema,
+  amount: z.number().int().nonnegative(),
+  value_aud: z.number().nonnegative().default(0),
+  total_werms: z.number().nonnegative().default(0),
+  breakdown: z.record(z.string(), z.number()).optional(),
   description: z.string().nullable().optional(),
   policy_id: z.string().nullable().optional(),
   source: z.string().default('app'),

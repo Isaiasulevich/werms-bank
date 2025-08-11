@@ -101,9 +101,11 @@ export async function transferWerms(
     receiver_id: string | null
     sender_email: string
     receiver_username: string
-    worm_type: WermType
+    werm_type: WermType
     amount: number
     value_aud: number
+    total_werms?: number
+    breakdown?: Record<string, number>
     description?: string
     policy_id?: string
     source?: string
@@ -119,9 +121,10 @@ export async function transferWerms(
       receiver_id: receiver.id,
       sender_email: sender.email,
       receiver_username: receiver.slack_username,
-      worm_type: type,
+      werm_type: type,
       amount: amt,
       value_aud: amt * WERM_PRICES[type],
+      total_werms: amt * WERM_PRICES[type],
       description: note,
       source: 'slack',
       status: 'completed',

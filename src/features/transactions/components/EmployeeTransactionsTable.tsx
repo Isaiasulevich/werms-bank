@@ -3,15 +3,27 @@
 import { z } from 'zod'
 import { useMemo } from 'react'
 import { DataTable, schema as DataTableSchema } from '@/components/data-table'
-import { WERM_PRICES } from '@/lib/wermTypes'
 import { useTransactionLogs } from '@/features/transactions/hooks'
+import { WERM_PRICES } from '@/lib/wermTypes'
 
-export function TransactionsTable() {
-  const { data, isLoading, isError } = useTransactionLogs({ limit: 50 })
+interface EmployeeTransactionsTableProps {
+  employeeId?: string
+  slackUsername?: string
+  limit?: number
+}
+
+export function EmployeeTransactionsTable({ employeeId, slackUsername, limit = 50 }: EmployeeTransactionsTableProps) {
+  const { data, isLoading, isError } = useTransactionLogs({ limit })
 
   const rows = useMemo<z.infer<typeof DataTableSchema>[]>(() => {
     if (!data) return []
-    return data.map((t, idx) => {
+    const filtered = data.filter(t => {
+      if (employeeId && (t.receiver_id === employeeId || t.sender_id === employeeId)) return true
+      if (slackUsername && t.receiver_username === slackUsername) return true
+      return !employeeId && !slackUsername
+    })
+
+    return filtered.map((t, idx) => {
       const header = t.werm_type === 'mixed'
         ? `Transfer to ${t.receiver_username}`
         : `${t.werm_type.toUpperCase()} ${t.amount} to ${t.receiver_username}`
@@ -19,7 +31,6 @@ export function TransactionsTable() {
       const target = t.werm_type === 'mixed'
         ? `${total} werms`
         : `${t.amount} ${t.werm_type}`
-
       return {
         id: idx + 1,
         header,
@@ -32,7 +43,7 @@ export function TransactionsTable() {
         timestamp: t.created_at,
       }
     })
-  }, [data])
+  }, [data, employeeId, slackUsername])
 
   if (isLoading) return null
   if (isError) return null
