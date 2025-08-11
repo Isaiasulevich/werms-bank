@@ -43,6 +43,7 @@ import { Employee, EmployeePermission, Department } from '../types';
 import { formatCurrency } from '@/shared/utils/format';
 import { computeWormBalances, WERM_PRICES } from '@/lib/wermTypes';
 import { CoinIndicator } from '@/components/custom/CoinIndicator';
+import { EmployeeTransactionsTable } from '@/features/transactions'
 
 // Schema for transaction data
 const transactionSchema = z.object({
@@ -662,7 +663,10 @@ export function EmployeeDetailView({ employee }: EmployeeDetailViewProps) {
           </TabsContent>
 
           <TabsContent value="transactions" className="mt-0 h-full">
-            <TransactionsTab transactions={transactions} />
+            <div className="flex flex-col gap-4">
+              <div className="text-sm text-muted-foreground">Recent transactions</div>
+              <EmployeeTransactionsTable employeeId={employee.id} slackUsername={employee.slack_username} />
+            </div>
           </TabsContent>
 
           <TabsContent value="details" className="mt-0 h-full">
