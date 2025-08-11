@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
+import type { Database } from './database.types'
 import { cookies } from 'next/headers'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
@@ -14,7 +15,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export function createClient() {
   const cookieStore = cookies()
 
-  return createServerClient(supabaseUrl, supabaseAnonKey, {
+  return createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll()
