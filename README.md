@@ -101,8 +101,25 @@ A Next.js application for managing "Werm" currency transactions with Slack integ
 
 The app uses these main tables:
 - `employees` - User profiles and werm balances
-- `transactions` - Werm transfer history
+- `werm_transactions` - Werm transfer history
 - `policies` - Company policies and documents
+
+### Database Migrations
+
+All SQL migrations are kept in `supabase/migrations/`.
+
+You can apply them in either of two ways:
+
+- Supabase SQL Editor
+  1. Open your project → SQL → New query
+  2. Paste the content of each migration (in order: `0001_...`, then `0002_...`)
+  3. Run
+
+- Supabase CLI (recommended for CI)
+  1. Install `supabase` CLI
+  2. Log in: `supabase login`
+  3. Link project: `supabase link --project-ref <your-ref>`
+  4. Apply: `supabase db push` (or run files in order)
 
 ### Development
 
