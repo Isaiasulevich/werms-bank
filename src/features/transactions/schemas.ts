@@ -9,8 +9,8 @@ export const WermTypeSchema = z.union([
 
 export const TransactionLogSchema = z.object({
   id: z.string().uuid(),
-  sender_id: z.string().uuid().nullable(),
-  receiver_id: z.string().uuid().nullable(),
+  sender_id: z.string().nullable(),
+  receiver_id: z.string().nullable(),
   sender_email: z.string().email(),
   receiver_username: z.string(),
   werm_type: WermTypeSchema,
