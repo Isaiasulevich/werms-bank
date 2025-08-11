@@ -39,6 +39,7 @@ export function useEmployees() {
       setIsLoading(true);
       setError(null);
 
+      const supabase = createClient();
       const { data, error } = await supabase
         .from('employees')
         .select('*');
@@ -93,6 +94,7 @@ export function useEmployees() {
       if (!existingEmployee) throw new Error('Employee not found');
 
       const updatedEmployee = { ...existingEmployee, ...employeeData };
+      const supabase = createClient();
       const { error: updateError } = await supabase
         .from('employees')
         .update(employeeData)
