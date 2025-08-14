@@ -139,6 +139,53 @@ export async function transferWerms(
       console.error('Failed to insert transaction logs', logErr)
     }
   }
+
+  // Only when the bank is the SENDER do we decrement bank reserves
+  const isBankSender = sender.id === 'bank'
+  if (isBankSender) {
+    // Resolve default bank id
+    const { data: bankRow, error: bankErr } = await supabase
+      .from('banks')
+      .select('id')
+      .eq('is_default', true)
+      .limit(1)
+      .maybeSingle()
+    if (!bankErr && (bankRow as { id?: string } | null)?.id) {
+      const bankId = (bankRow as { id: string }).id
+      // Load current supply rows
+      const { data: supplyRows, error: supplyErr } = await supabase
+        .from('bank_coin_supply')
+        .select('werm_type, digital_amount, physical_amount')
+        .eq('bank_id', bankId)
+      if (!supplyErr && Array.isArray(supplyRows)) {
+        const deltas: Record<WermType, number> = {
+          gold: 0,
+          silver: 0,
+          bronze: 0,
+        }
+        for (const [key, amount] of Object.entries(wermsToTransfer)) {
+          const type = key as WermType
+          const amt = amount ?? 0
+          if (amt <= 0) continue
+          // Bank sending reduces reserve
+          deltas[type] -= amt
+        }
+        for (const row of (supplyRows as Array<{ werm_type: WermType; digital_amount: number; physical_amount: number }>)) {
+          const delta = deltas[row.werm_type]
+          if (!delta) continue
+          const next = {
+            digital_amount: Number(row.digital_amount ?? 0) + delta,
+            physical_amount: Number(row.physical_amount ?? 0) + delta,
+          }
+          await supabase
+            .from('bank_coin_supply')
+            .update(next)
+            .eq('bank_id', bankId)
+            .eq('werm_type', row.werm_type)
+        }
+      }
+    }
+  }
 }
 
 // TODO: DOCUMENT
