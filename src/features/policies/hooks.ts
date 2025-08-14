@@ -189,7 +189,11 @@ export function usePolicies() {
     setError(null);
     
     try {
-      // Optimistic remove; add DELETE endpoint later
+      const res = await fetch(`/api/policies/${id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => null)
+        throw new Error(json?.error || 'Failed to delete policy')
+      }
       setPolicies(prev => prev.filter(p => p.id !== id))
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to delete policy'
