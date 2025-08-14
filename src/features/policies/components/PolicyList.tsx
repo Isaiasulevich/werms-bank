@@ -97,6 +97,8 @@ export function PolicyList({
         return { name: 'Recognition', icon: 'REC' };
       case 'compliance':
         return { name: 'Compliance', icon: 'COM' };
+      case 'performance':
+        return { name: 'Performance', icon: 'PERF' };
       default:
         return { name: category, icon: '📄' };
     }
@@ -216,6 +218,7 @@ export function PolicyList({
                 <SelectItem value="minting">Minting</SelectItem>
                 <SelectItem value="recognition">Recognition</SelectItem>
                 <SelectItem value="compliance">Compliance</SelectItem>
+                 <SelectItem value="performance">Performance</SelectItem>
               </SelectContent>
             </Select>
 

@@ -377,12 +377,13 @@ export function AddPolicyDialog({ open, onOpenChange }: AddPolicyDialogProps) {
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="recognition">Recognition - Employee rewards</SelectItem>
-                      <SelectItem value="distribution">Distribution - Worm allocation</SelectItem>
-                      <SelectItem value="minting">Minting - Worm creation</SelectItem>
-                      <SelectItem value="compliance">Compliance - Rule enforcement</SelectItem>
-                    </SelectContent>
+                      <SelectContent>
+                        <SelectItem value="recognition">Recognition - Employee rewards</SelectItem>
+                        <SelectItem value="distribution">Distribution - Worm allocation</SelectItem>
+                        <SelectItem value="minting">Minting - Worm creation</SelectItem>
+                        <SelectItem value="compliance">Compliance - Rule enforcement</SelectItem>
+                        <SelectItem value="performance">Performance - KPI & goals</SelectItem>
+                      </SelectContent>
                   </Select>
                 </div>
 

@@ -33,7 +33,7 @@ export const policySchema = z.object({
   id: z.string(),
   title: z.string().min(1, "Title is required").max(100, "Title must be less than 100 characters"),
   description: z.string().min(1, "Description is required").max(1000, "Description must be less than 1000 characters"),
-  category: z.enum(['distribution', 'minting', 'recognition', 'compliance']),
+  category: z.enum(['distribution', 'minting', 'recognition', 'compliance', 'performance']),
   status: z.enum(['active', 'inactive', 'draft']),
   conditions: z.array(policyConditionSchema).min(1, "At least one condition is required").max(4, "Maximum 4 conditions allowed"),
   createdBy: z.object({
@@ -52,7 +52,7 @@ export const policySchema = z.object({
 export const policyFormSchema = z.object({
   title: z.string().min(1, "Title is required").max(100, "Title must be less than 100 characters"),
   description: z.string().min(1, "Description is required").max(1000, "Description must be less than 1000 characters"),
-  category: z.enum(['distribution', 'minting', 'recognition', 'compliance']),
+  category: z.enum(['distribution', 'minting', 'recognition', 'compliance', 'performance']),
   status: z.enum(['active', 'inactive', 'draft']),
   conditions: z.array(policyConditionSchema).min(1, "At least one condition is required").max(4, "Maximum 4 conditions allowed"),
   effectiveDate: z.string(),

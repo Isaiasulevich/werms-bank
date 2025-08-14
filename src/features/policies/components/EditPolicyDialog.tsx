@@ -406,6 +406,7 @@ export function EditPolicyDialog({ open, onOpenChange, policy }: EditPolicyDialo
                       <SelectItem value="distribution">🏦 Distribution - Worm allocation</SelectItem>
                       <SelectItem value="minting">⚡ Minting - Worm creation</SelectItem>
                       <SelectItem value="compliance">Compliance - Rule enforcement</SelectItem>
+                      <SelectItem value="performance">Performance - KPI & goals</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

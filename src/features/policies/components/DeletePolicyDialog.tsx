@@ -65,6 +65,8 @@ export function DeletePolicyDialog({ open, onOpenChange, policy }: DeletePolicyD
         return { name: 'Recognition', icon: 'REC', color: 'text-chart-3' };
       case 'compliance':
         return { name: 'Compliance', icon: 'COM', color: 'text-chart-1' };
+      case 'performance':
+        return { name: 'Performance', icon: 'PERF', color: 'text-chart-2' };
       default:
         return { name: category, icon: '📄', color: 'text-muted-foreground' };
     }
