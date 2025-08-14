@@ -8,7 +8,7 @@
 
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Policy, PolicyFormData, PolicyStats } from './types';
 
 // Mock data for development - in real app this would come from API
@@ -116,38 +116,51 @@ const mockStats: PolicyStats = {
  * Hook for managing policy list and operations
  */
 export function usePolicies() {
-  const [policies, setPolicies] = useState<Policy[]>(mockPolicies);
+  const [policies, setPolicies] = useState<Policy[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // initial fetch
+  useEffect(() => {
+    let mounted = true
+    async function fetchPolicies() {
+      setIsLoading(true)
+      try {
+        const res = await fetch('/api/policies')
+        const json = await res.json()
+        if (!res.ok) throw new Error(json?.error || 'Failed to load policies')
+        if (mounted) setPolicies(json.data ?? [])
+      } catch (e: unknown) {
+        if (mounted) setError(e instanceof Error ? e.message : 'Failed to load policies')
+      } finally {
+        if (mounted) setIsLoading(false)
+      }
+    }
+    fetchPolicies()
+    return () => { mounted = false }
+  }, [])
 
   const createPolicy = useCallback(async (policyData: PolicyFormData): Promise<Policy> => {
     setIsLoading(true);
     setError(null);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const newPolicy: Policy = {
-        ...policyData,
-        id: `pol-${Date.now()}`,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        createdBy: {
-          name: 'Isa',
-          email: 'isa@nakatomi.com',
-          role: 'Operations Lead'
-        }
-      };
-      
-      setPolicies(prev => [newPolicy, ...prev]);
-      return newPolicy;
+      const res = await fetch('/api/policies', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(policyData),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json?.error || 'Failed to create policy')
+      const created: Policy = json.data
+      setPolicies(prev => [created, ...prev])
+      return created
     } catch (err) {
-      const errorMessage = 'Failed to create policy';
-      setError(errorMessage);
-      throw new Error(errorMessage);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create policy'
+      setError(errorMessage)
+      throw new Error(errorMessage)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }, []);
 
@@ -156,28 +169,18 @@ export function usePolicies() {
     setError(null);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const updatedPolicy = policies.find(p => p.id === id);
-      if (!updatedPolicy) {
-        throw new Error('Policy not found');
-      }
-
-      const newPolicy: Policy = {
-        ...updatedPolicy,
-        ...policyData,
-        updatedAt: new Date().toISOString(),
-      };
-      
-      setPolicies(prev => prev.map(p => p.id === id ? newPolicy : p));
-      return newPolicy;
+      // For now, update is a client-only optimistic update until we add a dedicated API
+      const existing = policies.find(p => p.id === id)
+      if (!existing) throw new Error('Policy not found')
+      const updated: Policy = { ...existing, ...policyData, updatedAt: new Date().toISOString() }
+      setPolicies(prev => prev.map(p => (p.id === id ? updated : p)))
+      return updated
     } catch (err) {
-      const errorMessage = 'Failed to update policy';
-      setError(errorMessage);
-      throw new Error(errorMessage);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to update policy'
+      setError(errorMessage)
+      throw new Error(errorMessage)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }, [policies]);
 
@@ -186,16 +189,14 @@ export function usePolicies() {
     setError(null);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setPolicies(prev => prev.filter(p => p.id !== id));
+      // Optimistic remove; add DELETE endpoint later
+      setPolicies(prev => prev.filter(p => p.id !== id))
     } catch (err) {
-      const errorMessage = 'Failed to delete policy';
-      setError(errorMessage);
-      throw new Error(errorMessage);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to delete policy'
+      setError(errorMessage)
+      throw new Error(errorMessage)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }, []);
 
