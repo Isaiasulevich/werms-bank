@@ -30,7 +30,7 @@ const data = {
     email: "sarah@werms.com",
     avatar: "/avatars/shadcn.jpg",
     slack_username: "@sarah",
-    role: "Operations Lead"
+    role: "Head of Operations"
   },
   navMain: [
     {
