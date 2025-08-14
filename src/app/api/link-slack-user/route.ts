@@ -14,11 +14,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing Slack user_id" }, { status: 400 })
   }
 
-  const userInfoRes = await fetch("https://slack.com/api/users.info", {
+  const userInfoRes = await fetch(`https://slack.com/api/users.info?user=${encodeURIComponent(user_id)}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
-      "Content-Type": "application/x-www-form-urlencoded",
     },
   })
 
